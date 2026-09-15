@@ -27,3 +27,12 @@ venv/
 ralph/logs/
 ralph/.state/
 *.log
+
+# API keys - NEVER commit
+SECRET/
+*.env
+Documents_for_dev/
+
+# Contest entry materials - keep private until after submission (30 Sep 2026)
+Fujie_Creative/
+tools/entry_fields.json
