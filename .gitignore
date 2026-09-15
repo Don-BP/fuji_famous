@@ -1,0 +1,29 @@
+# Contest source material - kept local (repo is public)
+source-materials/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Dependencies & builds
+node_modules/
+dist/
+build/
+.next/
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Ralph loop runtime output
+ralph/logs/
+ralph/.state/
+*.log
