@@ -14,6 +14,11 @@
 </head>
 <body>
 
+<!-- the scroll-driven hero film: a fixed canvas behind everything.
+     The hero and the dark band are translucent so it shows through;
+     the first white band covers it and the film is done. -->
+<div id="heroFilm" aria-hidden="true"><canvas id="heroFilmC"></canvas></div>
+
 <header id="nav">
   <a class="brand" href="#top">FUJIE<span>STUDIO</span></a>
   <span class="by" data-t="navBy">Vittorio Zumpano ／ 株式会社ブレインパワー</span>
@@ -168,6 +173,7 @@
 <div id="lb" hidden><button id="lbClose" type="button" aria-label="close">✕</button><img id="lbImg" src="" alt=""><div id="lbCap"></div></div>
 
 <script src="data.js"></script>
+<script src="hero.js"></script>
 <script src="hub.js"></script>
 <script src="buddy.js"></script>
 </body>
