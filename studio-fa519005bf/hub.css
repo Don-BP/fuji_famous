@@ -89,7 +89,14 @@ a{color:inherit}
   width:clamp(74px,8.4vw,132px);will-change:transform;
   filter:drop-shadow(0 12px 22px rgba(0,0,0,.45));
 }
-#buddy img{display:block;width:100%;height:auto;transform-origin:50% 50%}
+#buddy .bWrap{position:relative;width:100%;transform-origin:50% 50%}
+#buddy .bFace{
+  display:block;width:100%;height:auto;
+  transition:opacity .22s ease;
+}
+#buddy .bHappy{position:absolute;inset:0;opacity:0}
+#buddy.happy .bHappy{opacity:1}
+#buddy.happy .bNeutral{opacity:0}
 @media (prefers-reduced-motion:reduce){#buddy{display:none}}
 .heroArt .ring{
   position:absolute;border-radius:50%;border:1px solid rgba(150,215,240,.13);

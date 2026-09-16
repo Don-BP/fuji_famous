@@ -6,6 +6,9 @@
      avoid   - bolts away from the cursor
      wander  - ignores the cursor and drifts along its own path
 
+   He swims with a calm neutral face and only breaks into the happy,
+   star-covered pose while the cursor is actually touching him.
+
    Movement is steering, not teleporting: it accelerates toward a
    target and coasts, so it always reads as swimming.
    ============================================================ */
@@ -16,7 +19,7 @@
 
   var el = document.getElementById("buddy");
   if (!el) return;
-  var art = el.querySelector("img");
+  var art = el.querySelector(".bWrap");
 
   var MOODS = ["follow", "avoid", "wander"];
   var MIN_MS = 4000, MAX_MS = 8000;      // how long a mood is held
@@ -28,7 +31,7 @@
   var x = W * 0.74, y = H * 0.68;         // starts where the hero art sits
   var vx = 0, vy = 0;
   var tx = x, ty = y;
-  var face = -1, tilt = 0;
+  var face = -1, tilt = 0, pop = 1, happy = false;
 
   var pointer = { x: W / 2, y: H / 2, seen: false };
   var fine = matchMedia("(pointer: fine)").matches;
@@ -102,12 +105,24 @@
     x = clamp(x + vx, EDGE, W - EDGE);
     y = clamp(y + vy, TOP, H - EDGE);
 
+    // neutral while swimming; delighted the moment the cursor touches him
+    var near = Math.hypot(pointer.x - x, pointer.y - y);
+    if (pointer.seen) {
+      if (!happy && near < size * 0.52) happy = true;
+      else if (happy && near > size * 0.72) happy = false;
+    } else {
+      happy = false;
+    }
+    el.classList.toggle("happy", happy);
+    pop += ((happy ? 1.12 : 1) - pop) * 0.16;
+
     // turn to face the way it is swimming, and nose up or down a little
     if (Math.abs(vx) > 0.3) face = vx > 0 ? -1 : 1;
     tilt += (clamp(vy * 1.6, -14, 14) - tilt) * 0.08;
 
     el.style.transform = "translate3d(" + (x - size / 2) + "px," + (y - size / 2) + "px,0)";
-    art.style.transform = "scaleX(" + face + ") rotate(" + (tilt * -face) + "deg)";
+    art.style.transform =
+      "scale(" + pop.toFixed(3) + ") scaleX(" + face + ") rotate(" + (tilt * -face) + "deg)";
 
     requestAnimationFrame(step);
   }
