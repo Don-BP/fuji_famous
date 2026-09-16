@@ -145,7 +145,7 @@
     plush1H: "01 — Plush / three sizes",
     plush1B: "10cm, 25cm, 50cm. Fry, young fish, grown fish — the three stages are the product line.",
     plush2H: "02 — Mascot keychain",
-    plush2B: "The cheapest single item in the range and the one that travels furthest. Six poses sold blind means it is not bought once. And the moment it is hanging on a bag, it is seen every day.",
+    plush2B: "The cheapest single item in the range and the one that travels furthest. From the moment it is hanging on a bag, it is seen every day.",
     footNote: "The official illustration is used in accordance with Article 7 of the character manual ver 1.0 — no reshaping, recolouring, transparency, overlaid text, or added or removed elements. Chibi Fujie, the pattern collection and the Maison line are new work proposed alongside it.",
     lang: "日本語"
   };
