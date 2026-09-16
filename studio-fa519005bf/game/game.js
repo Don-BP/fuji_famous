@@ -709,6 +709,7 @@ function initShell(){
      standing in that slot right now, and `pearl` is the shell element holding
      the pearl - so when two shells swap, the pearl travels with its shell. */
   var order = shells.slice(), home = [], pearl = shells[0], stopped = false;
+  var correct = 0;                 // the shells speed up each time you are right
 
   function measure(){
     home = shells.map(function(s){ return s.offsetLeft; });
@@ -765,12 +766,12 @@ function initShell(){
     var t = order[a]; order[a] = order[b]; order[b] = t;
     // a swap between neighbours covers half the distance, so give it less time:
     // every swap then travels at the same apparent speed
-    var base = Math.max(340, 520 - (round - 1) * 38);
+    var base = Math.max(285, 520 - correct * 52);
     var dur = Math.abs(a - b) === 1 ? Math.round(base * 0.72) : base;
     paint(dur);
     hop(order[a], dur);
     hop(order[b], dur);
-    setTimeout(function(){ swap(n+1, total); }, dur + 95);
+    setTimeout(function(){ swap(n+1, total); }, dur + Math.max(55, 95 - correct * 10));
   }
 
   function pick(el){
@@ -781,7 +782,7 @@ function initShell(){
     el.querySelector(".pearlDot").style.opacity = ok ? "1" : "0";
     if (!ok){ pearl.classList.add("lift");
               pearl.querySelector(".pearlDot").style.opacity = "1"; }
-    if (ok) bumpScore(2);
+    if (ok){ correct++; bumpScore(2); }
     $("miniFoot").textContent = ok ? L.correct : L.wrong;
     setTimeout(function(){
       if (round >= 5) endMini();
