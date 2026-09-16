@@ -10,11 +10,20 @@ window.DATA = {
   ],
 
   stickers: [
-    ["sticker_sheet_01", "スタンプ 01 ／ 日常", "Sticker set 01 — everyday"],
-    ["sticker_sheet_02", "スタンプ 02 ／ きもち", "Sticker set 02 — feelings"],
+    ["sticker_board_01", "スタンプ 01 ／ 日常", "Sticker set 01 — everyday"],
+    ["sticker_board_02", "スタンプ 02 ／ きもち", "Sticker set 02 — feelings"],
     ["sticker_sheet_03_action", "スタンプ 03 ／ うごき", "Sticker set 03 — action"],
     ["sticker_sheet_EN_01_chat", "英語版 01 ／ チャット", "English 01 — everyday chat"],
-    ["sticker_sheet_EN_02_action", "英語版 02 ／ うごき", "English 02 — mood and motion"]
+    ["sticker_sheet_EN_02_action", "英語版 02 ／ うごき", "English 02 — mood and motion"],
+    ["linecut_jp", "切り出し済み ／ 日本語 40", "Cut out and ready — Japanese 40"],
+    ["linecut_action", "切り出し済み ／ うごき 24", "Cut out and ready — action 24"],
+    ["linecut_en", "切り出し済み ／ 英語 44", "Cut out and ready — English 44"]
+  ],
+
+  fish: [
+    ["endangered_water", "絶滅危惧種としてのフジィ", "The fish, and how few are left"],
+    ["shark_vs_sturgeon", "サメじゃないです", "Not a shark"],
+    ["badge_40", "1987–2027 ／ 40年", "1987-2027 — forty years"]
   ],
 
   plush: [

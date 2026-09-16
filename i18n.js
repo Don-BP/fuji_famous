@@ -38,7 +38,7 @@ ja: {
   /* mini-game picker */
   pickTitle:"なにしてあそぶ？",
   g_egg:"たまごキャッチ", g_egg_d:"落ちてくる卵を受けとめよう",
-  g_shark:"サメたたき",   g_shark_d:"暗闇から出るサメをたたけ",
+  g_shark:"サメじゃない！", g_shark_d:"まちがえてくるサメを追いはらえ",
   g_race:"ながれをさかのぼれ", g_race_d:"逆流を泳ぎきれ",
   g_shell:"どのカイにいる？", g_shell_d:"真珠のありかを当てよう",
 
@@ -76,9 +76,9 @@ ja: {
   lostHint:"世話を続け、流量を緑の帯に保ってください。",
   retry:"もういちど育てる",
 
-  winMark:"1987 — 2026",
+  winMark:"1987 — 2027　40年目",
   winTitle:"このフジィは、実在します。",
-  winBody:"茨城県常陸太田市・里美養魚場。<br>いまも1万尾を超えるチョウザメが泳いでいます。<br><b>バルブメーカーが、日本の国産キャビアを生みました。</b>",
+  winBody:"茨城県常陸太田市・里美養魚場。<br>いまも1万尾を超えるチョウザメが泳いでいます。<br><b>バルブメーカーが、日本の国産キャビアを生みました。</b><br><br>そしてチョウザメは、地球でもっとも絶滅の危機にある魚のなかまです。<br><b>完全養殖とは、「もう川から一尾も獲らなくていい」という技術です。</b>",
   winDays:"育てた年数"
 },
 
@@ -111,7 +111,7 @@ en: {
 
   pickTitle:"What shall we play?",
   g_egg:"Egg Catch",      g_egg_d:"Catch the falling eggs",
-  g_shark:"Whack-a-Shark", g_shark_d:"Smack the sharks from the dark",
+  g_shark:"Not a Shark!", g_shark_d:"See off the sharks he keeps getting mistaken for",
   g_race:"Upstream Dash",  g_race_d:"Swim against the current",
   g_shell:"Which Shell?",  g_shell_d:"Find the hidden pearl",
 
@@ -146,9 +146,9 @@ en: {
   lostHint:"Keep up the care, and hold the flow inside the green band.",
   retry:"Raise another",
 
-  winMark:"1987 — 2026",
+  winMark:"1987 — 2027　Year 40",
   winTitle:"This Fujie is real.",
-  winBody:"Satomi fish farm, Hitachiota, Ibaraki.<br>More than 10,000 sturgeon still swim there today.<br><b>A valve manufacturer created Japan’s domestic caviar.</b>",
+  winBody:"Satomi fish farm, Hitachiota, Ibaraki.<br>More than 10,000 sturgeon still swim there today.<br><b>A valve manufacturer created Japan’s domestic caviar.</b><br><br>And sturgeon are the most endangered family of animals on earth.<br><b>Closing the life cycle means never taking one from a river again.</b>",
   winDays:"Years raised"
 }
 

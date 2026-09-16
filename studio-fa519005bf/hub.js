@@ -16,7 +16,7 @@
 
   /* ---------------- language ---------------- */
   var EN = {
-    navWork: "Work", navChar: "Character", navGoods: "Goods", navWamon: "Patterns",
+    navWork: "Work", navChar: "Character", navFish: "The fish", navGoods: "Goods", navWamon: "Patterns",
     navBy: "Vittorio Zumpano / Brain Power Inc.",
     heroBy: "Conceived and produced by Vittorio Zumpano — Brain Power Inc., Osaka",
     footCredit: "Concept, design and build by <b>Vittorio Zumpano</b><br>Brain Power Inc., Osaka",
@@ -32,10 +32,12 @@
     tagStory: "SCROLLING TIMELINE", storyH: "From a single egg",
     storyB: "From one remark in 1987 to the world's first full-cycle farming, Japan's first caviar, and the Fujie of 2026. Forty years, one scroll.",
     storyGo: "Read →",
+    fishEyebrow: "ABOUT THIS FISH", fishH: "Fujie is real. Fujie is also endangered.",
+    fishB: "Sturgeon are listed by the IUCN as the most critically endangered group of species on earth; every surviving species is threatened. What Fujikin closed in 1998 was the full life cycle in a tank — which is to say, <strong>a way to make caviar without ever taking another fish from a river</strong>. What they built was not a delicacy. It was a way to stop catching them. 2027 is the fortieth year of that work.",
     charEyebrow: "PROPOSAL", charH: "Chibi Fujie — a second form",
     charB: "The official Fujie is not touched. As Article 7 of the manual requires, the original artwork is used exactly as supplied. Chibi Fujie is proposed as a <strong>second form</strong> to stand beside it: the sharp real fish for adults, this one for children.",
-    stkEyebrow: "GIVEAWAY", stkH: "One hundred stickers",
-    stkB: "Sixty in Japanese, forty in English. Given away free for adding the LINE official account, so Fujie ends up inside people's conversations. The English forty carry straight over to WhatsApp and Telegram.",
+    stkEyebrow: "GIVEAWAY", stkH: "A hundred and eight stickers",
+    stkB: "Sixty-four in Japanese, forty-four in English, every one cut out on its own and finished to the LINE spec. Given away free for adding the official account, so Fujie ends up inside people's conversations. First in the pack is \"Not a shark!\". The English set carries straight over to WhatsApp and Telegram.",
     goodsEyebrow: "GOODS", goodsH: "Four lines",
     goodsB: "One fish, four different shelves: the children's shelf, the gift shelf, the travel shelf and the craft shelf.",
     line1H: "01 — Chibi Fujie / toys and daily things",
