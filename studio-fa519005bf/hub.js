@@ -140,7 +140,7 @@
     line4B: "Woodblock, gold screens, maki-e, blue-and-white, indigo. What happens when Japanese craft draws a sturgeon the way it has always drawn carp and cranes.",
     wamonEyebrow: "PATTERNS", wamonH: "The Fujie pattern collection",
     wamonB: "Japanese patterns have always been chosen for what they mean. Seigaiha is the sea, uroko is a fish's scales, tatewaku is rising current, asanoha is growing. Eighteen patterns chosen for this fish and drawn for it: valve handwheels at the tortoise-shell nodes, arrows pointing upstream, caviar as a komon.",
-    plushEyebrow: "PROTOTYPE", plushH: "Plush and mascot",
+    plushEyebrow: "PLUSH", plushH: "Plush and mascot",
     plushB: "The same fish split in two: one you can hold, one you can hang on a bag. The first sits on a shelf; the second goes out into the city.",
     plush1H: "01 — Plush / three sizes",
     plush1B: "10cm, 25cm, 50cm. Fry, young fish, grown fish — the three stages are the product line.",
