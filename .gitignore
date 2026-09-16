@@ -1,6 +1,3 @@
-# Contest source material - kept local (repo is public)
-source-materials/
-
 # OS / editor
 .DS_Store
 Thumbs.db
@@ -31,11 +28,11 @@ ralph/.state/
 # API keys - NEVER commit
 SECRET/
 *.env
-Documents_for_dev/
 
-# Contest entry materials - keep private until after submission (30 Sep 2026)
-Fujie_Creative/
-tools/entry_fields.json
+# Fujikin's own documents - the brief, the character manual and the official
+# artwork. Not ours to publish on a public repo.
+source-materials/
+Documents_for_dev/
 
 # Downloaded font masters used only when rebuilding the offline HTML
 tools/_fontcache/

@@ -54,9 +54,19 @@ JOBS = [
     (
         "HARD ENAMEL PIN SET on a presentation card. Five small metal pins on a navy backing card: "
         "the character's head, a full-body swimming pose, a single ripple ring, a caviar tin, and a "
-        "tiny valve wheel. Polished silver metal plating with deep navy, white and cyan enamel fill. "
+        "tiny valve wheel. Polished silver metal plating; the enamel fills are deep navy, white and "
+        "cyan.\n"
+        "*** COLOUR RULE - CRITICAL ***\n"
+        "Wherever the character's BODY appears on a pin - head pin and full-body pin alike - it is "
+        "filled in PALE CHROME-SILVER and white enamel with a paler silver belly, exactly as in the "
+        "attached master. Never fill the body with navy, blue, cyan or any other colour. Navy is "
+        "only for the backing card and for outlines; cyan is only for water and the tin band. If a "
+        "pin shows a blue fish, that is WRONG.\n"
         "The card lies flat on a warm neutral surface, photographed slightly from above, with soft "
-        "specular highlights on the metal.",
+        "specular highlights on the metal.\n"
+        "The ONLY words anywhere in the image are Fujie, FUJIKIN and the katakana フジィ, printed "
+        "on the backing card. Do NOT add PIN SET, SET, COLLECTION, セット or any other word, "
+        "label, number or small print.",
         "enamel_pins.png", "4:3",
     ),
     (
@@ -98,7 +108,10 @@ JOBS = [
     ),
 ]
 
+only = sys.argv[1] if len(sys.argv) > 1 else None
 for prompt, name, aspect in JOBS:
+    if only and only not in name:
+        continue
     r = gen(LOCK + SHOT + prompt, OUT + name, refs=[M], aspect=aspect)
     print(json.dumps({"job": name, "ok": not isinstance(r, dict),
                       "r": r if isinstance(r, dict) else "saved"}, ensure_ascii=False), flush=True)

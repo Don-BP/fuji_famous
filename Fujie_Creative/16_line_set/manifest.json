@@ -1,0 +1,522 @@
+{
+  "jp": [
+    {
+      "file": "01.png",
+      "caption": "おはよう"
+    },
+    {
+      "file": "02.png",
+      "caption": "ありがとう"
+    },
+    {
+      "file": "03.png",
+      "caption": "おつかれさま"
+    },
+    {
+      "file": "04.png",
+      "caption": "OK"
+    },
+    {
+      "file": "05.png",
+      "caption": "りょうかい"
+    },
+    {
+      "file": "06.png",
+      "caption": "ごめんね"
+    },
+    {
+      "file": "07.png",
+      "caption": "よろしく"
+    },
+    {
+      "file": "08.png",
+      "caption": "いいね"
+    },
+    {
+      "file": "09.png",
+      "caption": "すごい"
+    },
+    {
+      "file": "10.png",
+      "caption": "がんばって"
+    },
+    {
+      "file": "11.png",
+      "caption": "まかせて"
+    },
+    {
+      "file": "12.png",
+      "caption": "うれしい"
+    },
+    {
+      "file": "13.png",
+      "caption": "えっ"
+    },
+    {
+      "file": "14.png",
+      "caption": "ねむい"
+    },
+    {
+      "file": "15.png",
+      "caption": "おなかすいた"
+    },
+    {
+      "file": "16.png",
+      "caption": "たすけて"
+    },
+    {
+      "file": "17.png",
+      "caption": "おやすみ"
+    },
+    {
+      "file": "18.png",
+      "caption": "いってきます"
+    },
+    {
+      "file": "19.png",
+      "caption": "かなしい"
+    },
+    {
+      "file": "20.png",
+      "caption": "だいじょうぶ"
+    },
+    {
+      "file": "21.png",
+      "caption": "ながれにのれ"
+    },
+    {
+      "file": "22.png",
+      "caption": "きわみへ"
+    },
+    {
+      "file": "23.png",
+      "caption": "キャビア"
+    },
+    {
+      "file": "24.png",
+      "caption": "なるほど"
+    },
+    {
+      "file": "25.png",
+      "caption": "さすが"
+    },
+    {
+      "file": "26.png",
+      "caption": "ちょっとまって"
+    },
+    {
+      "file": "27.png",
+      "caption": "ほんと"
+    },
+    {
+      "file": "28.png",
+      "caption": "やったー"
+    },
+    {
+      "file": "29.png",
+      "caption": "つかれた"
+    },
+    {
+      "file": "30.png",
+      "caption": "あつい"
+    },
+    {
+      "file": "31.png",
+      "caption": "さむい"
+    },
+    {
+      "file": "32.png",
+      "caption": "おめでとう"
+    },
+    {
+      "file": "33.png",
+      "caption": "ファイト"
+    },
+    {
+      "file": "34.png",
+      "caption": "ごちそうさま"
+    },
+    {
+      "file": "35.png",
+      "caption": "ひさしぶり"
+    },
+    {
+      "file": "36.png",
+      "caption": "かんぱい"
+    },
+    {
+      "file": "37.png",
+      "caption": "がーん"
+    },
+    {
+      "file": "38.png",
+      "caption": "ぴかぴか"
+    },
+    {
+      "file": "39.png",
+      "caption": "だいすき"
+    },
+    {
+      "file": "40.png",
+      "caption": "またね"
+    }
+  ],
+  "jp_action": [
+    {
+      "file": "01.png",
+      "caption": "とんだー！"
+    },
+    {
+      "file": "02.png",
+      "caption": "くるくる"
+    },
+    {
+      "file": "03.png",
+      "caption": "いそげー"
+    },
+    {
+      "file": "04.png",
+      "caption": "サメじゃない！"
+    },
+    {
+      "file": "05.png",
+      "caption": "いくぞー"
+    },
+    {
+      "file": "06.png",
+      "caption": "ながれにのれ"
+    },
+    {
+      "file": "07.png",
+      "caption": "とうじょう！"
+    },
+    {
+      "file": "08.png",
+      "caption": "よっしゃ！"
+    },
+    {
+      "file": "09.png",
+      "caption": "きりもみ"
+    },
+    {
+      "file": "10.png",
+      "caption": "しゅっぱつ"
+    },
+    {
+      "file": "11.png",
+      "caption": "ドーン"
+    },
+    {
+      "file": "12.png",
+      "caption": "みて！"
+    },
+    {
+      "file": "13.png",
+      "caption": "ひらめいた"
+    },
+    {
+      "file": "14.png",
+      "caption": "パワー！"
+    },
+    {
+      "file": "15.png",
+      "caption": "ストップ！"
+    },
+    {
+      "file": "16.png",
+      "caption": "ハイタッチ"
+    },
+    {
+      "file": "17.png",
+      "caption": "ロケット"
+    },
+    {
+      "file": "18.png",
+      "caption": "こっそり"
+    },
+    {
+      "file": "19.png",
+      "caption": "わらう"
+    },
+    {
+      "file": "20.png",
+      "caption": "ヒーロー"
+    },
+    {
+      "file": "21.png",
+      "caption": "サメじゃないです"
+    },
+    {
+      "file": "22.png",
+      "caption": "サメじゃないってば"
+    },
+    {
+      "file": "23.png",
+      "caption": "チョウザメです"
+    },
+    {
+      "file": "24.png",
+      "caption": "２億年このまま"
+    }
+  ],
+  "en": [
+    {
+      "file": "01.png",
+      "caption": "Morning!"
+    },
+    {
+      "file": "02.png",
+      "caption": "Yay!"
+    },
+    {
+      "file": "03.png",
+      "caption": "Thank you!"
+    },
+    {
+      "file": "04.png",
+      "caption": "OK!"
+    },
+    {
+      "file": "05.png",
+      "caption": "Sorry!"
+    },
+    {
+      "file": "06.png",
+      "caption": "On it!"
+    },
+    {
+      "file": "07.png",
+      "caption": "Nice!"
+    },
+    {
+      "file": "08.png",
+      "caption": "So sleepy"
+    },
+    {
+      "file": "09.png",
+      "caption": "Hungry..."
+    },
+    {
+      "file": "10.png",
+      "caption": "No way!"
+    },
+    {
+      "file": "11.png",
+      "caption": "Really?"
+    },
+    {
+      "file": "12.png",
+      "caption": "Congrats!"
+    },
+    {
+      "file": "13.png",
+      "caption": "Good night"
+    },
+    {
+      "file": "14.png",
+      "caption": "Love it"
+    },
+    {
+      "file": "15.png",
+      "caption": "Help!"
+    },
+    {
+      "file": "16.png",
+      "caption": "I am here"
+    },
+    {
+      "file": "17.png",
+      "caption": "See you!"
+    },
+    {
+      "file": "18.png",
+      "caption": "Go team!"
+    },
+    {
+      "file": "19.png",
+      "caption": "Nope"
+    },
+    {
+      "file": "20.png",
+      "caption": "Take a break"
+    },
+    {
+      "file": "21.png",
+      "caption": "Please!"
+    },
+    {
+      "file": "22.png",
+      "caption": "No problem"
+    },
+    {
+      "file": "23.png",
+      "caption": "Well done!"
+    },
+    {
+      "file": "24.png",
+      "caption": "Cheers!"
+    },
+    {
+      "file": "25.png",
+      "caption": "Time to eat!"
+    },
+    {
+      "file": "26.png",
+      "caption": "Yum!"
+    },
+    {
+      "file": "27.png",
+      "caption": "Wait!"
+    },
+    {
+      "file": "28.png",
+      "caption": "Almost there"
+    },
+    {
+      "file": "29.png",
+      "caption": "Miss you"
+    },
+    {
+      "file": "30.png",
+      "caption": "Good luck!"
+    },
+    {
+      "file": "31.png",
+      "caption": "Understood"
+    },
+    {
+      "file": "32.png",
+      "caption": "So busy"
+    },
+    {
+      "file": "33.png",
+      "caption": "Where?"
+    },
+    {
+      "file": "34.png",
+      "caption": "Me too!"
+    },
+    {
+      "file": "35.png",
+      "caption": "Agreed"
+    },
+    {
+      "file": "36.png",
+      "caption": "Cannot wait"
+    },
+    {
+      "file": "37.png",
+      "caption": "Feeling good"
+    },
+    {
+      "file": "38.png",
+      "caption": "Oops"
+    },
+    {
+      "file": "39.png",
+      "caption": "Welcome!"
+    },
+    {
+      "file": "40.png",
+      "caption": "Have fun!"
+    },
+    {
+      "file": "41.png",
+      "caption": "Let us go!"
+    },
+    {
+      "file": "42.png",
+      "caption": "Making waves"
+    },
+    {
+      "file": "43.png",
+      "caption": "Deep dive"
+    },
+    {
+      "file": "44.png",
+      "caption": "Splash!"
+    },
+    {
+      "file": "45.png",
+      "caption": "Creating the flow"
+    },
+    {
+      "file": "46.png",
+      "caption": "Upstream"
+    },
+    {
+      "file": "47.png",
+      "caption": "Chill"
+    },
+    {
+      "file": "48.png",
+      "caption": "Focus"
+    },
+    {
+      "file": "49.png",
+      "caption": "Teamwork"
+    },
+    {
+      "file": "50.png",
+      "caption": "Big win"
+    },
+    {
+      "file": "51.png",
+      "caption": "Power up"
+    },
+    {
+      "file": "52.png",
+      "caption": "Brrr"
+    },
+    {
+      "file": "53.png",
+      "caption": "Too hot"
+    },
+    {
+      "file": "54.png",
+      "caption": "Study time"
+    },
+    {
+      "file": "55.png",
+      "caption": "So tired"
+    },
+    {
+      "file": "56.png",
+      "caption": "Spin!"
+    },
+    {
+      "file": "57.png",
+      "caption": "Got it!"
+    },
+    {
+      "file": "58.png",
+      "caption": "Stop!"
+    },
+    {
+      "file": "59.png",
+      "caption": "High five"
+    },
+    {
+      "file": "60.png",
+      "caption": "Hero"
+    }
+  ],
+  "en_action": [
+    {
+      "file": "01.png",
+      "caption": "Not a shark!"
+    },
+    {
+      "file": "02.png",
+      "caption": "I am a sturgeon"
+    },
+    {
+      "file": "03.png",
+      "caption": "Still not a shark"
+    },
+    {
+      "file": "04.png",
+      "caption": "200 million years"
+    }
+  ]
+}

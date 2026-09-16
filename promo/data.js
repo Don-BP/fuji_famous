@@ -51,17 +51,6 @@ window.DATA = {
   ],
 
   official: [
-    ["poster_flow", "ポスター", "Poster"],
-    ["furoshiki_white", "風呂敷 ／ 生成", "Furoshiki, natural"],
-    ["furoshiki_navy", "風呂敷 ／ 紺", "Furoshiki, navy"],
-    ["tenugui", "手ぬぐい", "Tenugui"],
-    ["noren", "暖簾", "Noren"],
-    ["giftbox_lid", "ギフトボックス", "Gift box lid"],
-    ["caviar_tin", "キャビア缶", "Caviar tin"],
-    ["notebook_cover", "ノート", "Notebook"],
-    ["uchiwa_fan", "うちわ", "Uchiwa fan"],
-    ["stationery_plate", "名刺・封筒", "Card and envelope"],
-    ["pattern_repeat", "包装紙", "Wrapping paper"],
     ["official_leather_tote", "革トート", "Leather tote, blind-debossed"],
     ["official_canvas_tote", "帆布トート", "Canvas tote"],
     ["official_pin_set", "ピンバッジ・タイバー", "Pins and tie bar"],
@@ -79,7 +68,18 @@ window.DATA = {
     ["official_fuji_umbrella", "富士 傘", "Fuji umbrella"],
     ["official_fuji_desk_set", "富士 デスクまわり", "Fuji desk set"],
     ["official_fuji_gift_set", "富士 ギフトセット", "Fuji gift set"],
-    ["official_fuji_wall_relief", "富士 レセプション", "Fuji reception relief"]
+    ["official_fuji_wall_relief", "富士 レセプション", "Fuji reception relief"],
+    ["poster_flow", "ポスター", "Poster"],
+    ["furoshiki_white", "風呂敷 ／ 生成", "Furoshiki, natural"],
+    ["furoshiki_navy", "風呂敷 ／ 紺", "Furoshiki, navy"],
+    ["tenugui", "手ぬぐい", "Tenugui"],
+    ["noren", "暖簾", "Noren"],
+    ["giftbox_lid", "ギフトボックス", "Gift box lid"],
+    ["caviar_tin", "キャビア缶", "Caviar tin"],
+    ["notebook_cover", "ノート", "Notebook"],
+    ["uchiwa_fan", "うちわ", "Uchiwa fan"],
+    ["stationery_plate", "名刺・封筒", "Card and envelope"],
+    ["pattern_repeat", "包装紙", "Wrapping paper"]
   ],
 
   wamongoods: [
@@ -106,7 +106,6 @@ window.DATA = {
   ],
 
   maison: [
-    ["monogram_ecru", "モノグラム地", "The monogram canvas"],
     ["maison_duffle", "ダッフル", "Travel duffle"],
     ["maison_tote", "トート", "Structured tote"],
     ["maison_trunks", "トランク", "Trunk cases"],
@@ -120,7 +119,8 @@ window.DATA = {
     ["maison_fuji_trunk", "富士 トランク", "Fuji trunk"],
     ["maison_fuji_small_goods", "富士 小物", "Fuji small leather goods"],
     ["maison_fuji_duffle", "富士 ダッフル", "Fuji duffle"],
-    ["maison_fuji_boutique", "富士 ブティック", "Fuji boutique vitrine"]
+    ["maison_fuji_boutique", "富士 ブティック", "Fuji boutique vitrine"],
+    ["monogram_ecru", "モノグラム地", "The monogram canvas"]
   ],
 
   wamon: [

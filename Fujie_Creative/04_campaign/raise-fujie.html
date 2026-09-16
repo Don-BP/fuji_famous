@@ -1,0 +1,311 @@
+<title>フジィを育てよう</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --abyss:#06141A; --deep:#0C2430; --mid:#17404D; --shallow:#2E6F79; --surface:#7FB3B4;
+    --steel:#BFCFD6; --chrome:#EEF5F7; --flow:#3FB6EE; --roe:#0A0806;
+    --ink:#EEF5F7; --ink-dim:#8FA9B4;
+    --serif:"Shippori Mincho",serif;
+    --sans:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--abyss); color:var(--ink);
+    font-family:var(--sans); -webkit-font-smoothing:antialiased;
+    overflow:hidden; height:100dvh;
+  }
+
+  #water{
+    position:fixed; inset:0;
+    background:radial-gradient(120% 90% at 50% 105%, var(--w2) 0%, var(--w1) 62%, var(--abyss) 100%);
+    transition:background 1600ms cubic-bezier(.4,0,.2,1);
+    --w1:var(--deep); --w2:var(--mid);
+  }
+  #grain{position:fixed; inset:0; opacity:.5; pointer-events:none}
+
+  #app{position:relative; height:100dvh; display:flex; flex-direction:column; cursor:pointer}
+
+  /* ---- year rail ---- */
+  #rail{
+    position:fixed; left:0; top:0; bottom:0; width:72px;
+    display:flex; flex-direction:column; justify-content:center; gap:0;
+    padding-block:24px; z-index:3; pointer-events:none;
+  }
+  #rail::before{
+    content:""; position:absolute; left:27px; top:8%; bottom:8%; width:1px;
+    background:linear-gradient(to bottom,transparent,rgba(191,207,214,.22) 12%,rgba(191,207,214,.22) 88%,transparent);
+  }
+  .tick{
+    position:relative; display:flex; align-items:center; gap:9px;
+    height:calc(100% / 8); padding-left:20px;
+    font-family:var(--serif); font-size:11px; letter-spacing:.06em;
+    color:var(--ink-dim); opacity:.32; transition:opacity .6s, color .6s;
+    font-variant-numeric:tabular-nums;
+  }
+  .tick i{
+    width:7px; height:7px; border-radius:50%; flex:none;
+    border:1px solid rgba(191,207,214,.45); background:var(--abyss);
+    transition:background .6s, border-color .6s, box-shadow .6s;
+  }
+  .tick.done{opacity:.6}
+  .tick.done i{background:rgba(191,207,214,.5); border-color:rgba(191,207,214,.5)}
+  .tick.now{opacity:1; color:var(--chrome)}
+  .tick.now i{background:var(--flow); border-color:var(--flow); box-shadow:0 0 0 4px rgba(63,182,238,.16)}
+
+  /* ---- stage ---- */
+  #stage{
+    position:relative; z-index:2; flex:1;
+    display:grid; grid-template-rows:1fr auto;
+    padding:clamp(20px,4vh,40px) clamp(20px,5vw,64px) clamp(20px,4vh,40px) 84px;
+    gap:clamp(14px,2.4vh,28px); min-height:0;
+  }
+
+  #vis{position:relative; display:grid; place-items:center; min-height:0}
+  #vis::before{
+    content:""; position:absolute; width:min(78%,560px); aspect-ratio:1; border-radius:50%;
+    background:radial-gradient(circle, rgba(127,179,180,.30) 0%, rgba(63,182,238,.10) 42%, transparent 68%);
+    filter:blur(6px); pointer-events:none;
+  }
+  #fish{
+    position:relative;
+    max-width:min(100%,520px); max-height:100%;
+    width:var(--fw,42%); min-width:92px; height:auto; object-fit:contain;
+    filter:drop-shadow(0 22px 46px rgba(0,0,0,.55)) drop-shadow(0 0 26px rgba(159,203,214,.45));
+    transition:width 1500ms cubic-bezier(.34,1.2,.42,1), opacity .7s;
+    animation:drift 7s ease-in-out infinite;
+  }
+  @keyframes drift{0%,100%{transform:translateY(-8px) rotate(-1.1deg)}50%{transform:translateY(8px) rotate(1.1deg)}}
+
+  /* ---- the 5% moment ---- */
+  #roe{
+    position:absolute; inset:0; display:none; place-content:center; align-content:center;
+    justify-content:center; gap:clamp(5px,1.1vh,9px);
+    grid-template-columns:repeat(10,1fr); padding:8px;
+  }
+  #roe.on{display:grid}
+  #roe b{
+    width:clamp(9px,2.1vh,15px); aspect-ratio:1; border-radius:50%;
+    background:radial-gradient(circle at 32% 28%, #5a6a70, var(--roe) 72%);
+    box-shadow:inset 0 0 0 1px rgba(191,207,214,.16);
+    transition:opacity 620ms ease, transform 620ms ease;
+  }
+  #roe b.gone{opacity:.06; transform:scale(.4)}
+  #roe b.live{box-shadow:inset 0 0 0 1px rgba(63,182,238,.75), 0 0 14px rgba(63,182,238,.5)}
+
+  /* ---- copy ---- */
+  #copy{max-width:56ch; display:grid; gap:clamp(8px,1.4vh,14px)}
+  #year{
+    font-family:var(--serif); font-weight:700; line-height:.9;
+    font-size:clamp(40px,10vw,76px); letter-spacing:.01em;
+    color:var(--chrome); font-variant-numeric:tabular-nums;
+  }
+  #year small{display:block; font-size:clamp(11px,2.6vw,13px); font-weight:500;
+    letter-spacing:.34em; color:var(--flow); margin-bottom:.7em; font-family:var(--sans)}
+  #head{
+    font-family:var(--serif); font-weight:700; text-wrap:balance;
+    font-size:clamp(19px,4.6vw,30px); line-height:1.5; color:var(--chrome); margin:0;
+  }
+  #body{
+    font-size:clamp(13.5px,3.2vw,16px); line-height:2; color:var(--ink-dim);
+    margin:0; text-wrap:pretty;
+  }
+  #body em{color:var(--steel); font-style:normal; font-weight:700}
+  .fade{animation:rise 900ms cubic-bezier(.2,.7,.3,1) both}
+  @keyframes rise{from{opacity:0; transform:translateY(14px)}to{opacity:1; transform:none}}
+
+  #hint{
+    display:flex; align-items:center; gap:10px; margin-top:4px;
+    font-size:11px; letter-spacing:.24em; color:var(--ink-dim); opacity:.75;
+  }
+  #hint span{width:22px; height:1px; background:currentColor; animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.3;width:14px}50%{opacity:1;width:30px}}
+
+  /* ---- finale ---- */
+  #end{
+    position:fixed; inset:0; z-index:5; display:none; place-items:center; text-align:center;
+    background:radial-gradient(120% 90% at 50% 40%, #16414C 0%, #081A22 68%, #050E13 100%);
+    padding:32px 20px;
+  }
+  #end.on{display:grid; animation:rise 1200ms ease both}
+  #end .in{display:grid; gap:20px; justify-items:center; max-width:620px}
+  #end img{width:min(74vw,440px); filter:drop-shadow(0 26px 50px rgba(0,0,0,.6))}
+  #end h2{font-family:var(--serif); font-weight:700; margin:0; color:var(--chrome);
+    font-size:clamp(24px,6.6vw,42px); line-height:1.45; text-wrap:balance}
+  #end p{margin:0; color:var(--ink-dim); font-size:clamp(13px,3.1vw,15.5px); line-height:2}
+  #end .mark{font-family:var(--serif); letter-spacing:.3em; font-size:11px; color:var(--flow)}
+  #again{
+    margin-top:6px; background:none; color:var(--ink-dim); font-family:var(--sans);
+    border:1px solid rgba(191,207,214,.3); border-radius:999px; padding:11px 24px;
+    font-size:12px; letter-spacing:.2em; cursor:pointer; transition:.3s;
+  }
+  #again:hover,#again:focus-visible{color:var(--chrome); border-color:var(--flow); outline:none}
+
+  @media (max-width:560px){
+    #rail{width:58px} #rail::before{left:20px} .tick{padding-left:13px; font-size:10px}
+    #stage{padding-left:64px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important; transition-duration:.01ms!important}
+  }
+</style>
+
+<div id="water"></div>
+<canvas id="grain"></canvas>
+
+<div id="rail"></div>
+
+<div id="app">
+  <div id="stage">
+    <div id="vis">
+      <img id="fish" src="stage_1_egg.png" alt="">
+      <div id="roe"></div>
+    </div>
+    <div id="copy">
+      <div id="year"><small>FUJIKIN</small>1987</div>
+      <h1 id="head">「フジキンのバルブを使って、<br>チョウザメの養殖を始めてみないか？」</h1>
+      <p id="body">最高技術顧問・故 西堀栄三郎先生の一言から、すべては始まった。<br>バルブメーカーが、一粒の卵を預かった年である。</p>
+      <div id="hint"><span></span>画面をタップして進む</div>
+    </div>
+  </div>
+</div>
+
+<div id="end">
+  <div class="in">
+    <img id="endimg" src="fujie-official.png" alt="フジキン公式マスコット Fujie">
+    <div class="mark">1987 — 2026</div>
+    <h2>このフジィは、実在します。</h2>
+    <p>茨城県常陸太田市・里美養魚場。<br>いまも 1 万尾を超えるチョウザメが泳いでいます。<br><em>バルブメーカーが、日本の国産キャビアを生みました。</em></p>
+    <button id="again">もう一度育てる</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var S = [
+    { y:"1987", tag:"FUJIKIN", img:"stage_1_egg.png", fw:"17%", w1:"#06141A", w2:"#0C2430",
+      h:'「フジキンのバルブを使って、<br>チョウザメの養殖を始めてみないか？」',
+      b:'最高技術顧問・故 西堀栄三郎先生の一言から、すべては始まった。<br>バルブメーカーが、一粒の卵を預かった年である。' },
+
+    { y:"1987", tag:"ボルガ川", img:"stage_1_egg.png", fw:"15%", w1:"#07181F", w2:"#0E2A36",
+      h:'船上でふるまわれた、<br>一匙のフレッシュキャビア。',
+      b:'旧ソ連の養殖場へ。ボルガ川を行く船の上で、なぜキャビアが世界三大珍味に数えられるのかを、はじめて舌で理解した。<br>持ち帰ったのは、その味の記憶と、<em>「ながれ」を制御するという着想</em>だった。' },
+
+    { y:"1989", tag:"つくば", img:"stage_2_larva.png", fw:"22%", w1:"#081C24", w2:"#10303D",
+      h:'完全閉鎖循環ろ過方式、<br>稼働。',
+      b:'万博記念つくば先端事業所に養殖プラントが完成。ベステル種 100 尾を迎え入れる。<br>一尾ずつを見分け、個体ごとに記録をとる日々が始まった。' },
+
+    { y:"1992", tag:"人工ふ化", img:"stage_2_larva.png", fw:"26%", w1:"#091F28", w2:"#123644", roe:true,
+      h:'民間企業として、日本初の<br>人工ふ化に成功。',
+      b:'しかし ——' },
+
+    { y:"1998", tag:"世界初", img:"stage_3_fry.png", fw:"36%", w1:"#0B2733", w2:"#17404D",
+      h:'世界初、水槽での完全養殖。',
+      b:'生残率は <em>60%</em> へ。卵から育てた魚が、ふたたび卵を産んだ。<br>11 年をかけて、誰も到達していなかった場所に立った。' },
+
+    { y:"2002", tag:"日本初", img:"stage_4_young.png", fw:"48%", w1:"#0E303D", w2:"#1E4F5B",
+      h:'日本初のキャビア、出荷。',
+      b:'バルブメーカーが、日本の食卓に<em>国産キャビア</em>を届けた。<br>いま国内で流通する国産キャビアの多くは、ここから広がっている。' },
+
+    { y:"2008", tag:"里美養魚場", img:"stage_4_young.png", fw:"56%", w1:"#123A47", w2:"#26606A",
+      h:'茨城県常陸太田市、<br>1 万尾を超える。',
+      b:'稚魚は全国の養殖業者へ。フジキンは、日本のチョウザメ養殖そのものの源流になった。' },
+
+    { y:"2026", tag:"NOW", img:"MASTER", fw:"62%", w1:"#17454F", w2:"#2E6F79",
+      h:'そして、フジィが生まれた。',
+      b:'創業 95 周年のマスコットは、想像上の生きものではない。<br><em>この会社が、40 年かけて本当に育ててきた魚である。</em>' }
+  ];
+
+  var MASTER = "master.png";
+  var i = 0, busy = false;
+  var water=document.getElementById("water"), rail=document.getElementById("rail"),
+      fish=document.getElementById("fish"), roe=document.getElementById("roe"),
+      yearEl=document.getElementById("year"), headEl=document.getElementById("head"),
+      bodyEl=document.getElementById("body"), hint=document.getElementById("hint"),
+      endEl=document.getElementById("end"), app=document.getElementById("app");
+
+  S.forEach(function(s,n){
+    var t=document.createElement("div");
+    t.className="tick"; t.innerHTML='<i></i>'+s.y;
+    t.dataset.n=n; rail.appendChild(t);
+  });
+  var ticks=rail.querySelectorAll(".tick");
+
+  for(var k=0;k<100;k++) roe.appendChild(document.createElement("b"));
+  var eggs=roe.querySelectorAll("b");
+
+  function paint(n){
+    var s=S[n];
+    water.style.setProperty("--w1",s.w1);
+    water.style.setProperty("--w2",s.w2);
+    fish.src = s.img==="MASTER" ? MASTER : s.img;
+    fish.style.setProperty("--fw",s.fw);
+    yearEl.innerHTML='<small>'+s.tag+'</small>'+s.y;
+    headEl.innerHTML=s.h;
+    bodyEl.innerHTML=s.b;
+    [yearEl,headEl,bodyEl].forEach(function(el){
+      el.classList.remove("fade"); void el.offsetWidth; el.classList.add("fade");
+    });
+    ticks.forEach(function(t,m){
+      t.classList.toggle("done",m<n); t.classList.toggle("now",m===n);
+    });
+    hint.style.visibility = n===S.length-1 ? "hidden" : "visible";
+    if(s.roe) runRoe(); else { roe.classList.remove("on"); fish.style.opacity=1; }
+  }
+
+  function runRoe(){
+    fish.style.opacity=0; roe.classList.add("on"); busy=true;
+    eggs.forEach(function(e){ e.className=""; });
+    var order=[]; for(var a=0;a<100;a++) order.push(a);
+    for(var b=order.length-1;b>0;b--){ var r=Math.floor(Math.random()*(b+1)); var t=order[b]; order[b]=order[r]; order[r]=t; }
+    var doomed=order.slice(0,95), spared=order.slice(95);
+    doomed.forEach(function(idx,n){
+      setTimeout(function(){ eggs[idx].classList.add("gone"); }, 380 + n*17);
+    });
+    setTimeout(function(){
+      spared.forEach(function(idx){ eggs[idx].classList.add("live"); });
+      bodyEl.innerHTML='しかし、初年度の生残率は <em>5%</em>。<br>100 尾のうち 95 尾は、育たなかった。';
+      bodyEl.classList.remove("fade"); void bodyEl.offsetWidth; bodyEl.classList.add("fade");
+      busy=false;
+    }, 2400);
+  }
+
+  function next(){
+    if(busy) return;
+    if(i>=S.length-1){ endEl.classList.add("on"); return; }
+    i++; paint(i);
+  }
+
+  app.addEventListener("click", next);
+  window.addEventListener("keydown", function(e){
+    if(e.key===" "||e.key==="Enter"||e.key==="ArrowRight"||e.key==="ArrowDown"){ e.preventDefault(); next(); }
+  });
+  document.getElementById("again").addEventListener("click", function(e){
+    e.stopPropagation(); endEl.classList.remove("on"); i=0; paint(0);
+  });
+
+  /* suspended particles */
+  var cv=document.getElementById("grain"), cx=cv.getContext("2d"), P=[], raf;
+  function size(){ cv.width=innerWidth; cv.height=innerHeight; }
+  size(); addEventListener("resize",size);
+  for(var p=0;p<46;p++) P.push({
+    x:Math.random()*innerWidth, y:Math.random()*innerHeight,
+    r:Math.random()*1.7+.35, s:Math.random()*.28+.06, o:Math.random()*.3+.06
+  });
+  function tick(){
+    cx.clearRect(0,0,cv.width,cv.height);
+    for(var n=0;n<P.length;n++){
+      var q=P[n]; q.y-=q.s; if(q.y<-6){ q.y=cv.height+6; q.x=Math.random()*cv.width; }
+      cx.beginPath(); cx.arc(q.x,q.y,q.r,0,6.284);
+      cx.fillStyle="rgba(191,207,214,"+q.o+")"; cx.fill();
+    }
+    raf=requestAnimationFrame(tick);
+  }
+  if(!matchMedia("(prefers-reduced-motion: reduce)").matches) tick();
+
+  paint(0);
+})();
+</script>
