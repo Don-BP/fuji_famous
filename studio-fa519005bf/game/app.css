@@ -422,3 +422,25 @@ header{position:absolute;top:0;left:0;right:0;z-index:6;pointer-events:none;
   background:linear-gradient(rgba(4,18,26,.78) 0%,rgba(4,18,26,.42) 55%,rgba(4,18,26,0) 100%)}
 header > *{pointer-events:auto}
 #tank{border-radius:0}
+
+/* ================================================================
+   WIDE SCREENS
+   Under 1100px nothing here applies and the phone layout is untouched.
+   Above it the tank stopped at a 1100px column with the page showing as
+   dark gutters either side; now it runs the full width of the window and
+   the artwork grows with it, while the meters, buttons and mini-game
+   furniture stay a readable width in the middle of the screen.
+   ================================================================ */
+@media (min-width:1100px){
+  #app{max-width:100%}
+
+  /* the fish scales with the tank instead of stopping at 320px */
+  #fish{max-width:min(58vw,1000px)}
+
+  /* controls stay centred and readable rather than stretching to the edges */
+  #stats,#growRow,#actions{max-width:1120px;margin-inline:auto;width:100%}
+
+  #miniHead,#miniFoot{max-width:1280px;margin-inline:auto;width:100%}
+  #holes{max-width:1000px;margin-inline:auto;left:0;right:0}
+  #shells{max-width:1000px;margin-inline:auto;left:0;right:0}
+}
