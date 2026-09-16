@@ -127,7 +127,7 @@
     stkEyebrow: "GIVEAWAY", stkH: "A hundred and twenty-eight stickers",
     stkB: "Sixty-four in Japanese, sixty-four in English, every one cut out on its own and finished to the LINE spec. Given away free for adding the official account, so Fujie ends up inside people's conversations. First in the pack is \"Not a shark!\". The English set carries straight over to WhatsApp and Telegram.",
     goodsEyebrow: "GOODS", goodsH: "Five lines",
-    goodsB: "One fish, five different shelves: the children's shelf, the gift shelf, the travel shelf, the everyday shelf and the craft shelf.<br>And Mount Fuji on every one of them. The name Fujikin comes from the mountain, so it now stands beside the water as the second house motif.",
+    goodsB: "One fish, five different shelves: the children's shelf, the gift shelf, the travel shelf, the pattern shelf and the craft shelf.<br>And Mount Fuji on every one of them. The name Fujikin comes from the mountain, so it now stands beside the water as the second house motif.",
     line1H: "Chibi Fujie / toys and daily things",
     line1B: "The visitor-centre shelf and the capsule machine. Cheap, high volume, taken home.",
     line2H: "The official line / gifts and ceremony",
