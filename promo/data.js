@@ -43,16 +43,16 @@ window.DATA = {
   ],
 
   mascot: [
-    ["plush_mascot_set", "マスコット 6種", "Six poses, the full set"],
+    ["plush_mascot_backpack", "リュックに", "Clipped to a backpack"],
+    ["plush_mascot_set", "マスコット 10cm", "The mascot keychain, 10cm"],
     ["plush_keychain_lifestyle", "鞄に下げて", "Hung on a bag"],
     ["plush_mascot_rail", "売り場のラック", "Shop rail"],
     ["plush_mascot_blindbag", "ブラインドバッグ", "Blind bags"],
-    ["plush_mascot_backpack", "リュックに", "Clipped to a backpack"],
     ["plush_mascot_hand", "手のひらサイズ", "Palm-sized"],
     ["plush_mascot_cafe", "カフェの机で", "On a cafe table"],
     ["plush_mascot_pair", "二つ並べて", "A pair on a handbag"],
     ["plush_mascot_luggage", "旅の相棒", "Clipped to a suitcase"],
-    ["plush_fuji_mascot_set", "富士帽 6種", "Six poses, all in Fuji caps"],
+    ["plush_fuji_mascot_set", "富士帽のマスコット", "The mascot in its Fuji cap"],
     ["plush_fuji_keychain", "富士チャーム付き", "With a felt Fuji charm"],
     ["plush_fuji_mascot_rail", "富士帽 売り場", "Shop rail, Fuji caps"],
     ["plush_fuji_mascot_pouch", "富士 巾着", "In a Fuji pouch"]

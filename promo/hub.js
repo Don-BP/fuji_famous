@@ -211,7 +211,7 @@
     if (tab) {
       var tgrid = tab.parentElement.nextElementSibling;
       tgrid.dataset.touched = "1";
-      tgrid.classList.toggle("showFuji", tab.dataset.set === "fuji");
+      tgrid.dataset.view = tab.dataset.set;
       tgrid.classList.add("collapsed");
       sync(tgrid);
       return;
