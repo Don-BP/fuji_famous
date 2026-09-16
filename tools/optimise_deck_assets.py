@@ -38,6 +38,10 @@ FILES = [
     ("19_fujisan/maison/maison_fuji_scarf.png", False, 1200),
     ("19_fujisan/chibi/chibi_fuji_gacha.png",  False, 1200),
     ("19_fujisan/official/official_fuji_glass.png", False, 1200),
+    # the mascot keychain slide
+    ("03_plushie/plush_mascot_set.png",         False, 1600),
+    ("03_plushie/plush_mascot_rail.png",        False, 1400),
+    ("03_plushie/plush_mascot_blindbag.png",    False, 1400),
 ]
 
 total_before = total_after = 0

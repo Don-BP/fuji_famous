@@ -498,6 +498,27 @@ img(s, "deck_assets/03_plushie/plush_keychain_lifestyle.jpg", 8.35, 3.15, 2.0, 3
 img(s, "deck_assets/03_plushie/plush_studio_front.jpg", 10.5, 3.15, 2.05, 3.3);
 foot(s, "10cm キーホルダー／25cm／50cm。いずれも試作イメージです。");
 
+/* =============== 15a. マスコット =============== */
+s = P.addSlide(); light(s);
+eyebrow(s, "受け皿となるグッズ");
+title(s, "マスコットは、飾るものではなく、集めるもの。");
+body(s, "一点の値段がいちばん安く、いちばん遠くまで行くのがマスコットです。6 種を出してブラインドで売れば、買うのは一度きりではなくなります。そして鞄に下がった瞬間、通勤電車のなかで毎日人目に触れます。棚の上ではなく、街のなかに置ける唯一のグッズです。",
+  { x: M, y: 2.25, w: 11.8, h: 0.9, fontSize: 13.5 });
+[
+  ["deck_assets/03_plushie/plush_mascot_set.jpg", "全 6 種", "同じ一匹を 6 つの姿で。\n揃えたくなる形にします。"],
+  ["deck_assets/03_plushie/plush_mascot_blindbag.jpg", "ブラインド販売", "中身は開けるまで分からない。\n一度きりの買い物にしません。"],
+  ["deck_assets/03_plushie/plush_mascot_rail.jpg", "ラックで面を取る", "小さく、軽く、吊るせる。\n売り場でいちばん場所を取りません。"],
+].forEach((it, i) => {
+  const x = M + i * 4.0;
+  card(s, x, 3.2, 3.8, 3.3);
+  img(s, it[0], x + 0.1, 3.3, 3.6, 1.95);
+  s.addText(it[1], { x: x + 0.2, y: 5.38, w: 3.4, h: 0.36, fontFace: FH, fontSize: 14,
+    bold: true, color: C.ink, align: "center", isTextBox: true, margin: 0 });
+  s.addText(it[2], { x: x + 0.15, y: 5.76, w: 3.5, h: 0.62, fontFace: FB, fontSize: 10,
+    color: C.muted, align: "center", lineSpacing: 15, isTextBox: true, margin: 0 });
+});
+foot(s, "10cm・全 6 種。ぬいぐるみ 3 サイズのうち、いちばん安く、いちばん数が出る一点です。");
+
 /* =============== 15b. 五つの棚 =============== */
 s = P.addSlide(); light(s);
 eyebrow(s, "受け皿となるグッズ");
