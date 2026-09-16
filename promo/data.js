@@ -44,7 +44,6 @@ window.DATA = {
 
   mascot: [
     ["plush_mascot_backpack", "リュックに", "Clipped to a backpack"],
-    ["plush_mascot_set", "マスコット 10cm", "The mascot keychain, 10cm"],
     ["plush_keychain_lifestyle", "鞄に下げて", "Hung on a bag"],
     ["plush_mascot_rail", "売り場のラック", "Shop rail"],
     ["plush_mascot_blindbag", "ブラインドバッグ", "Blind bags"],
