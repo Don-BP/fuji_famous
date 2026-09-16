@@ -238,6 +238,16 @@ header{padding:12px 16px 6px;display:flex;align-items:center;gap:10px;z-index:4}
   text-shadow:0 2px 0 rgba(4,18,26,.6)}
 #miniScore,#miniTime{color:var(--flow);font-variant-numeric:tabular-nums}
 #miniTime{margin-left:auto}
+/* three chances, spent left to right, so you always know how close you are */
+#miniLives{display:flex;gap:5px;align-items:center}
+#miniLives i{
+  width:9px;height:9px;border-radius:50%;
+  background:var(--flow);box-shadow:0 0 7px rgba(90,200,235,.55);
+  transition:background .3s,box-shadow .3s,transform .3s;
+}
+#miniLives i.spent{background:rgba(255,255,255,.16);box-shadow:none;transform:scale(.72)}
+@keyframes lifeLost{0%{transform:scale(1.7)}60%{transform:scale(.6)}100%{transform:scale(.72)}}
+#miniLives i.losing{animation:lifeLost .45s ease-out;background:var(--bad)}
 #miniExit{background:none;border:1px solid var(--edge);color:var(--dim);border-radius:99px;
   padding:4px 11px;font-size:11px;cursor:pointer}
 #miniBody{position:relative;overflow:hidden;min-height:0}
@@ -370,6 +380,10 @@ header{padding:12px 16px 6px;display:flex;align-items:center;gap:10px;z-index:4}
   filter:drop-shadow(0 4px 10px rgba(0,0,0,.45))}
 .bigScore{font-family:var(--serif);font-size:44px;font-weight:400;letter-spacing:.02em;color:var(--flow);line-height:1;
   text-shadow:0 4px 0 rgba(4,18,26,.7),0 0 22px rgba(63,182,238,.45)}
+/* a run that ended on three mistakes should not look like a celebration */
+#resultScreen.failed .bigScore{color:var(--bad);
+  text-shadow:0 4px 0 rgba(4,18,26,.7),0 0 22px rgba(232,112,95,.35)}
+#resultScreen.failed .mark{color:var(--bad)}
 
 @media (max-height:700px){
   #year{font-size:21px}.screen h1{font-size:18px}.act{padding:9px 4px}

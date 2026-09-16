@@ -137,10 +137,19 @@ def main():
     gi = DIST / "game" / "index.html"
     html = gi.read_text(encoding="utf-8")
     if 'name="robots"' not in html:
-        gi.write_text(html.replace('<meta charset="utf-8">',
-                                   '<meta charset="utf-8">\n'
-                                   '<meta name="robots" content="noindex,nofollow">', 1),
-                      encoding="utf-8")
+        html = html.replace('<meta charset="utf-8">',
+                            '<meta charset="utf-8">\n'
+                            '<meta name="robots" content="noindex,nofollow">', 1)
+
+    # The game's scripts carried a hand-typed "?v=6". Forget to bump it and every
+    # returning player keeps yesterday's game from their own cache - exactly the
+    # fault that hid two studio fixes. Stamp them with a hash of the file instead,
+    # so the number looks after itself.
+    for f in ("app.css", "i18n.js", "game.js"):
+        v = hashlib.sha1((DIST / "game" / f).read_bytes()).hexdigest()[:8]
+        html = re.sub(r'(["\'])%s(\?v=[^"\']*)?\1' % re.escape(f),
+                      lambda m: '%s%s?v=%s%s' % (m.group(1), f, v, m.group(1)), html)
+    gi.write_text(html, encoding="utf-8")
 
     # ---- every id in data.js must exist ----
     ids = re.findall(r'\["([\w\-]+)"', (PROMO / "data.js").read_text(encoding="utf-8"))

@@ -220,7 +220,13 @@ a{color:inherit}
 .g2{grid-template-columns:repeat(2,1fr)}
 .g3{grid-template-columns:repeat(3,1fr)}
 .g4{grid-template-columns:repeat(4,1fr)}
+/* Each card is a <figure>, and a browser gives every figure 40px of margin
+   down each side by default. Nothing here ever took it off, so every card was
+   handing back 80px of its column: barely noticeable in a wide desktop column,
+   but on a phone the column is only 164px and the goods were being shown at
+   less than half size. */
 .card{
+  margin:0;
   position:relative;border-radius:12px;overflow:hidden;cursor:zoom-in;
   background:rgba(0,0,0,.14);border:1px solid rgba(0,0,0,.08);
   opacity:0;transform:translateY(20px);
