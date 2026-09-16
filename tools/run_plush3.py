@@ -34,6 +34,26 @@ LOCK = (
     "cyan, pink or any other hue. ***\n\n"
 )
 
+CHIBI = (
+    "*** CHIBI PROPORTIONS - CRITICAL ***\n"
+    "This is CHIBI FUJIE, the cute young form. It is NOT the realistic adult Fujie, and the two must "
+    "never be mixed inside one picture.\n"
+    "The head is HUGE - roughly one third of the whole length - and rounded. The single glossy black "
+    "eye is large, about a quarter the height of the head. The body behind the head is SHORT, plump "
+    "and stubby, tapering quickly into a small crescent tail. The snout is a short blunt paddle, not "
+    "a long spike.\n"
+    "NEVER render any of them as a long, slender, realistic sturgeon with a small eye, a long snout "
+    "and a stretched-out body. That is the other character. Every one of the six has the same big "
+    "head, the same big eye and the same stubby body as the attached toy.\n\n"
+)
+
+TAIL = (
+    "*** TAIL RULE ***\n"
+    "EVERY figure clearly shows its CRESCENT TAIL FIN at the rear - two soft swept lobes sewn as one "
+    "piece. The body never simply ends in a stump, and the dorsal fin on the back is never mistaken "
+    "for the tail.\n\n"
+)
+
 SHOT = (
     "PHOTOREALISTIC photography of a real object - a photograph, not a drawing or a render. The "
     "plush is soft fabric: satin pile catching the light, seams and stitch lines visible, a slight "
@@ -42,7 +62,9 @@ SHOT = (
     "*** TEXT RULE ***\n"
     "The only words allowed anywhere are Fujie, FUJIKIN and the katakana \u30d5\u30b8\u30a3, small "
     "and discreet on a tag or a header card. No other words in any language, no slogans, no shop "
-    "names, no invented kanji or kana, no captions, no small print, no prices.\n\n"
+    "names, no invented kanji or kana, no captions, no small print, no prices.\n"
+    "Never write the pose names or any part of these instructions into the picture. No labels under "
+    "or beside any figure, no numbers, no grid captions.\n\n"
 )
 
 FUJI = (
@@ -57,22 +79,26 @@ PLAIN = [
     ("plush_mascot_set.png", "16:9", [KEY, STUDIO],
      "PRODUCT ASSORTMENT PHOTOGRAPH on a pale grey surface: six mascot keychains laid out in two "
      "rows of three, each with its own silver split ring and short chain.\n"
-     "*** SIX DIFFERENT POSES - CRITICAL ***\n"
-     "All six are sewn in GENUINELY DIFFERENT shapes. No two may repeat a pose, and no two may face "
-     "the same way. Read as six clearly distinct silhouettes even in a thumbnail:\n"
-     "1. UPRIGHT AND FORWARD - sitting up on its belly, head lifted, facing the camera dead on, "
-     "both pectoral fins held out to the sides. A symmetrical front view.\n"
-     "2. CURLED ASLEEP - the body bent into a closed ring with the snout tucked against the tail, "
-     "photographed from directly above, the eye a single stitched closed curve.\n"
-     "3. FULL SIDE PROFILE FACING RIGHT - lying flat and stretched out long, tail extended straight "
-     "back, the whole body in one horizontal line.\n"
-     "4. DIVING - head angled steeply down toward the surface with the tail lifted high in the air "
-     "behind it, the body a diagonal.\n"
-     "5. BELLY UP - lying on its back, pale ivory belly facing the camera, both pectoral fins "
-     "splayed wide, seen from above.\n"
-     "6. LEAPING ARCH FACING LEFT - the body curved into a deep C with both the head and the tail "
-     "lifted clear of the surface, seen from the side.\n"
-     "Even soft studio light, gentle contact shadows, neat catalogue arrangement."),
+     + CHIBI + TAIL +
+     "This is ONE photograph of six soft toys arranged in two rows of three on a single continuous "
+     "pale grey surface. It is NOT a contact sheet and NOT a catalogue page: no panel borders, no "
+     "dividing lines between the toys, no white gutters, and NO CAPTIONS, NO LABELS AND NO WRITING "
+     "OF ANY KIND anywhere in the picture. Never write these pose descriptions into the image.\n"
+     "The six are sewn in six genuinely different shapes so the set reads as a collection. No two "
+     "repeat a pose and no two face the same way; in every one both the face and the crescent tail "
+     "are visible. Left to right along the top row and then the bottom:\n"
+     "one propped on its belly at a three-quarter angle turned toward the camera, a pectoral fin "
+     "lifted in a cheerful wave, head tilted;\n"
+     "one curled into a closed ring with its snout tucked against its tail, seen from above, its "
+     "eye a single stitched closed curve;\n"
+     "one resting on its belly in full side view facing right, head up, the short round body and "
+     "the crescent tail both clearly in profile;\n"
+     "one diving, head angled steeply down toward the surface and tail lifted high behind it;\n"
+     "one lounging on its side with the pale belly toward the camera, head propped up and one "
+     "pectoral fin raised behind its head;\n"
+     "one caught mid-leap facing left, its body curved into a deep C with the head and the crescent "
+     "tail both lifted clear of the surface.\n"
+     "Even soft studio light, gentle contact shadows, a quiet unfussy arrangement."),
 
     ("plush_mascot_rail.png", "4:3", [KEY],
      "RETAIL PHOTOGRAPH inside a bright Japanese gift shop: a chrome display rail hung with four "
@@ -120,22 +146,27 @@ FUJIS = [
      "rows of three, each with its own silver split ring and short chain, and each wearing a small "
      "KNITTED MOUNT FUJI CAP - a low wide soft-blue knitted cone with a cream bobbled snow band. "
      "Small felt Mount Fuji charms hang beside two of them on the same chains.\n"
-     "*** SIX DIFFERENT POSES - CRITICAL ***\n"
-     "All six are sewn in GENUINELY DIFFERENT shapes. No two may repeat a pose, and no two may face "
-     "the same way. Read as six clearly distinct silhouettes even in a thumbnail:\n"
-     "1. UPRIGHT AND FORWARD - sitting up on its belly, head lifted, facing the camera dead on, "
-     "both pectoral fins held out to the sides.\n"
-     "2. CURLED ASLEEP - the body bent into a closed ring with the snout tucked against the tail, "
-     "seen from directly above, the eye a single stitched closed curve, the cap tipped forward.\n"
-     "3. FULL SIDE PROFILE FACING RIGHT - lying flat and stretched out long, tail extended straight "
-     "back.\n"
-     "4. DIVING - head angled steeply down with the tail lifted high behind it, the body a "
-     "diagonal.\n"
-     "5. BELLY UP - lying on its back, pale ivory belly to the camera, both pectoral fins splayed "
-     "wide, the cap resting beside its head.\n"
-     "6. LEAPING ARCH FACING LEFT - the body curved into a deep C with head and tail both lifted, "
-     "seen from the side.\n"
-     "Even soft studio light, neat catalogue arrangement."),
+     + CHIBI + TAIL +
+     "This is ONE photograph of six soft toys arranged in two rows of three on a single continuous "
+     "pale grey surface. It is NOT a contact sheet and NOT a catalogue page: no panel borders, no "
+     "dividing lines between the toys, no white gutters, and NO CAPTIONS, NO LABELS AND NO WRITING "
+     "OF ANY KIND anywhere in the picture. Never write these pose descriptions into the image.\n"
+     "The six are sewn in six genuinely different shapes so the set reads as a collection. No two "
+     "repeat a pose and no two face the same way; in every one both the face and the crescent tail "
+     "are visible. Left to right along the top row and then the bottom:\n"
+     "one propped on its belly at a three-quarter angle turned toward the camera, a pectoral fin "
+     "lifted in a cheerful wave, head tilted;\n"
+     "one curled into a closed ring with its snout tucked against its tail, seen from above, its "
+     "eye a single stitched closed curve and its cap tipped forward;\n"
+     "one resting on its belly in full side view facing right, head up, the short round body and "
+     "the crescent tail both clearly in profile;\n"
+     "one diving, head angled steeply down and tail lifted high behind it;\n"
+     "one lounging on its side with the pale belly toward the camera, head propped up and one "
+     "pectoral fin raised behind its head;\n"
+     "one caught mid-leap facing left, its body curved into a deep C with the head and the crescent "
+     "tail both lifted clear of the surface.\n"
+     "Every one still wears its knitted Mount Fuji cap. Even soft studio light, a quiet "
+     "arrangement."),
 
     ("plush_fuji_mascot_rail.png", "4:3", [KEY],
      "RETAIL PHOTOGRAPH inside a bright Japanese gift shop: a chrome display rail hung with rows of "
@@ -147,8 +178,8 @@ FUJIS = [
 if __name__ == "__main__":
     only = sys.argv[1] if len(sys.argv) > 1 else None
     for folder, jobs, wrap in [
-        (OUT, PLAIN, lambda p: LOCK + SHOT + p),
-        (FOUT, FUJIS, lambda p: LOCK + SHOT + FUJI + p),
+        (OUT, PLAIN, lambda p: LOCK + CHIBI + SHOT + p),
+        (FOUT, FUJIS, lambda p: LOCK + CHIBI + SHOT + FUJI + p),
     ]:
         for name, aspect, refs, prompt in jobs:
             if only and only not in name:

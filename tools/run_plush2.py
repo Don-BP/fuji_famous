@@ -36,6 +36,17 @@ LOCK = (
     "navy, cyan, pink or any other hue.\n\n"
 )
 
+CHIBI = (
+    "*** CHIBI PROPORTIONS - CRITICAL ***\n"
+    "This toy is CHIBI FUJIE, the cute young form, NOT the realistic adult Fujie. The head is HUGE, "
+    "roughly one third of the whole length, and deeply rounded; the single glossy black eye is "
+    "large, about a quarter the height of the head; the body behind the head is SHORT, plump and "
+    "stubby and tapers quickly into the crescent tail; the flat paddle snout sticks well out in "
+    "front with four cord whiskers beneath it.\n"
+    "Never sew it as a long, slender, realistic sturgeon with a small eye and a stretched-out body. "
+    "That is the other character and it must not appear.\n\n"
+)
+
 SHOT = (
     "PHOTOREALISTIC photography of a real object - a photograph, not a drawing or a render. The "
     "plush is soft fabric: short pile catching the light, seams and stitch lines visible, a slight "
@@ -161,8 +172,8 @@ FUJIS = [
 if __name__ == "__main__":
     only = sys.argv[1] if len(sys.argv) > 1 else None
     for folder, jobs, wrap in [
-        (OUT, PLAIN, lambda p: LOCK + SHOT + p),
-        (FOUT, FUJIS, lambda p: LOCK + SHOT + FUJI + p),
+        (OUT, PLAIN, lambda p: LOCK + CHIBI + SHOT + p),
+        (FOUT, FUJIS, lambda p: LOCK + CHIBI + SHOT + FUJI + p),
     ]:
         if only and only not in folder:
             continue

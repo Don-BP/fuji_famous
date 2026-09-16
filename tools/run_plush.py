@@ -2,7 +2,8 @@ import json, pathlib, sys
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from gen import gen
 
-M = "D:/Fuji_Famous/Fujie_Creative/01_character/master_v2_float.png"
+M = "D:/Fuji_Famous/Fujie_Creative/01_character/master_v3_wave.png"
+T = "D:/Fuji_Famous/Fujie_Creative/01_character/master_turnaround.png"
 
 LOCK = (
     "The attached image is the LOCKED master design of 'Chibi Fujie' (chibi Fujie), the cute young "
@@ -16,8 +17,19 @@ LOCK = (
     "protruding downward. It never stands upright on anything. It rests on its belly.\n\n"
 )
 
+CHIBI = (
+    "*** CHIBI PROPORTIONS - CRITICAL ***\n"
+    "This toy is CHIBI FUJIE, the cute young form, NOT the realistic adult Fujie. Match the attached "
+    "master exactly: the head is HUGE, roughly one third of the whole length, and deeply rounded; "
+    "the single glossy black eye is large, about a quarter the height of the head; the body behind "
+    "the head is SHORT, plump and stubby and tapers quickly into the crescent tail; the flat paddle "
+    "snout sticks well out in front with four whiskers beneath it.\n"
+    "Never sew it as a long, slender, realistic sturgeon with a small eye and a stretched-out body. "
+    "That is the other character and it must not appear.\n\n"
+)
+
 PLUSH = (
-    LOCK
+    LOCK + CHIBI
     + "Create a PHOTOREALISTIC PRODUCT PHOTOGRAPH of this character manufactured as a real Japanese "
     "plush toy. Silver-grey short-pile velboa plush with a pearlescent sheen, pale ivory-silver "
     "belly panel, the long flat snout firmly stuffed and sewn, four soft cord barbel whiskers, the "
@@ -66,6 +78,9 @@ JOBS = [
     ),
 ]
 
+only = sys.argv[1] if len(sys.argv) > 1 else None
 for prompt, out, aspect in JOBS:
-    r = gen(prompt, out, refs=[M], aspect=aspect)
+    if only and only not in out:
+        continue
+    r = gen(prompt, out, refs=[M, T], aspect=aspect)
     print(json.dumps({"out": out, "ok": not isinstance(r, dict)}, ensure_ascii=False), flush=True)
