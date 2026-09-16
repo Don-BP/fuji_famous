@@ -28,7 +28,21 @@ window.DATA = {
     ["plush_studio_front", "ぬいぐるみ 25cm", "Plush, 25cm"],
     ["plush_in_hands", "手のひらサイズ", "Palm-sized in the hand"],
     ["plush_size_lineup", "3サイズ展開", "Three sizes"],
-    ["plush_keychain_lifestyle", "キーホルダー", "Keychain version"]
+    ["plush_keychain_lifestyle", "キーホルダー", "Keychain version"],
+    ["plush_detail", "仕立てのディテール", "Stitching and the embroidered eye"],
+    ["plush_packaging", "パッケージ", "Retail packaging and hang tag"],
+    ["plush_desk", "デスクの上で", "On a working desk"],
+    ["plush_hug_large", "50cm を抱く", "The 50cm, hugged"],
+    ["plush_shop_wall", "売り場の棚", "A shop wall of them"],
+    ["plush_cushion", "クッション 60cm", "Floor cushion version, 60cm"],
+    ["plush_fuji_cap", "富士のニット帽", "Knitted Fuji cap"],
+    ["plush_fuji_cushion", "富士クッション", "Fuji cushion"],
+    ["plush_fuji_lineup", "富士帽 3サイズ", "Three sizes, all in caps"],
+    ["plush_fuji_keychain", "富士チャーム付き", "Keychain with a felt Fuji"],
+    ["plush_fuji_giftbox", "富士ギフトセット", "Fuji gift set"],
+    ["plush_fuji_pouch", "富士 巾着", "Fuji drawstring pouch"],
+    ["plush_fuji_shop", "富士の売り場", "Shop wall, with the mountain"],
+    ["plush_fuji_window", "窓辺の富士", "On a windowsill, Fuji beyond"]
   ],
 
   chibi: [

@@ -27,7 +27,7 @@ GALLERY_DIRS = ["01_character", "02_stickers", "03_plushie", "07_merch_chibi",
                 # the Fuji collection: one folder per line, flat filenames
                 "19_fujisan", "19_fujisan/chibi", "19_fujisan/official",
                 "19_fujisan/wa", "19_fujisan/wa_official", "19_fujisan/wamon",
-                "19_fujisan/maison"]
+                "19_fujisan/maison", "19_fujisan/plush"]
 
 # art the promo pages need as-is (alpha kept, no re-encoding to JPEG)
 VERBATIM = [
