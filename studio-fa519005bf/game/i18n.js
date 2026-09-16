@@ -24,7 +24,7 @@ ja: {
 
   /* needs */
   need_hunger:"おなかすいた", need_mood:"ひまだな…", need_energy:"ねむい…",
-  need_water:"水がよごれてる", need_ok:"ごきげん！",
+  need_water:"水がよごれてる。水流を調整して", need_ok:"ごきげん！",
 
   /* flow panel */
   flowTitle:"バルブ開度（流量）",
@@ -100,7 +100,7 @@ en: {
   st_egg:"Egg", st_larva:"Larva", st_fry:"Fry", st_young:"Juvenile", st_adult:"Adult",
 
   need_hunger:"I'm hungry", need_mood:"I'm bored…", need_energy:"I'm sleepy…",
-  need_water:"The water's dirty", need_ok:"Happy!",
+  need_water:"The water's dirty - check Flow", need_ok:"Happy!",
 
   flowTitle:"Valve opening (flow rate)",
   flowGood:"Flow is good", flowBad:"Match the green band",

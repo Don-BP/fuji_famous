@@ -708,7 +708,7 @@ function initShell(){
   /* The shells really do change places. `order[slot]` is whichever shell is
      standing in that slot right now, and `pearl` is the shell element holding
      the pearl - so when two shells swap, the pearl travels with its shell. */
-  var order = shells.slice(), home = [], pearl = shells[0];
+  var order = shells.slice(), home = [], pearl = shells[0], stopped = false;
 
   function measure(){
     home = shells.map(function(s){ return s.offsetLeft; });
@@ -716,18 +716,22 @@ function initShell(){
   function xFor(el, slot){
     return home[slot] - home[shells.indexOf(el)];
   }
-  function paint(dur, lifted){
+  /* One uninterrupted transition per swap. An earlier version re-set the
+     transform half way through to bring the shells back down, which restarted
+     the easing mid-flight and made them lurch. The hop now lives on the shell
+     image as its own animation, so the slide is left alone. */
+  function paint(dur){
     order.forEach(function(el, slot){
-      var up = lifted && lifted.indexOf(el) >= 0 ? -22 : 0;
-      el.style.transition = dur ? "transform " + dur + "ms cubic-bezier(.45,.05,.3,1)" : "none";
-      el.style.transform = "translate(" + xFor(el, slot) + "px," + up + "px)";
+      el.style.transition = dur ? "transform " + dur + "ms cubic-bezier(.32,0,.25,1)" : "none";
+      el.style.transform = "translateX(" + xFor(el, slot) + "px)";
     });
   }
-  function settle(dur){                       // set the pair back down mid-slide
-    order.forEach(function(el, slot){
-      el.style.transition = "transform " + Math.round(dur * .5) + "ms ease-in";
-      el.style.transform = "translate(" + xFor(el, slot) + "px,0px)";
-    });
+  function hop(el, dur){
+    el.style.setProperty("--hop", dur + "ms");
+    el.classList.remove("hop");
+    void el.offsetWidth;
+    el.classList.add("hop");
+    setTimeout(function(){ el.classList.remove("hop"); }, dur + 40);
   }
 
   function newRound(){
@@ -748,20 +752,25 @@ function initShell(){
         s.classList.remove("lift");
         s.querySelector(".pearlDot").style.opacity = "0";
       });
-      setTimeout(function(){ swap(0, 6 + round * 2); }, 320);
+      setTimeout(function(){ swap(0, 4 + round); }, 360);
     }, 950);
   }
 
   function swap(n, total){
+    if (stopped) return;
     if (n >= total){ busy = false; $("miniFoot").textContent = L.ctl_shell; return; }
     $("miniFoot").textContent = "…";
     var a = Math.floor(Math.random()*3), b;
     do { b = Math.floor(Math.random()*3); } while (b === a);
     var t = order[a]; order[a] = order[b]; order[b] = t;
-    var dur = Math.max(165, 310 - round * 20);
-    paint(dur, [order[a], order[b]]);
-    setTimeout(function(){ settle(dur); }, Math.round(dur * .55));
-    setTimeout(function(){ swap(n+1, total); }, dur + 55);
+    // a swap between neighbours covers half the distance, so give it less time:
+    // every swap then travels at the same apparent speed
+    var base = Math.max(340, 520 - (round - 1) * 38);
+    var dur = Math.abs(a - b) === 1 ? Math.round(base * 0.72) : base;
+    paint(dur);
+    hop(order[a], dur);
+    hop(order[b], dur);
+    setTimeout(function(){ swap(n+1, total); }, dur + 95);
   }
 
   function pick(el){
@@ -781,7 +790,7 @@ function initShell(){
   }
 
   newRound();
-  MG.cleanup = function(){};
+  MG.cleanup = function(){ stopped = true; };
 }
 
 $("gEgg").addEventListener("click", function(){ startMini("egg"); });
