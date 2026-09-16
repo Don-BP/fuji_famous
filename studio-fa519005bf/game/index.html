@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>フジィを育てよう ｜ フジキン</title>
+<meta name="description" content="Raise Fujie — a virtual sturgeon based on Fujikin's real world-first aquaculture story. フジキンの実話をもとにした育成シミュレーター。">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div id="app">
+
+  <header>
+    <div id="year">1987</div>
+    <div id="stageName">たまご</div>
+    <button id="langBtn" type="button">EN</button>
+  </header>
+
+  <div id="tank">
+    <div id="tankArt"></div>
+    <div id="tankTint"></div>
+    <canvas id="bubbles"></canvas>
+    <div id="fishWrap"><img id="fish" src="stage_1_egg.png" alt="Fujie"></div>
+    <div id="bubble"></div>
+    <div id="veil"><div class="zzz">z z z</div></div>
+    <div id="note"><b></b><span></span></div>
+  </div>
+
+  <div id="deck">
+    <div id="stats">
+      <div class="gauge"><label id="lbHunger">おなか</label><div class="bar"><i id="bHunger"></i></div></div>
+      <div class="gauge"><label id="lbMood">きげん</label><div class="bar"><i id="bMood"></i></div></div>
+      <div class="gauge"><label id="lbEnergy">げんき</label><div class="bar"><i id="bEnergy"></i></div></div>
+      <div class="gauge"><label id="lbWater">水質</label><div class="bar"><i id="bWater"></i></div></div>
+    </div>
+
+    <div id="growRow">
+      <label id="lbGrowth">成長</label>
+      <div class="bar"><i id="bGrowth"></i></div>
+      <div class="val" id="growVal">0</div>
+    </div>
+
+    <div id="actions">
+      <button class="act" id="actFeed"  type="button"><span class="ico"><img src="art/ico_feed.png" alt=""></span><span id="actFeedT">ごはん</span></button>
+      <button class="act" id="actPlay"  type="button"><span class="ico"><img src="art/ico_play.png" alt=""></span><span id="actPlayT">あそぶ</span></button>
+      <button class="act" id="actSleep" type="button"><span class="ico"><img src="art/ico_sleep.png" alt=""></span><span id="actSleepT">ねむる</span></button>
+      <button class="act" id="actFlow"  type="button"><span class="ico"><img src="art/ico_flow.png" alt=""></span><span id="actFlowT">水流</span></button>
+    </div>
+  </div>
+
+  <!-- ============ flow control sheet ============ -->
+  <div class="sheet" id="flowSheet">
+    <div class="box">
+      <h2 id="flowTitle">バルブ開度（流量）</h2>
+      <div id="track">
+        <div id="zone"></div>
+        <input id="flow" type="range" min="0" max="100" value="30" step="1" aria-label="flow">
+      </div>
+      <div id="flowState">緑の帯に合わせる</div>
+      <p id="flowNote">フジキンの超精密流体制御技術。水質はここで決まります。</p>
+      <button class="btn ghost" id="flowClose" type="button">とじる</button>
+    </div>
+  </div>
+
+  <!-- ============ mini-game picker ============ -->
+  <div class="sheet" id="pickSheet">
+    <div class="box">
+      <h2 id="pickTitle">なにしてあそぶ？</h2>
+      <div id="gameList">
+        <button class="gameItem" id="gEgg" type="button"><span class="ico"><img src="art/roe_egg.png" alt=""></span><span><b id="gEggT">たまごキャッチ</b><span id="gEggD">落ちてくる卵を受けとめよう</span></span></button>
+        <button class="gameItem" id="gShark" type="button"><span class="ico"><img src="art/shark_pop.png" alt=""></span><span><b id="gSharkT">サメたたき</b><span id="gSharkD">暗闇から出るサメをたたけ</span></span></button>
+        <button class="gameItem" id="gRace" type="button"><span class="ico"><img src="art/fujie_dash.png" alt=""></span><span><b id="gRaceT">ながれをさかのぼれ</b><span id="gRaceD">逆流を泳ぎきれ</span></span></button>
+        <button class="gameItem" id="gShell" type="button"><span class="ico"><img src="art/shell_closed.png" alt=""></span><span><b id="gShellT">どのカイにいる？</b><span id="gShellD">真珠のありかを当てよう</span></span></button>
+      </div>
+      <button class="btn ghost" id="pickClose" type="button">とじる</button>
+    </div>
+  </div>
+
+  <!-- ============ mini-game stage ============ -->
+  <div id="mini">
+    <div id="miniHead">
+      <div id="miniTitle"></div>
+      <div id="miniScore"></div>
+      <div id="miniTime"></div>
+      <button id="miniExit" type="button">もどる</button>
+    </div>
+    <div id="miniBody">
+      <canvas id="miniCanvas"></canvas>
+      <div id="miniDom"></div>
+    </div>
+    <div id="miniFoot"></div>
+  </div>
+
+  <!-- ============ mini-game result ============ -->
+  <div class="screen" id="resultScreen">
+    <div class="in">
+      <img class="endArt" id="resArt" src="art/fujie_cheer.png" alt="">
+      <div class="mark" id="resTitle">けっか</div>
+      <div class="bigScore" id="resScore">0</div>
+      <p><span id="resMood"></span><br><span id="resGrow"></span></p>
+      <button class="btn" id="resAgain" type="button">もういちど</button>
+      <button class="btn ghost" id="resBack" type="button">もどる</button>
+    </div>
+  </div>
+
+  <!-- ============ start ============ -->
+  <div class="screen on" id="startScreen">
+    <div class="in">
+      <img id="startArt" src="art/title_fujie.png" alt="Fujie">
+      <div class="mark" id="startMark">1987 — FUJIKIN</div>
+      <h1 id="startTitleH">フジィを育てよう</h1>
+      <p class="quote" id="startQuote"></p>
+      <p id="startBody"></p>
+      <button class="btn" id="startBtn" type="button">はじめる</button>
+    </div>
+  </div>
+
+  <!-- ============ lost ============ -->
+  <div class="screen" id="lostScreen">
+    <div class="in">
+      <img class="endArt" id="lostArt" src="art/fujie_sad.png" alt="">
+      <div class="mark" id="lostMark">1992</div>
+      <h1 id="lostTitle"></h1>
+      <p id="lostBody"></p>
+      <p id="lostHint" class="hint"></p>
+      <button class="btn" id="retryBtn" type="button">もういちど育てる</button>
+    </div>
+  </div>
+
+  <!-- ============ won ============ -->
+  <div class="screen" id="winScreen">
+    <div class="in">
+      <img id="endImg" src="fujie-official.png" alt="Fujie">
+      <div class="mark" id="winMark">1987 — 2026</div>
+      <h1 id="winTitle"></h1>
+      <p id="winBody"></p>
+      <p id="winYears" class="years"></p>
+      <button class="btn" id="againBtn" type="button">もういちど育てる</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="i18n.js"></script>
+<script src="game.js"></script>
+<script>
+  // keep the start-screen title in sync with the language toggle
+  (function(){
+    var h = document.getElementById("startTitleH");
+    function sync(){ h.textContent = window.I18N[document.documentElement.lang] ?
+                     window.I18N[document.documentElement.lang].title : h.textContent; }
+    new MutationObserver(sync).observe(document.documentElement, { attributes:true, attributeFilter:["lang"] });
+    sync();
+  })();
+</script>
+</body>
+</html>

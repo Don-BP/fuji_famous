@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>一粒の卵から ｜ フジィ 40年の記録</title>
+<meta name="description" content="1987年の一粒の卵から、世界初の完全養殖、日本初のキャビア、そしてフジィへ。スクロールでたどるフジキンのチョウザメ 40年史。">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Maru+Gothic:wght@400;500;700&family=Shippori+Mincho:wght@400;600&display=swap">
+<link rel="stylesheet" href="timeline.css">
+</head>
+<body>
+
+<div id="sky"><div class="layer" id="skyA"></div><div class="layer" id="skyB"></div></div>
+<div id="beams"></div>
+<canvas id="motes"></canvas>
+
+<div id="creature"><img id="creatureImg" src="../assets/stage_1_egg.png" alt=""></div>
+
+<header id="bar">
+  <a class="back" href="../">&larr; <span data-t="back">もどる</span></a>
+  <div id="progress"><i></i></div>
+  <button id="langBtn" type="button">EN</button>
+</header>
+
+<main>
+
+  <section class="beat hero" data-stage="0" data-sky="egg">
+    <div class="in">
+      <p class="kicker" data-t="kicker">フジキン チョウザメ事業</p>
+      <h1 data-t="heroTitle">一粒の卵から</h1>
+      <p class="lede" data-t="heroLede">1987年、ひとりの科学者の言葉から始まりました。<br>これは、40年かけて世界初にたどりついた記録です。</p>
+      <div class="scrollcue"><span data-t="scroll">スクロール</span><i></i></div>
+    </div>
+  </section>
+
+  <section class="beat" data-stage="0" data-sky="egg" data-year="1987">
+    <div class="in">
+      <div class="year">1987</div>
+      <h2 data-t="y87h">はじまりの一言</h2>
+      <p data-t="y87b">「フジキンのバルブを使って、チョウザメの養殖を始めてみては」——西堀栄三郎先生の一言から、バルブメーカーの挑戦が始まりました。</p>
+      <p class="note" data-t="y87n">バルブをつくる会社が、魚を育てる。社内でも前例のない話でした。</p>
+    </div>
+  </section>
+
+  <section class="beat" data-stage="1" data-sky="early" data-year="1992">
+    <div class="in">
+      <div class="year">1992</div>
+      <h2 data-t="y92h">日本の民間で初めて</h2>
+      <p data-t="y92b">人工ふ化に成功。ただし最初の年、生き残ったのは 100 尾のうち 5 尾ほどでした。</p>
+      <div class="stat">
+        <div class="statNum"><b data-count="5">0</b><span>%</span></div>
+        <div class="statLb" data-t="y92s">初年度の生残率</div>
+        <div class="statBar"><i style="--to:5%"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="beat" data-stage="2" data-sky="early" data-year="1998">
+    <div class="in">
+      <div class="year">1998</div>
+      <h2 data-t="y98h">世界初の完全養殖</h2>
+      <p data-t="y98b">卵から育てた魚が、また卵を産む。水槽の中だけで命がひと巡りしました。世界で初めてのことです。</p>
+      <div class="stat">
+        <div class="statNum"><b data-count="60">0</b><span>%</span></div>
+        <div class="statLb" data-t="y98s">生残率はここまで</div>
+        <div class="statBar"><i style="--to:60%"></i></div>
+      </div>
+      <p class="note" data-t="y98n">水温、水流、溶存酸素。決め手になったのは、フジキンが本業で磨いた超精密な流体制御でした。</p>
+    </div>
+  </section>
+
+  <section class="beat" data-stage="3" data-sky="grown" data-year="2002">
+    <div class="in">
+      <div class="year">2002</div>
+      <h2 data-t="y02h">日本初の国産キャビア</h2>
+      <p data-t="y02b">初出荷。いま日本で流通する国産キャビアの多くは、この水槽から続く系譜の上にあります。</p>
+      <p class="note" data-t="y02n">茨城県・里美養魚場。いまも 1 万尾を超えるチョウザメが泳いでいます。</p>
+    </div>
+  </section>
+
+  <section class="beat" data-stage="4" data-sky="win" data-year="2026">
+    <div class="in">
+      <div class="year">2026</div>
+      <h2 data-t="y26h">そして、フジィへ</h2>
+      <p data-t="y26b">40年目。会社のマスコットになったこの魚は、想像上のキャラクターではありません。実際に泳いでいる一匹です。</p>
+      <p class="note" data-t="y26n">ながれを創る、世界へ ── Creating the Flow for Sustainability</p>
+    </div>
+  </section>
+
+  <section class="beat outro" data-stage="4" data-sky="win">
+    <div class="in">
+      <h2 data-t="outroH">つづきは、あなたの水槽で。</h2>
+      <p data-t="outroB">1987年の一粒の卵から、成魚になるまで。90秒で育てられます。</p>
+      <a class="cta" href="../game/" data-t="outroCta">フジィを育てよう</a>
+      <a class="ghost" href="../" data-t="outroBack">ぜんぶ見る</a>
+    </div>
+  </section>
+
+</main>
+
+<script src="timeline.js"></script>
+</body>
+</html>
