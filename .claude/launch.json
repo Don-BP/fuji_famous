@@ -4,8 +4,22 @@
     {
       "name": "fujie-site",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "8777", "--directory", "site"],
-      "port": 8777
+      "runtimeArgs": [
+        "-c",
+        "import os,functools,http.server; p=int(os.environ.get('PORT','8777')); h=functools.partial(http.server.SimpleHTTPRequestHandler, directory='site'); http.server.ThreadingHTTPServer.allow_reuse_address=True; print('serving site on',p,flush=True); http.server.ThreadingHTTPServer(('127.0.0.1',p),h).serve_forever()"
+      ],
+      "port": 8777,
+      "autoPort": true
+    },
+    {
+      "name": "fujie-dist",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-c",
+        "import os,functools,http.server; p=int(os.environ.get('PORT','8779')); h=functools.partial(http.server.SimpleHTTPRequestHandler, directory='dist'); http.server.ThreadingHTTPServer.allow_reuse_address=True; print('serving dist on',p,flush=True); http.server.ThreadingHTTPServer(('127.0.0.1',p),h).serve_forever()"
+      ],
+      "port": 8779,
+      "autoPort": true
     }
   ]
 }

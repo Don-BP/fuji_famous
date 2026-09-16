@@ -66,6 +66,49 @@ function card(s, x, y, w, h, onDark) {
     line: { color: onDark ? C.mid : "E2EAED", width: 1 },
   });
 }
+/* Images.
+   pptxgenjs's `sizing` option does not survive into the file - every picture came
+   out as a plain stretch filling its box, so tall art was squashed and wide art
+   pulled. So we read each file's real pixel size and place it at its own aspect
+   ratio, fitted inside the box we wanted it to occupy and centred there.
+   `align`/`valign` pin it to an edge of that box instead. */
+const fs = require("fs");
+const SIZE_CACHE = {};
+
+function pixels(file) {
+  if (SIZE_CACHE[file]) return SIZE_CACHE[file];
+  const b = fs.readFileSync(file);
+  let d = null;
+  if (b[0] === 0x89 && b[1] === 0x50) {                       // PNG: IHDR
+    d = { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
+  } else if (b[0] === 0xFF && b[1] === 0xD8) {                // JPEG: first SOFn
+    let i = 2;
+    while (i < b.length - 9) {
+      if (b[i] !== 0xFF) { i++; continue; }
+      const m = b[i + 1];
+      if (m >= 0xC0 && m <= 0xCF && m !== 0xC4 && m !== 0xC8 && m !== 0xCC) {
+        d = { h: b.readUInt16BE(i + 5), w: b.readUInt16BE(i + 7) };
+        break;
+      }
+      i += 2 + b.readUInt16BE(i + 2);
+    }
+  }
+  if (!d) throw new Error("could not read image size: " + file);
+  SIZE_CACHE[file] = d;
+  return d;
+}
+
+function img(s, file, x, y, bw, bh, o) {
+  o = o || {};
+  const path = IMG + file, d = pixels(path), ar = d.w / d.h;
+  let w = bw, h = bw / ar;
+  if (h > bh) { h = bh; w = bh * ar; }
+  const ax = o.align || "center", ay = o.valign || "middle";
+  const px = ax === "left" ? x : ax === "right" ? x + bw - w : x + (bw - w) / 2;
+  const py = ay === "top" ? y : ay === "bottom" ? y + bh - h : y + (bh - h) / 2;
+  s.addImage({ path: path, x: px, y: py, w: w, h: h });
+}
+
 function foot(s, txt, onDark) {
   s.addText(txt, {
     x: M, y: H - 0.55, w: W - M * 2, h: 0.3, fontFace: FB, fontSize: 9.5,
@@ -75,8 +118,7 @@ function foot(s, txt, onDark) {
 
 /* =============== 1. TITLE =============== */
 let s = P.addSlide(); dark(s, true);
-s.addImage({ path: IMG + "04_campaign/fujie-official.png", x: 6.4, y: 2.35, w: 6.6, h: 2.0,
-  sizing: { type: "contain", w: 6.6, h: 2.0 } });
+img(s, "deck_assets/04_campaign/fujie-official.png", 6.4, 2.35, 6.6, 2.0);
 s.addText("フジィを有名にする！アイデアコンテスト", {
   x: M, y: 1.55, w: 8, h: 0.34, fontFace: FB, fontSize: 12, bold: true,
   charSpacing: 2.5, color: C.cyan, isTextBox: true, margin: 0 });
@@ -86,7 +128,7 @@ s.addText("フジィは、\n実在する。", {
 s.addText("世界初の完全養殖ストーリーで、\nフジィを「シンボル」から「キャラクター」へ。", {
   x: M, y: 4.62, w: 7.2, h: 0.9, fontFace: FB, fontSize: 14.5,
   color: C.steel, lineSpacing: 27, isTextBox: true, margin: 0 });
-s.addText("株式会社ブレインパワー　／　〔氏名〕", {
+s.addText("株式会社ブレインパワー　大阪　／　Vittorio Zumpano", {
   x: M, y: H - 1.0, w: 7, h: 0.35, fontFace: FB, fontSize: 11.5,
   color: C.dimOnDark, isTextBox: true, margin: 0 });
 s.addNotes("表紙。結論を先に置く：フジィは想像上のキャラクターではなく、フジキンが実際に育てている魚である。");
@@ -143,15 +185,13 @@ cols.forEach((col, i) => {
     s.addText(cant, { x: x + 0.45, y: 5.45, w: 4.9, h: 1.0, fontFace: FB, fontSize: 11.5,
       color: "B04A4A", lineSpacing: 20, isTextBox: true, margin: 0 });
   } else {
-    s.addImage({ path: IMG + "01_character/master_v3_wave.png", x: x + 3.15, y: 5.15, w: 2.3, h: 1.35,
-      sizing: { type: "contain", w: 2.3, h: 1.35 } });
+    img(s, "deck_assets/01_character/master_v3_wave.jpg", x + 3.15, 4.8, 2.35, 1.75);
   }
 });
 
 /* =============== 4. REVEAL =============== */
 s = P.addSlide(); dark(s, true);
-s.addImage({ path: IMG + "04_campaign/stage_4_young.png", x: 7.6, y: 1.5, w: 5.2, h: 4.4,
-  sizing: { type: "contain", w: 5.2, h: 4.4 } });
+img(s, "deck_assets/04_campaign/stage_4_young.png", 7.6, 1.5, 5.2, 4.4);
 eyebrow(s, "この企画の起点", true, 1.5);
 s.addText("フジィは、実在する。", {
   x: M, y: 2.0, w: 7.0, h: 1.3, fontFace: FH, fontSize: 46, bold: true,
@@ -164,7 +204,36 @@ s.addText("茨城県常陸太田市・里美養魚場。\nフジィは想像上�
   x: M, y: 4.85, w: 6.6, h: 1.3, fontFace: FB, fontSize: 14, color: C.steel,
   lineSpacing: 26, isTextBox: true, margin: 0 });
 
-/* =============== 5. TIMELINE =============== */
+/* =============== 5. 絶滅危惧種 =============== */
+s = P.addSlide(); dark(s, true);
+img(s, "15_act2/endangered_water.jpg", 7.15, 1.35, 5.4, 3.05);
+eyebrow(s, "この魚について", true, 1.35);
+s.addText("フジィは、実在する。\n──そして、絶滅危惧種である。", {
+  x: M, y: 1.95, w: 6.3, h: 1.6, fontFace: FH, fontSize: 26, bold: true,
+  color: "FFFFFF", lineSpacing: 40, isTextBox: true, margin: 0 });
+s.addText("チョウザメは、IUCN レッドリストで「もっとも絶滅の危機にある生物群」とされています。\n現存する全種が、絶滅危惧種です。",
+  { x: M, y: 4.1, w: 6.2, h: 0.9, fontFace: FB, fontSize: 12.5, color: C.steel,
+    lineSpacing: 22, isTextBox: true, margin: 0 });
+const rare = [
+  ["2 億年", "恐竜より古く、ほとんど姿を変えなかった魚。\n「進化」を名に持つフジィは、進化する\n必要がなかった魚でもあります。"],
+  ["全 種", "現存するチョウザメは、すべて絶滅危惧種。\nキャビアのために、世界中で獲られ続けました。"],
+  ["1998 年", "完全養殖の成立以降、この魚は水槽の中だけで\n世代をつないでいます。川から獲る必要が、ない。"],
+];
+rare.forEach((r, i) => {
+  const x = M + i * 4.03;
+  s.addShape(P.ShapeType.roundRect, { x: x, y: 5.05, w: 3.8, h: 1.55, rectRadius: 0.06,
+    fill: { color: C.mid }, line: { color: C.mid, width: 0 } });
+  s.addText(r[0], { x: x + 0.3, y: 5.22, w: 3.2, h: 0.45, fontFace: FH, fontSize: 19,
+    bold: true, color: C.cyan, isTextBox: true, margin: 0 });
+  s.addText(r[1], { x: x + 0.3, y: 5.72, w: 3.25, h: 0.8, fontFace: FB, fontSize: 10,
+    color: C.steel, lineSpacing: 16, isTextBox: true, margin: 0 });
+});
+s.addText("フジキンがつくったのは、珍味ではありません。「もう川から獲らなくていい」という技術です。", {
+  x: M, y: 6.8, w: 11.8, h: 0.4, fontFace: FB, fontSize: 13, bold: true,
+  color: "FFFFFF", isTextBox: true, margin: 0 });
+s.addNotes("物語に「重さ」を与えるスライド。キャビアの話を、食の話から保全の話へ引き上げる。統合報告書・サステナビリティ部門にも共有できる論点になる。");
+
+/* =============== 6. TIMELINE =============== */
 s = P.addSlide(); light(s);
 eyebrow(s, "物語");
 title(s, "バルブメーカーが、日本の国産キャビアを生んだ。");
@@ -185,8 +254,11 @@ tl.forEach((t, i) => {
 });
 card(s, M, 5.55, 11.8, 1.05);
 s.addText("この 11 年間こそ、企業ポリシー「極限への挑戦」そのものです。説明する言葉ではなく、実話として語れます。", {
-  x: M + 0.45, y: 5.82, w: 10.9, h: 0.5, fontFace: FB, fontSize: 13.5, bold: true,
+  x: M + 0.45, y: 5.75, w: 10.9, h: 0.4, fontFace: FB, fontSize: 13.5, bold: true,
   color: C.ink, isTextBox: true, margin: 0 });
+s.addText("そして 2027 年 —— 1987 年から 40 年、2002 年から 25 年。ふたつの節目が重なります。", {
+  x: M + 0.45, y: 6.15, w: 10.9, h: 0.35, fontFace: FB, fontSize: 11.5,
+  color: C.cyan, isTextBox: true, margin: 0 });
 
 /* =============== 6. WHY STORY =============== */
 s = P.addSlide(); light(s);
@@ -209,7 +281,37 @@ ways.forEach((w2, i) => {
     color: C.muted, lineSpacing: 18, isTextBox: true, margin: 0 });
 });
 
-/* =============== 7. SIX MOVES =============== */
+/* =============== 8. サメじゃないです =============== */
+s = P.addSlide(); light(s);
+eyebrow(s, "入口");
+title(s, "「サメじゃないです。」", { y: 0.75 });
+body(s, "チョウザメは「蝶のサメ」と書くため、ほぼ全員が最初にサメだと思います。フジキンのキャビアサイトにも「サメとの違い」というページがあるほどです。\nならば、誤解を直す努力をやめて、誤解のほうを入口にします。",
+  { x: M, y: 2.35, w: 6.75, h: 1.3, fontSize: 13 });
+img(s, "15_act2/shark_vs_sturgeon_cut.png", 7.75, 1.95, 4.8, 2.7);
+const diff = [
+  ["サメ", "歯がある／軟骨魚／海／ヒゲなし", "9BB0BA"],
+  ["チョウザメ", "歯がない／硬骨魚／淡水／ヒゲ 4 本・背中に硬い板", C.cyan],
+];
+diff.forEach((d, i) => {
+  const y = 3.82 + i * 0.74;
+  card(s, M, y, 7.1, 0.62);
+  s.addText(d[0], { x: M + 0.35, y: y + 0.15, w: 1.75, h: 0.34, fontFace: FH, fontSize: 13.5,
+    bold: true, color: d[2], isTextBox: true, margin: 0 });
+  s.addText(d[1], { x: M + 2.15, y: y + 0.17, w: 4.8, h: 0.34, fontFace: FB, fontSize: 11.5,
+    color: C.ink, isTextBox: true, margin: 0 });
+});
+s.addShape(P.ShapeType.roundRect, { x: M, y: 5.4, w: 11.8, h: 1.2, rectRadius: 0.06,
+  fill: { color: C.deep }, line: { color: C.deep, width: 0 } });
+s.addText("「サメじゃないです。」　→　「サメより、ずっと少ないんです。」", {
+  x: M + 0.45, y: 5.6, w: 10.9, h: 0.42, fontFace: FH, fontSize: 17, bold: true,
+  color: "FFFFFF", isTextBox: true, margin: 0 });
+s.addText("冗談で入口を開け、事実で残す。この二行で「チョウザメとは何か」と「なぜ大切か」が同時に伝わります。スタンプもグッズもミニゲームも、すべてここから展開できます。", {
+  x: M + 0.45, y: 6.08, w: 10.9, h: 0.35, fontFace: FB, fontSize: 10.5,
+  color: C.steel, isTextBox: true, margin: 0 });
+foot(s, "※ この一言を発するのは「ちびフジィ」です。公式フジィに文字を重ねることはしません（マニュアル第 7 条）。");
+s.addNotes("キャラクターの最大の弱点（サメに見える）を、そのまま最大の入口に変える。フジキン自身のサイトが根拠。");
+
+/* =============== 9. SIX MOVES =============== */
 s = P.addSlide(); dark(s);
 eyebrow(s, "全体像", true);
 s.addText("6 つの施策", { x: M, y: 0.62, w: 8, h: 0.8, fontFace: FH, fontSize: 34,
@@ -219,7 +321,7 @@ s.addText("上から順に実施します。①がなければ②以降は成立
   isTextBox: true, margin: 0 });
 const moves = [
   ["ちびフジィ", "表情と親しみを担う第 2 の姿を公式に追加する"],
-  ["LINE スタンプ 40 種", "友だち追加を条件に無料配布する"],
+  ["LINE スタンプ 108 種", "友だち追加を条件に無料配布する"],
   ["フジィに「中の人」を", "誰も見たことのない養魚場の映像を出す"],
   ["ちびフジィの無償開放", "稚魚取引先のパッケージを広告に変える"],
   ["会いに行けるマスコット", "里美養魚場を限定公開する"],
@@ -242,10 +344,8 @@ eyebrow(s, "施策 1");
 title(s, "ちびフジィ ―― 表情を持つ、第 2 の姿。");
 body(s, "現行マニュアルの規定は一切変更しません。従来のフジィは企業シンボルとして厳格に保護したまま、\n公の場で人と接するための姿を新たに追加します。",
   { x: M, y: 2.3, w: 11.8, h: 0.8, fontSize: 14 });
-s.addImage({ path: IMG + "01_character/master_v3_wave.png", x: M, y: 3.15, w: 3.5, h: 3.3,
-  sizing: { type: "contain", w: 3.5, h: 3.3 } });
-s.addImage({ path: IMG + "01_character/master_expressions.png", x: 4.6, y: 3.15, w: 7.95, h: 3.3,
-  sizing: { type: "contain", w: 7.95, h: 3.3 } });
+img(s, "deck_assets/01_character/master_v3_wave.jpg", M, 3.15, 3.5, 3.3);
+img(s, "deck_assets/01_character/master_expressions.jpg", 4.6, 3.15, 7.95, 3.3);
 s.addNotes("チョウザメの特徴（銀色のボディ、長い吻、背中の硬鱗、4本のひげ、大きな黒い目）はすべて継承。ひれのみで、脚はありません。");
 
 /* =============== 9. マニュアル遵守 =============== */
@@ -272,21 +372,20 @@ foot(s, "シンボルは守り、キャラクターは育てる。両立させ�
 /* =============== 10. LINEスタンプ =============== */
 s = P.addSlide(); light(s);
 eyebrow(s, "施策 2");
-title(s, "LINE スタンプ 40 種を、無料配布する。");
+title(s, "LINE スタンプ 108 種を、無料配布する。");
 body(s, "日本でもっとも費用対効果の高い認知獲得手段です。スタンプは「友人が」「私的な会話の中で」「自発的に」送るため、広告では決して到達できない場所に届きます。一度制作すれば、送信されるたびに露出が続きます。",
   { x: M, y: 2.3, w: 11.8, h: 0.85, fontSize: 13.5 });
-s.addImage({ path: IMG + "02_stickers/sticker_sheet_01.png", x: M, y: 3.2, w: 3.6, h: 3.4,
-  sizing: { type: "contain", w: 3.6, h: 3.4 } });
-s.addImage({ path: IMG + "02_stickers/sticker_sheet_02.png", x: 4.5, y: 3.2, w: 3.6, h: 3.4,
-  sizing: { type: "contain", w: 3.6, h: 3.4 } });
+img(s, "deck_assets/02_stickers/sticker_board_01.jpg", M, 3.2, 3.6, 3.4);
+img(s, "deck_assets/02_stickers/sticker_board_02.jpg", 4.5, 3.2, 3.6, 3.4);
 card(s, 8.45, 3.2, 4.1, 3.4);
 s.addText("すでに制作済みです", { x: 8.85, y: 3.5, w: 3.3, h: 0.4, fontFace: FH, fontSize: 16,
   bold: true, color: C.cyan, isTextBox: true, margin: 0 });
 s.addText([
-  { text: "日常語 20 種：おはよう／ありがとう／おつかれさま／りょうかい ほか", options: { breakLine: true, bullet: true } },
-  { text: "フジキン語 20 種：ながれにのれ／きわみへ／キャビア ほか", options: { breakLine: true, bullet: true } },
-  { text: "配布条件：公式アカウント友だち追加", options: { breakLine: true, bullet: true } },
-  { text: "スタンプが SNS の入口になり、以降の施策の土台になります", options: { bullet: true } },
+  { text: "日常語 40 種：おはよう／ありがとう／おつかれさま ほか", options: { breakLine: true, bullet: true } },
+  { text: "動きのある 24 種：ながれにのれ／ロケット／ハイタッチ ほか", options: { breakLine: true, bullet: true } },
+  { text: "英語 44 種：海外拠点・WhatsApp にもそのまま使えます", options: { breakLine: true, bullet: true } },
+  { text: "一番手は「サメじゃないです」。この一言が会話を始めます", options: { breakLine: true, bullet: true } },
+  { text: "配布条件：公式アカウント友だち追加", options: { bullet: true } },
 ], { x: 8.85, y: 4.05, w: 3.3, h: 2.3, fontFace: FB, fontSize: 10.5, color: C.muted,
   lineSpacing: 17, paraSpaceAfter: 8, isTextBox: true, margin: 0 });
 
@@ -347,23 +446,22 @@ s.addText("BtoB 企業が BtoC に到達する、現実的で低コストな経�
 s = P.addSlide(); light(s);
 eyebrow(s, "施策 5");
 title(s, "日本で唯一、「餌やりができる」企業マスコットへ。");
-body(s, "里美養魚場（茨城県常陸太田市）の限定公開。1 万尾の本物のフジィに会える場所をつくります。\n茨城県は「霞ヶ浦キャビア」で国内一の産地を目指しており、協力相手として利害が完全に一致します。県・自治体・地元メディアを無償の拡散チャネルとして活用できます。",
-  { x: M, y: 2.35, w: 7.4, h: 1.5, fontSize: 13.5 });
+body(s, "里美養魚場（茨城県常陸太田市）の限定公開。1 万尾の本物のフジィに会える場所をつくります。\n茨城県は「霞ヶ浦キャビア」で国内一の産地を目指しており、県・自治体・地元メディアを\n無償の拡散チャネルとして活用できます。",
+  { x: M, y: 2.35, w: 7.5, h: 1.4, fontSize: 13 });
 const visit = [
   ["小学校・自治体との連携", "地元の社会科見学・食育プログラムとして"],
   ["採用広報への転用", "学生が「極限への挑戦」を体験として理解する"],
   ["メディアの取材動線", "テレビ・新聞が撮りたくなる絵がある"],
 ];
 visit.forEach((v, i) => {
-  const y = 4.05 + i * 0.83;
+  const y = 4.32 + i * 0.8;
   numDot(s, i + 1, M, y);
   s.addText(v[0], { x: M + 0.62, y: y - 0.02, w: 3.6, h: 0.3, fontFace: FH, fontSize: 12.5,
     bold: true, color: C.ink, isTextBox: true, margin: 0 });
   s.addText(v[1], { x: M + 0.62, y: y + 0.28, w: 6.6, h: 0.3, fontFace: FB, fontSize: 10.5,
     color: C.muted, isTextBox: true, margin: 0 });
 });
-s.addImage({ path: IMG + "04_campaign/stage_3_fry.png", x: 8.6, y: 2.6, w: 4.0, h: 3.9,
-  sizing: { type: "contain", w: 4.0, h: 3.9 } });
+img(s, "deck_assets/04_campaign/stage_3_fry.png", 8.6, 2.6, 4.0, 3.9);
 
 /* =============== 14. 映像化 =============== */
 s = P.addSlide(); dark(s);
@@ -395,69 +493,80 @@ eyebrow(s, "受け皿となるグッズ");
 title(s, "ぬいぐるみは、3 サイズで「成長」を見せる。");
 body(s, "稚魚・幼魚・成魚。フジキンが世界で初めて成功させた「完全養殖」＝ 一生をまるごと育てる技術が、そのまま商品ラインになります。グッズが物語を説明してくれます。",
   { x: M, y: 2.3, w: 11.8, h: 0.8, fontSize: 13.5 });
-s.addImage({ path: IMG + "03_plushie/plush_size_lineup.png", x: M, y: 3.15, w: 7.3, h: 3.3,
-  sizing: { type: "contain", w: 7.3, h: 3.3 } });
-s.addImage({ path: IMG + "03_plushie/plush_keychain_lifestyle.png", x: 8.35, y: 3.15, w: 2.0, h: 3.3,
-  sizing: { type: "contain", w: 2.0, h: 3.3 } });
-s.addImage({ path: IMG + "03_plushie/plush_studio_front.png", x: 10.5, y: 3.15, w: 2.05, h: 3.3,
-  sizing: { type: "contain", w: 2.05, h: 3.3 } });
+img(s, "deck_assets/03_plushie/plush_size_lineup.jpg", M, 3.15, 7.3, 3.3);
+img(s, "deck_assets/03_plushie/plush_keychain_lifestyle.jpg", 8.35, 3.15, 2.0, 3.3);
+img(s, "deck_assets/03_plushie/plush_studio_front.jpg", 10.5, 3.15, 2.05, 3.3);
 foot(s, "10cm キーホルダー／25cm／50cm。いずれも試作イメージです。");
 
 /* =============== 16. 体験版 =============== */
 s = P.addSlide(); dark(s, true);
 eyebrow(s, "本エントリーの添付資料", true);
-s.addText("「フジィを育てよう」\n―― 実際に動く体験版を同梱しています。", {
+s.addText("「フジィを育てよう」\n―― 実際に遊べる育成シミュレーターを制作しました。", {
   x: M, y: 1.1, w: 11.8, h: 1.5, fontFace: FH, fontSize: 32, bold: true,
   color: "FFFFFF", lineSpacing: 46, isTextBox: true, margin: 0 });
-s.addText("スマートフォンでもパソコンでも開けます。所要 90 秒。インターネット接続もアプリも不要です。", {
-  x: M, y: 2.65, w: 11.8, h: 0.35, fontFace: FB, fontSize: 13, color: C.steel,
-  isTextBox: true, margin: 0 });
+s.addText("ごはん・あそぶ・ねむる・水流（バルブ開度）の四つの世話で、一粒の卵から成魚まで育てます。\nあそぶはミニゲーム四種。フジィの表情が空腹や眠気を伝えます。所要 90 秒。スマートフォンでもそのまま開けます。", {
+  x: M, y: 2.46, w: 11.8, h: 0.66, fontFace: FB, fontSize: 12.5, color: C.steel,
+  lineSpacing: 24, isTextBox: true, margin: 0 });
 const stages = [
   ["1987", "stage_1_egg.png", "一粒の卵から"],
   ["1992", "stage_2_larva.png", "生残率 5%"],
   ["1998", "stage_3_fry.png", "世界初の完全養殖"],
   ["2002", "stage_4_young.png", "日本初のキャビア"],
-  ["2026", "master.png", "そして、フジィへ"],
+  ["2027", "fujie-official.png", "そして、40年目へ"],
 ];
 stages.forEach((st, i) => {
   const x = M + i * 2.42;
   s.addShape(P.ShapeType.roundRect, { x: x, y: 3.25, w: 2.2, h: 2.5, rectRadius: 0.06,
     fill: { color: C.mid }, line: { color: C.mid, width: 0 } });
-  s.addImage({ path: IMG + "04_campaign/" + st[1], x: x + 0.3, y: 3.45, w: 1.6, h: 1.3,
-    sizing: { type: "contain", w: 1.6, h: 1.3 } });
+  img(s, "deck_assets/04_campaign/" + st[1], x + 0.3, 3.45, 1.6, 1.3);
   s.addText(st[0], { x: x + 0.2, y: 4.85, w: 1.8, h: 0.38, fontFace: FH, fontSize: 16,
     bold: true, color: C.cyan, align: "center", isTextBox: true, margin: 0 });
   s.addText(st[2], { x: x + 0.1, y: 5.25, w: 2.0, h: 0.35, fontFace: FB, fontSize: 9.5,
     color: C.dimOnDark, align: "center", isTextBox: true, margin: 0 });
 });
-s.addText("添付ファイル：フジィを育てよう.html　（ダブルクリックで開きます）", {
-  x: M, y: 6.05, w: 11.8, h: 0.35, fontFace: FB, fontSize: 12, bold: true,
-  color: C.steel, isTextBox: true, margin: 0 });
+s.addShape(P.ShapeType.roundRect, { x: M, y: 5.95, w: 11.8, h: 0.62, rectRadius: 0.08,
+  fill: { color: C.mid }, line: { color: C.cyan, width: 1 } });
+s.addText([
+  { text: "いますぐ開けます　", options: { fontSize: 12, color: C.steel, bold: true } },
+  { text: "https://don-bp.github.io/fuji_famous/", options: { fontSize: 13.5, color: C.cyan, bold: true } },
+  { text: "　／　添付：フジィを育てよう.html", options: { fontSize: 11, color: C.dimOnDark } },
+], { x: M + 0.4, y: 6.08, w: 11.0, h: 0.38, fontFace: FB, isTextBox: true, margin: 0 });
 
 /* =============== 17. ROADMAP =============== */
 s = P.addSlide(); light(s);
 eyebrow(s, "進め方");
-title(s, "小さく始めて、積み上げる。");
+title(s, "2027 年は、40 年目です。");
+body(s, "1987 年の一言から 40 年、2002 年の初出荷から 25 年。2027 年はその両方が重なる年です。結果発表は 2026 年 12 月 —— 2027 年度の計画に、そのまま乗せられます。",
+  { x: M, y: 1.95, w: 11.8, h: 0.8, fontSize: 13.5 });
 const phases = [
-  ["第 1 期", "0 〜 3 ヶ月", "ちびフジィ確定\nマニュアル ver2.0 策定\nLINE スタンプ公開", "低", C.cyan],
-  ["第 2 期", "3 〜 9 ヶ月", "SNS 運用開始\n養魚場の映像を蓄積\n取引先への無償開放を案内", "低〜中", C.steel],
-  ["第 3 期", "9 〜 18 ヶ月", "ぬいぐるみ等グッズ化\n養魚場の限定公開を試行\n茨城県との連携協議", "中", C.steel],
-  ["第 4 期", "18 ヶ月 〜", "ドキュメンタリー公開\n採用広報への本格転用", "中〜高", C.steel],
+  ["2027", "春", "挑戦から 40 年", "ちびフジィ確定\nマニュアル ver2.0 策定\nLINE スタンプ 108 種公開", "ふ化の季節に合わせ、\nフジィの誕生日を定める", "低", true],
+  ["2027", "通年", "初出荷から 25 年", "SNS 運用開始\n養魚場の映像を蓄積\n取引先への無償開放を案内", "25 周年の国産キャビアとして\n地域・行政に持ち込める", "低〜中", false],
+  ["2028", "", "完全養殖から 30 年", "里美養魚場の限定公開\n茨城県との連携協議\nぬいぐるみ等グッズ化", "「会いに行けるマスコット」の\n開始年として節目が立つ", "中", false],
+  ["2030", "", "創業 100 周年", "ドキュメンタリー公開\n採用広報への本格転用", "フジィ自身も 5 歳。\n100 周年の顔になる", "中〜高", false],
 ];
 phases.forEach((p, i) => {
   const x = M + i * 3.03;
-  s.addShape(P.ShapeType.roundRect, { x: x, y: 2.5, w: 2.8, h: 3.55, rectRadius: 0.06,
-    fill: { color: C.card }, line: { color: i === 0 ? C.cyan : "E2EAED", width: i === 0 ? 2 : 1 } });
-  s.addText(p[0], { x: x + 0.3, y: 2.78, w: 2.2, h: 0.4, fontFace: FH, fontSize: 17,
-    bold: true, color: p[4] === C.cyan ? C.cyan : C.ink, isTextBox: true, margin: 0 });
-  s.addText(p[1], { x: x + 0.3, y: 3.2, w: 2.2, h: 0.3, fontFace: FB, fontSize: 10.5,
+  s.addShape(P.ShapeType.roundRect, { x: x, y: 2.85, w: 2.8, h: 3.2, rectRadius: 0.06,
+    fill: { color: C.card }, line: { color: p[6] ? C.cyan : "E2EAED", width: p[6] ? 2 : 1 } });
+  s.addText(p[0], { x: x + 0.3, y: 3.02, w: 1.5, h: 0.5, fontFace: FH, fontSize: 24,
+    bold: true, color: p[6] ? C.cyan : C.ink, isTextBox: true, margin: 0 });
+  s.addText(p[1], { x: x + 1.55, y: 3.22, w: 0.9, h: 0.3, fontFace: FB, fontSize: 10.5,
     color: C.muted, isTextBox: true, margin: 0 });
-  s.addText(p[2], { x: x + 0.3, y: 3.68, w: 2.2, h: 1.6, fontFace: FB, fontSize: 11,
-    color: C.ink, lineSpacing: 19, isTextBox: true, margin: 0 });
-  s.addText("想定コスト：" + p[3], { x: x + 0.3, y: 5.5, w: 2.2, h: 0.3, fontFace: FB,
-    fontSize: 10, bold: true, color: C.muted, isTextBox: true, margin: 0 });
+  s.addText(p[2], { x: x + 0.3, y: 3.56, w: 2.25, h: 0.3, fontFace: FB, fontSize: 10.5,
+    bold: true, color: p[6] ? C.cyan : C.muted, isTextBox: true, margin: 0 });
+  s.addText(p[3], { x: x + 0.3, y: 3.95, w: 2.25, h: 1.25, fontFace: FB, fontSize: 10.5,
+    color: C.ink, lineSpacing: 18, isTextBox: true, margin: 0 });
+  s.addText(p[4], { x: x + 0.3, y: 5.25, w: 2.25, h: 0.55, fontFace: FB, fontSize: 9,
+    color: C.muted, lineSpacing: 14, isTextBox: true, margin: 0 });
+  s.addText("想定コスト：" + p[5], { x: x + 0.3, y: 5.72, w: 2.25, h: 0.25, fontFace: FB,
+    fontSize: 9, bold: true, color: C.muted, isTextBox: true, margin: 0 });
 });
-foot(s, "第 1 期はすでに本エントリーで制作済みのため、実質的に着手済みの状態から始められます。");
+s.addShape(P.ShapeType.roundRect, { x: M, y: 6.25, w: 11.8, h: 0.66, rectRadius: 0.06,
+  fill: { color: C.deep }, line: { color: C.deep, width: 0 } });
+s.addText("創業 100 周年を、フジィが有名になった状態で迎える。", {
+  x: M + 0.45, y: 6.42, w: 10.9, h: 0.38, fontFace: FH, fontSize: 16, bold: true,
+  color: "FFFFFF", isTextBox: true, margin: 0 });
+s.addNotes("2027 年という締切を置くことで、この企画は「いつかやる案」ではなく「来年度の計画」になる。第 1 期の制作物は本エントリーにすべて添付済み。");
 
 /* =============== 18. 効果 =============== */
 s = P.addSlide(); light(s);
@@ -483,15 +592,17 @@ eff.forEach((e, i) => {
 
 /* =============== 19. CLOSING =============== */
 s = P.addSlide(); dark(s, true);
-s.addImage({ path: IMG + "04_campaign/fujie-official.png", x: 3.35, y: 1.55, w: 6.6, h: 2.0,
-  sizing: { type: "contain", w: 6.6, h: 2.0 } });
+img(s, "deck_assets/04_campaign/fujie-official.png", 3.35, 1.55, 6.6, 2.0);
 s.addText("このフジィは、実在します。", { x: 0.9, y: 3.95, w: 11.5, h: 0.95,
   fontFace: FH, fontSize: 42, bold: true, color: "FFFFFF", align: "center",
   isTextBox: true, margin: 0 });
 s.addText("フジキンが 40 年かけて育ててきた魚を、\n日本中が知っている名前にしたいと考えています。", {
   x: 0.9, y: 5.0, w: 11.5, h: 0.9, fontFace: FB, fontSize: 14.5, color: C.steel,
   align: "center", lineSpacing: 28, isTextBox: true, margin: 0 });
-s.addText("株式会社ブレインパワー　／　〔氏名〕", { x: 0.9, y: 6.35, w: 11.5, h: 0.35,
+s.addText("2027 年、40 年目。　創業 100 周年を、フジィが有名になった状態で迎える。", {
+  x: 0.9, y: 5.92, w: 11.5, h: 0.4, fontFace: FH, fontSize: 15, bold: true,
+  color: C.cyan, align: "center", isTextBox: true, margin: 0 });
+s.addText("株式会社ブレインパワー　大阪　／　Vittorio Zumpano", { x: 0.9, y: 6.35, w: 11.5, h: 0.35,
   fontFace: FB, fontSize: 11, color: C.dimOnDark, align: "center", isTextBox: true, margin: 0 });
 
 P.writeFile({ fileName: "D:/Fuji_Famous/Fujie_Creative/05_submission/フジィは実在する_企画書.pptx" })

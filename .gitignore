@@ -36,3 +36,9 @@ Documents_for_dev/
 # Contest entry materials - keep private until after submission (30 Sep 2026)
 Fujie_Creative/
 tools/entry_fields.json
+
+# Downloaded font masters used only when rebuilding the offline HTML
+tools/_fontcache/
+
+# Local safety copies taken before risky changes - never publish
+_backup/
