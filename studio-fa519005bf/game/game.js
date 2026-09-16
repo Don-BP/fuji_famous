@@ -594,6 +594,30 @@ function initRace(){
   var y = H/2, vy = 0, rocks = [], spawn = 0, dist = 0, dead = false;
   var img = ART.fujie_dash, rock = ART.rock_pillar, RW = 52;
 
+  /* How the course is built.
+
+     PITCH is how many frames pass between one pillar pair and the next, so at
+     SPEED px per frame the pairs sit PITCH*SPEED apart. CLIMB is how fast a
+     player who is tapping steadily can actually gain height - a flap gives
+     -LIFT and gravity claws back GRAV every frame, so the honest average is
+     well under LIFT. The next gap is then placed within reach of the last one:
+     it can never demand a climb the fish has no time to make. Falling is
+     easier than climbing, so the downward step is allowed to be bigger. */
+  var PITCH = 140, SPEED = 2.9, GRAV = 0.20, LIFT = 4.6, CLIMB = 1.5;
+  var GAP_H = 170;
+  var edge = GAP_H/2 + 26;
+  var lo = edge, hi = Math.max(edge, H - edge);
+  var maxUp = Math.min((hi - lo) * 0.62, PITCH * CLIMB);
+  var maxDown = maxUp * 1.6;
+  var lastGap = null;
+
+  function nextGapY(){
+    if (lastGap === null) return (lo + hi) / 2;
+    var a = Math.max(lo, lastGap - maxUp);
+    var b = Math.min(hi, lastGap + maxDown);
+    return a + Math.random() * Math.max(0, b - a);
+  }
+
   // Stack the pillar art at its own aspect ratio rather than stretching one copy
   // over the whole column, which smears the rock texture. `tipUp` puts the
   // jagged crystal end at the top of the rect instead of the bottom.
@@ -616,7 +640,7 @@ function initRace(){
     g.x.restore();
   }
 
-  function flap(e){ e.preventDefault(); if (!dead) vy = -4.2; }
+  function flap(e){ e.preventDefault(); if (!dead) vy = -LIFT; }
   g.c.addEventListener("pointerdown", flap);
   MG.cleanup = function(){ g.c.removeEventListener("pointerdown", flap); };
 
@@ -628,21 +652,19 @@ function initRace(){
       var sy = (s*H/7 + (dist*2)%(H/7));
       g.x.beginPath(); g.x.moveTo(0, sy); g.x.lineTo(W, sy); g.x.stroke();
     }
-    vy += 0.22; y += vy;
+    vy += GRAV; y += vy;
     if (y < 24){ y = 24; vy = 0; }
     if (y > H-24){ y = H-24; vy = 0; }
 
     spawn--;
     if (spawn <= 0){
-      // the pillars used to arrive almost on top of each other, which left no
-      // time to line up the next gap
-      var gapH = 164, edge = gapH/2 + 28;
-      var gapY = edge + Math.random()*Math.max(0, H - edge*2);
-      rocks.push({ x:W+30, gy:gapY, gh:gapH, passed:false });
-      spawn = 118;
+      var gapY = nextGapY();
+      lastGap = gapY;
+      rocks.push({ x:W+30, gy:gapY, gh:GAP_H, passed:false });
+      spawn = PITCH;
     }
     for (var i = rocks.length-1; i >= 0; i--){
-      var r = rocks[i]; r.x -= 2.9;
+      var r = rocks[i]; r.x -= SPEED;
       // the jagged crystal end always points into the gap
       drawRock(r.x, 0, r.gy - r.gh/2, false);
       drawRock(r.x, r.gy + r.gh/2, H - (r.gy + r.gh/2), true);
