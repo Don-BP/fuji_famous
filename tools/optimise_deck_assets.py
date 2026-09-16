@@ -23,6 +23,21 @@ FILES = [
     ("04_campaign/stage_2_larva.png",          True,  700),
     ("04_campaign/stage_3_fry.png",            True,  900),
     ("04_campaign/stage_4_young.png",          True,  900),
+    # the goods slides - one hero per line, then the Fuji collection
+    ("07_merch_chibi/gacha_capsule_set.png",   False, 1400),
+    ("12_merch_official_2/official_gift_set.png", False, 1400),
+    ("09_merch_maison/maison_tote.png",        False, 1400),
+    ("13_merch_wamon/wamon_shop_table.png",    False, 1600),
+    ("10_merch_wa/wa_ukiyoe_wave.png",         False, 1600),
+    ("11_wamon/wamon_collection_board.png",    False, 1600),
+    ("13_merch_wamon/wamon_sensu.png",         False, 1200),
+    ("19_fujisan/badge_40_fuji.png",           False,  900),
+    ("19_fujisan/wa/wa_fuji_ukiyoe.png",       False, 1600),
+    ("19_fujisan/wa_official/wao_fuji_byobu.png", False, 1600),
+    ("19_fujisan/wamon/wamon_fuji_furoshiki.png", False, 1200),
+    ("19_fujisan/maison/maison_fuji_scarf.png", False, 1200),
+    ("19_fujisan/chibi/chibi_fuji_gacha.png",  False, 1200),
+    ("19_fujisan/official/official_fuji_glass.png", False, 1200),
 ]
 
 total_before = total_after = 0

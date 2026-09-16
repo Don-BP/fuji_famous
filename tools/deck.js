@@ -498,6 +498,72 @@ img(s, "deck_assets/03_plushie/plush_keychain_lifestyle.jpg", 8.35, 3.15, 2.0, 3
 img(s, "deck_assets/03_plushie/plush_studio_front.jpg", 10.5, 3.15, 2.05, 3.3);
 foot(s, "10cm キーホルダー／25cm／50cm。いずれも試作イメージです。");
 
+/* =============== 15b. 五つの棚 =============== */
+s = P.addSlide(); light(s);
+eyebrow(s, "受け皿となるグッズ");
+title(s, "一匹の魚から、五つの棚。");
+body(s, "同じ一匹から、客層のちがう棚をつくります。子どもの棚、贈答の棚、旅の棚、文様の棚、工芸の棚。公式原画を使う棚では、マニュアル第 7 条のとおり原画に一切手を入れていません。",
+  { x: M, y: 2.25, w: 11.8, h: 0.8, fontSize: 13.5 });
+[
+  ["ちびフジィ", "07_merch_chibi/gacha_capsule_set.jpg", "見学者センターとガチャ"],
+  ["公式ライン", "12_merch_official_2/official_gift_set.jpg", "贈答と式典"],
+  ["Maison Fujie", "09_merch_maison/maison_tote.jpg", "革と帆布"],
+  ["和紋", "13_merch_wamon/wamon_shop_table.jpg", "文様を持ちあるく"],
+  ["和", "10_merch_wa/wa_ukiyoe_wave.jpg", "工芸のことば"],
+].forEach((it, i) => {
+  const x = M + i * 2.37;
+  card(s, x, 3.15, 2.2, 3.35);
+  img(s, "deck_assets/" + it[1], x + 0.1, 3.25, 2.0, 2.05);
+  s.addText(it[0], { x: x + 0.12, y: 5.45, w: 1.96, h: 0.34, fontFace: FH, fontSize: 13,
+    bold: true, color: C.ink, align: "center", isTextBox: true, margin: 0 });
+  s.addText(it[2], { x: x + 0.06, y: 5.82, w: 2.08, h: 0.5, fontFace: FB, fontSize: 9.5,
+    color: C.muted, align: "center", lineSpacing: 14, isTextBox: true, margin: 0 });
+});
+foot(s, "全 100 点超を制作済み。全点は添付のポートフォリオサイトでご覧いただけます。");
+
+/* =============== 15c. 富士 =============== */
+s = P.addSlide(); light(s);
+eyebrow(s, "もう一つの意匠");
+title(s, "フジキンの名は、富士に由来する。");
+body(s, "社名の由来がそのまま意匠になります。水にくわえて富士を据えると、五つの棚すべてが一本の筋でつながります。浮世絵の遠景に、金屏風の右隻に、青海波を抜いた白地に、絹の中央に、そして 40 周年の記章に。",
+  { x: M, y: 2.25, w: 11.8, h: 0.9, fontSize: 13.5 });
+card(s, M, 3.2, 6.15, 3.3);
+img(s, "deck_assets/19_fujisan/wa/wa_fuji_ukiyoe.jpg", M + 0.1, 3.3, 5.95, 3.1);
+[
+  ["19_fujisan/badge_40_fuji.jpg", "40 周年の記章"],
+  ["19_fujisan/chibi/chibi_fuji_gacha.jpg", "ちびフジィ ガチャ"],
+  ["19_fujisan/maison/maison_fuji_scarf.jpg", "Maison スカーフ"],
+  ["19_fujisan/wamon/wamon_fuji_furoshiki.jpg", "青海波 風呂敷"],
+].forEach((it, i) => {
+  const x = 7.15 + (i % 2) * 2.75, y = 3.2 + Math.floor(i / 2) * 1.72;
+  card(s, x, y, 2.55, 1.58);
+  img(s, "deck_assets/" + it[0], x + 0.08, y + 0.07, 2.39, 1.06);
+  s.addText(it[1], { x: x + 0.06, y: y + 1.17, w: 2.43, h: 0.32, fontFace: FB, fontSize: 9,
+    color: C.muted, align: "center", isTextBox: true, margin: 0 });
+});
+foot(s, "富士は公式原画の隣に置く意匠であり、原画そのものには重ねていません。");
+
+/* =============== 15d. 和紋 =============== */
+s = P.addSlide(); light(s);
+eyebrow(s, "文様");
+title(s, "この魚のために、文様を 18 種描いた。");
+body(s, "日本の文様は意味で選ばれてきました。青海波は海、鱗は魚の鱗、立涌はのぼる流れ、麻の葉は育つこと。そこへこの魚の要素を描き足しています —— 亀甲の節にはバルブのハンドル、矢絣は逆流、小紋の粒はキャビア。",
+  { x: M, y: 2.25, w: 11.8, h: 0.9, fontSize: 13.5 });
+card(s, M, 3.2, 5.55, 3.3);
+img(s, "deck_assets/11_wamon/wamon_collection_board.jpg", M + 0.1, 3.3, 5.35, 3.1);
+[
+  ["13_merch_wamon/wamon_sensu.jpg", "扇子"],
+  ["19_fujisan/wa_official/wao_fuji_byobu.jpg", "金屏風 ／ 公式原画"],
+  ["19_fujisan/official/official_fuji_glass.jpg", "クリスタル ／ 公式原画"],
+].forEach((it, i) => {
+  const x = 6.55 + i * 2.02;
+  card(s, x, 3.2, 1.87, 3.3);
+  img(s, "deck_assets/" + it[0], x + 0.08, 3.3, 1.71, 2.6);
+  s.addText(it[1], { x: x + 0.04, y: 5.98, w: 1.79, h: 0.4, fontFace: FB, fontSize: 8.5,
+    color: C.muted, align: "center", lineSpacing: 12, isTextBox: true, margin: 0 });
+});
+foot(s, "同じ版を風呂敷・手ぬぐい・扇子・包装紙・化粧箱へ展開しています。");
+
 /* =============== 16. 体験版 =============== */
 s = P.addSlide(); dark(s, true);
 eyebrow(s, "本エントリーの添付資料", true);
