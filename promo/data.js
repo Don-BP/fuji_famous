@@ -27,15 +27,6 @@ window.DATA = {
   plush: [
     ["plush_studio_front", "ぬいぐるみ 25cm", "Plush, 25cm"],
     ["plush_size_lineup", "3サイズ展開", "Three sizes"],
-    ["plush_keychain_lifestyle", "マスコット キーホルダー", "Mascot keychain"],
-    ["plush_mascot_set", "マスコット 6種", "Mascot keychains, six poses"],
-    ["plush_mascot_rail", "売り場のラック", "Shop rail"],
-    ["plush_mascot_backpack", "リュックに", "Clipped to a backpack"],
-    ["plush_mascot_hand", "手のひらサイズ", "Palm-sized"],
-    ["plush_mascot_cafe", "カフェの机で", "On a cafe table"],
-    ["plush_mascot_blindbag", "ブラインドバッグ", "Blind bags"],
-    ["plush_mascot_pair", "二つ並べて", "A pair on a handbag"],
-    ["plush_mascot_luggage", "旅の相棒", "Clipped to a suitcase"],
     ["plush_in_hands", "手のひらに 25cm", "The 25cm in the hand"],
     ["plush_detail", "仕立てのディテール", "Stitching and the embroidered eye"],
     ["plush_packaging", "パッケージ", "Retail packaging and hang tag"],
@@ -43,16 +34,28 @@ window.DATA = {
     ["plush_hug_large", "50cm を抱く", "The 50cm, hugged"],
     ["plush_shop_wall", "売り場の棚", "A shop wall of them"],
     ["plush_cushion", "クッション 60cm", "Floor cushion version, 60cm"],
-    ["plush_fuji_keychain", "富士チャーム付き", "Keychain with a felt Fuji"],
-    ["plush_fuji_mascot_set", "富士帽 マスコット 6種", "Mascot keychains in Fuji caps"],
-    ["plush_fuji_mascot_rail", "富士帽 売り場", "Shop rail, Fuji caps"],
     ["plush_fuji_cap", "富士のニット帽", "Knitted Fuji cap"],
     ["plush_fuji_lineup", "富士帽 3サイズ", "Three sizes, all in caps"],
     ["plush_fuji_cushion", "富士クッション", "Fuji cushion"],
-    ["plush_fuji_pouch", "富士 巾着", "Fuji drawstring pouch"],
     ["plush_fuji_window", "窓辺の富士", "On a windowsill, Fuji beyond"],
     ["plush_fuji_giftbox", "富士ギフトセット", "Fuji gift set"],
     ["plush_fuji_shop", "富士の売り場", "Shop wall, with the mountain"]
+  ],
+
+  mascot: [
+    ["plush_mascot_set", "マスコット 6種", "Six poses, the full set"],
+    ["plush_keychain_lifestyle", "鞄に下げて", "Hung on a bag"],
+    ["plush_mascot_rail", "売り場のラック", "Shop rail"],
+    ["plush_mascot_blindbag", "ブラインドバッグ", "Blind bags"],
+    ["plush_mascot_backpack", "リュックに", "Clipped to a backpack"],
+    ["plush_mascot_hand", "手のひらサイズ", "Palm-sized"],
+    ["plush_mascot_cafe", "カフェの机で", "On a cafe table"],
+    ["plush_mascot_pair", "二つ並べて", "A pair on a handbag"],
+    ["plush_mascot_luggage", "旅の相棒", "Clipped to a suitcase"],
+    ["plush_fuji_mascot_set", "富士帽 6種", "Six poses, all in Fuji caps"],
+    ["plush_fuji_keychain", "富士チャーム付き", "With a felt Fuji charm"],
+    ["plush_fuji_mascot_rail", "富士帽 売り場", "Shop rail, Fuji caps"],
+    ["plush_fuji_mascot_pouch", "富士 巾着", "In a Fuji pouch"]
   ],
 
   chibi: [

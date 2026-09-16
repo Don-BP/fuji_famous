@@ -3,14 +3,19 @@
   "use strict";
 
   /* ---------------- galleries ----------------
-     Every goods line now exists twice: the original water pieces and the Fuji
-     collection. Showing both at once would make each line unreadably long, so a
-     line that has both grows a two-way switch and shows one set at a time. Long
-     sets are further cut to data-preview rows with a "show more" underneath.
+     Most lines exist twice: the original water pieces and the Fuji collection.
+     Showing both at once would make a line unreadably long, so a line that has
+     both grows a switch and shows one view at a time. Long views are further cut
+     to data-preview rows with a "show more" underneath.
+
      Fuji assets are the ones whose id carries _fuji; nothing older does. */
   var CAPS = {};
 
   function isFuji(id) { return id.indexOf("_fuji") > -1; }
+
+  function inView(card, view) {
+    return (card.dataset.set === "fuji") === (view === "fuji");
+  }
 
   document.querySelectorAll("[data-gallery]").forEach(function (host) {
     var items = window.DATA[host.dataset.gallery] || [];
@@ -22,16 +27,21 @@
              '<figcaption data-cap="' + it[0] + '">' + it[1] + "</figcaption></figure>";
     }).join("");
 
-    /* only the long goods lines split; a short section shows everything */
-    var split = parseInt(host.dataset.preview, 10) > 0 &&
-                items.some(function (it) { return isFuji(it[0]); }) &&
-                items.some(function (it) { return !isFuji(it[0]); });
-    if (split) {
-      host.dataset.split = "1";
+    /* only the long lines split; a short section shows everything */
+    var views = [];
+    if (parseInt(host.dataset.preview, 10) > 0 &&
+        items.some(function (it) { return isFuji(it[0]); }) &&
+        items.some(function (it) { return !isFuji(it[0]); })) {
+      views = ["water", "fuji"];
+    }
+    if (views.length) {
+      host.dataset.views = views.join(",");
+      host.dataset.view = "water";
       var tabs = document.createElement("div");
       tabs.className = "setTabs";
-      tabs.innerHTML = '<button type="button" class="setTab on" data-set="water"></button>' +
-                       '<button type="button" class="setTab" data-set="fuji"></button>';
+      tabs.innerHTML = views.map(function (v) {
+        return '<button type="button" class="setTab" data-set="' + v + '"></button>';
+      }).join("");
       host.insertAdjacentElement("beforebegin", tabs);
     }
     if (parseInt(host.dataset.preview, 10)) {
@@ -47,15 +57,15 @@
   /* Decide what the grid shows: the active set, cut to the preview count while
      collapsed. Called again whenever a switch, a toggle or the language moves. */
   function sync(grid) {
-    var split = grid.dataset.split === "1",
-        fuji = grid.classList.contains("showFuji"),
+    var split = !!grid.dataset.views,
+        view = grid.dataset.view || "water",
         shut = grid.classList.contains("collapsed"),
         cap = parseInt(grid.dataset.preview, 10) || 0,
         live = grid.dataset.touched === "1",
         seen = 0, buried = 0;
 
     [].forEach.call(grid.children, function (c) {
-      if (split && (c.dataset.set === "fuji") !== fuji) { c.classList.add("off"); return; }
+      if (split && !inView(c, view)) { c.classList.add("off"); return; }
       seen++;
       var over = cap && seen > cap && shut;
       c.classList.toggle("off", over);
@@ -66,7 +76,7 @@
     var tabs = grid.previousElementSibling;
     if (tabs && tabs.classList.contains("setTabs")) {
       [].forEach.call(tabs.children, function (t) {
-        var mine = (t.dataset.set === "fuji") === fuji;
+        var mine = t.dataset.set === view;
         t.classList.toggle("on", mine);
         t.setAttribute("aria-pressed", mine ? "true" : "false");
       });
@@ -130,7 +140,12 @@
     line4B: "Woodblock, gold screens, maki-e, blue-and-white, indigo. What happens when Japanese craft draws a sturgeon the way it has always drawn carp and cranes.",
     wamonEyebrow: "PATTERNS", wamonH: "The Fujie pattern collection",
     wamonB: "Japanese patterns have always been chosen for what they mean. Seigaiha is the sea, uroko is a fish's scales, tatewaku is rising current, asanoha is growing. Eighteen patterns chosen for this fish and drawn for it: valve handwheels at the tortoise-shell nodes, arrows pointing upstream, caviar as a komon.",
-    plushEyebrow: "PROTOTYPE", plushH: "Plush",
+    plushEyebrow: "PROTOTYPE", plushH: "Plush and mascot",
+    plushB: "The same fish split in two: one you can hold, one you can hang on a bag. The first sits on a shelf; the second goes out into the city.",
+    plush1H: "01 — Plush / three sizes",
+    plush1B: "10cm, 25cm, 50cm. Fry, young fish, grown fish — the three stages are the product line.",
+    plush2H: "02 — Mascot keychain",
+    plush2B: "The cheapest single item in the range and the one that travels furthest. Six poses sold blind means it is not bought once. And the moment it is hanging on a bag, it is seen every day.",
     footNote: "The official illustration is used in accordance with Article 7 of the character manual ver 1.0 — no reshaping, recolouring, transparency, overlaid text, or added or removed elements. Chibi Fujie, the pattern collection and the Maison line are new work proposed alongside it.",
     lang: "日本語"
   };

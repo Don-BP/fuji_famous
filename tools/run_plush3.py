@@ -55,12 +55,24 @@ FUJI = (
 
 PLAIN = [
     ("plush_mascot_set.png", "16:9", [KEY, STUDIO],
-     "PRODUCT ASSORTMENT PHOTOGRAPH on a pale grey surface, shot slightly from above: six of the "
-     "mascot keychains laid out in two rows, each sewn in a different pose - one facing forward, "
-     "one curled asleep with the eye stitched shut, one with the tail flicked up, one lying flat on "
-     "its belly, one with a pectoral fin raised, one seen in profile. Each has its own silver split "
-     "ring and short chain fanned out beside it. Even soft studio light, gentle contact shadows, "
-     "neat catalogue arrangement."),
+     "PRODUCT ASSORTMENT PHOTOGRAPH on a pale grey surface: six mascot keychains laid out in two "
+     "rows of three, each with its own silver split ring and short chain.\n"
+     "*** SIX DIFFERENT POSES - CRITICAL ***\n"
+     "All six are sewn in GENUINELY DIFFERENT shapes. No two may repeat a pose, and no two may face "
+     "the same way. Read as six clearly distinct silhouettes even in a thumbnail:\n"
+     "1. UPRIGHT AND FORWARD - sitting up on its belly, head lifted, facing the camera dead on, "
+     "both pectoral fins held out to the sides. A symmetrical front view.\n"
+     "2. CURLED ASLEEP - the body bent into a closed ring with the snout tucked against the tail, "
+     "photographed from directly above, the eye a single stitched closed curve.\n"
+     "3. FULL SIDE PROFILE FACING RIGHT - lying flat and stretched out long, tail extended straight "
+     "back, the whole body in one horizontal line.\n"
+     "4. DIVING - head angled steeply down toward the surface with the tail lifted high in the air "
+     "behind it, the body a diagonal.\n"
+     "5. BELLY UP - lying on its back, pale ivory belly facing the camera, both pectoral fins "
+     "splayed wide, seen from above.\n"
+     "6. LEAPING ARCH FACING LEFT - the body curved into a deep C with both the head and the tail "
+     "lifted clear of the surface, seen from the side.\n"
+     "Even soft studio light, gentle contact shadows, neat catalogue arrangement."),
 
     ("plush_mascot_rail.png", "4:3", [KEY],
      "RETAIL PHOTOGRAPH inside a bright Japanese gift shop: a chrome display rail hung with four "
@@ -104,11 +116,26 @@ PLAIN = [
 
 FUJIS = [
     ("plush_fuji_mascot_set.png", "16:9", [KEY],
-     "PRODUCT ASSORTMENT PHOTOGRAPH on a pale grey surface, shot slightly from above: six of the "
-     "mascot keychains laid out in two rows, each in a different sewn pose and each wearing its own "
-     "small KNITTED MOUNT FUJI CAP - a low wide soft-blue knitted cone with a cream bobbled snow "
-     "band. Small felt Mount Fuji charms hang beside two of them on the same chains. Even soft "
-     "studio light, neat catalogue arrangement."),
+     "PRODUCT ASSORTMENT PHOTOGRAPH on a pale grey surface: six mascot keychains laid out in two "
+     "rows of three, each with its own silver split ring and short chain, and each wearing a small "
+     "KNITTED MOUNT FUJI CAP - a low wide soft-blue knitted cone with a cream bobbled snow band. "
+     "Small felt Mount Fuji charms hang beside two of them on the same chains.\n"
+     "*** SIX DIFFERENT POSES - CRITICAL ***\n"
+     "All six are sewn in GENUINELY DIFFERENT shapes. No two may repeat a pose, and no two may face "
+     "the same way. Read as six clearly distinct silhouettes even in a thumbnail:\n"
+     "1. UPRIGHT AND FORWARD - sitting up on its belly, head lifted, facing the camera dead on, "
+     "both pectoral fins held out to the sides.\n"
+     "2. CURLED ASLEEP - the body bent into a closed ring with the snout tucked against the tail, "
+     "seen from directly above, the eye a single stitched closed curve, the cap tipped forward.\n"
+     "3. FULL SIDE PROFILE FACING RIGHT - lying flat and stretched out long, tail extended straight "
+     "back.\n"
+     "4. DIVING - head angled steeply down with the tail lifted high behind it, the body a "
+     "diagonal.\n"
+     "5. BELLY UP - lying on its back, pale ivory belly to the camera, both pectoral fins splayed "
+     "wide, the cap resting beside its head.\n"
+     "6. LEAPING ARCH FACING LEFT - the body curved into a deep C with head and tail both lifted, "
+     "seen from the side.\n"
+     "Even soft studio light, neat catalogue arrangement."),
 
     ("plush_fuji_mascot_rail.png", "4:3", [KEY],
      "RETAIL PHOTOGRAPH inside a bright Japanese gift shop: a chrome display rail hung with rows of "
