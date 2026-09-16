@@ -46,7 +46,32 @@ window.DATA = {
     ["notebook_cover", "ノート", "Notebook"],
     ["uchiwa_fan", "うちわ", "Uchiwa fan"],
     ["stationery_plate", "名刺・封筒", "Card and envelope"],
-    ["pattern_repeat", "包装紙", "Wrapping paper"]
+    ["pattern_repeat", "包装紙", "Wrapping paper"],
+    ["official_leather_tote", "革トート", "Leather tote, blind-debossed"],
+    ["official_canvas_tote", "帆布トート", "Canvas tote"],
+    ["official_pin_set", "ピンバッジ・タイバー", "Pins and tie bar"],
+    ["official_notebooks", "ノート三種", "Notebooks, silver foil"],
+    ["official_handkerchiefs", "ハンカチ", "Handkerchiefs"],
+    ["official_umbrella", "傘", "Umbrella"],
+    ["official_glassware", "グラス", "Etched glassware"],
+    ["official_desk_set", "デスクまわり", "Desk set"],
+    ["official_gift_set", "ギフトセット", "Gift set"],
+    ["official_wall_relief", "レセプション", "Reception wall relief"]
+  ],
+
+  wamongoods: [
+    ["wamon_sensu", "扇子", "Folding fan"],
+    ["wamon_long_wallet", "長財布", "Long wallet"],
+    ["wamon_weekend_bag", "ボストンバッグ", "Weekend bag"],
+    ["wamon_pouches", "巾着・ポーチ", "Drawstring pouches"],
+    ["wamon_handkerchiefs", "ハンカチ三種", "Handkerchief set"],
+    ["wamon_notepads", "メモ帳", "Notepads"],
+    ["wamon_furoshiki_wrapped", "風呂敷包み", "Furoshiki, tied"],
+    ["wamon_makie_card_case", "蒔絵 名刺入れ", "Maki-e card case"],
+    ["wamon_tenugui", "手ぬぐい", "Tenugui"],
+    ["wamon_sake_set", "酒器", "Sake set"],
+    ["wamon_umbrella", "和傘", "Umbrella"],
+    ["wamon_shop_table", "売り場", "Shop table"]
   ],
 
   maison: [
@@ -81,6 +106,14 @@ window.DATA = {
     ["wa_obi_textile", "帯地", "Obi textile"],
     ["wa_noren_indigo", "藍染 暖簾", "Indigo noren"],
     ["wa_sumie_scroll", "掛軸", "Sumi-e scroll"],
-    ["wa_tea_setting", "茶の設え", "Tea setting"]
+    ["wa_tea_setting", "茶の設え", "Tea setting"],
+    ["wao_byobu", "金屏風 ／ 公式原画", "Gold screen, official artwork"],
+    ["wao_makie_box", "蒔絵箱 ／ 公式原画", "Maki-e box, official artwork"],
+    ["wao_noren", "藍染 暖簾 ／ 公式原画", "Indigo noren, official artwork"],
+    ["wao_porcelain", "染付 ／ 公式原画", "Porcelain, official artwork"],
+    ["wao_obi", "帯地 ／ 公式原画", "Obi, official artwork"],
+    ["wao_scroll", "掛軸 ／ 公式原画", "Scroll, official artwork"],
+    ["wao_tea_setting", "茶の設え ／ 公式原画", "Tea setting, official artwork"],
+    ["wao_ukiyoe", "木版 ／ 公式原画", "Woodblock, official artwork"]
   ]
 };

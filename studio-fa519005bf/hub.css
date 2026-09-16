@@ -56,29 +56,62 @@ a{color:inherit}
 
 /* ---------------- hero ---------------- */
 .hero{
-  position:relative;min-height:100svh;display:grid;align-items:center;
-  grid-template-columns:1.06fr .94fr;gap:clamp(24px,4vw,64px);
-  padding:96px clamp(18px,5vw,72px) 70px;
+  position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;
+  padding:clamp(104px,14vh,150px) clamp(20px,6vw,86px) clamp(80px,12vh,120px);
   background:
-    radial-gradient(120% 90% at 78% 18%,rgba(0,160,233,.20),transparent 60%),
-    radial-gradient(100% 80% at 10% 90%,rgba(73,210,240,.10),transparent 55%),
-    linear-gradient(180deg,#051a26,#04121a 70%);
-  overflow:hidden;
+    radial-gradient(90% 70% at 72% 40%,rgba(0,160,233,.22),transparent 62%),
+    radial-gradient(80% 70% at 8% 88%,rgba(73,210,240,.10),transparent 58%),
+    linear-gradient(180deg,#06202e,#04121a 78%);
 }
+/* light shafts */
 .hero::after{
-  content:"";position:absolute;inset:-20%;pointer-events:none;
+  content:"";position:absolute;inset:-25%;z-index:1;pointer-events:none;
   background:linear-gradient(103deg,transparent 44%,rgba(150,225,255,.07) 48%,transparent 53%),
              linear-gradient(94deg,transparent 64%,rgba(150,225,255,.05) 68%,transparent 73%);
   animation:sway 19s ease-in-out infinite alternate;
 }
 @keyframes sway{from{transform:translateX(-2%)}to{transform:translateX(3%)}}
-.heroCopy{position:relative;z-index:2;max-width:620px}
+
+/* the art fills the whole hero and the copy sits on top of it */
+.heroArt{position:absolute;inset:0;z-index:2;pointer-events:none}
+.heroArt img{position:absolute;filter:drop-shadow(0 34px 60px rgba(0,0,0,.65))}
+.heroArt .hOfficial{
+  right:2.5%;top:45%;width:min(56vw,1010px);
+  transform:translateY(-50%) rotate(-6deg);
+  animation:drift 13s ease-in-out infinite alternate;
+}
+@keyframes drift{from{transform:translateY(-53%) rotate(-6.4deg)}
+                 to{transform:translateY(-47%) rotate(-4.6deg)}}
+
+/* ---------------- the chibi that swims around the page ---------------- */
+#buddy{
+  position:fixed;left:0;top:0;z-index:50;pointer-events:none;
+  width:clamp(74px,8.4vw,132px);will-change:transform;
+  filter:drop-shadow(0 12px 22px rgba(0,0,0,.45));
+}
+#buddy img{display:block;width:100%;height:auto;transform-origin:50% 50%}
+@media (prefers-reduced-motion:reduce){#buddy{display:none}}
+.heroArt .ring{
+  position:absolute;border-radius:50%;border:1px solid rgba(150,215,240,.13);
+  aspect-ratio:1;
+}
+.heroArt .r1{right:4%;top:8%;width:min(42vw,560px)}
+.heroArt .r2{right:12%;top:24%;width:min(27vw,360px);border-color:rgba(150,215,240,.10)}
+.heroArt .r3{right:19%;top:36%;width:min(15vw,200px);border-color:rgba(150,215,240,.08)}
+
+/* the scrim that keeps the copy readable over the fish */
+.hero > .heroCopy::before{
+  content:"";position:absolute;left:-40vw;top:-60vh;width:120vw;height:220vh;z-index:-1;
+  background:linear-gradient(100deg,rgba(4,18,26,.95) 26%,rgba(4,18,26,.62) 48%,transparent 70%);
+  pointer-events:none;
+}
+.heroCopy{position:relative;z-index:3;max-width:min(560px,54vw)}
 .kicker{margin:0 0 16px;font-size:10.5px;font-weight:700;letter-spacing:.32em;color:var(--flow)}
 .hero h1{
   margin:0 0 22px;font-family:var(--serif);font-weight:600;
-  font-size:clamp(38px,6.6vw,74px);line-height:1.24;letter-spacing:.03em;
+  font-size:clamp(40px,6.2vw,78px);line-height:1.2;letter-spacing:.03em;
 }
-.hero .lede{margin:0 0 30px;color:var(--steel);font-size:14.5px;line-height:2.05;max-width:30em}
+.hero .lede{margin:0 0 32px;color:var(--steel);font-size:14.5px;line-height:2.05;max-width:30em}
 .heroBtns{display:flex;flex-wrap:wrap;gap:12px}
 .btn{
   display:inline-block;padding:14px 30px;border-radius:99px;text-decoration:none;
@@ -89,26 +122,11 @@ a{color:inherit}
 .btn:hover{filter:brightness(1.08)}
 .btn.ghost{background:none;border:1px solid rgba(255,255,255,.26);color:var(--steel);box-shadow:none}
 .btn.ghost:hover{border-color:var(--flow);color:var(--flow)}
-.heroArt{
-  position:relative;z-index:2;order:2;
-  width:100%;max-width:620px;aspect-ratio:1/.86;margin-left:auto;
+.heroMeta{
+  margin:34px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);
+  font-size:10.5px;font-weight:700;letter-spacing:.24em;color:var(--dim);
 }
-.heroArt::before{                       /* one still ripple, to hold the pair together */
-  content:"";position:absolute;right:6%;top:6%;width:52%;aspect-ratio:1;
-  border-radius:50%;border:1px solid rgba(150,215,240,.16);
-  box-shadow:0 0 0 26px rgba(150,215,240,.05),0 0 0 54px rgba(150,215,240,.035);
-}
-.heroArt img{position:absolute;filter:drop-shadow(0 26px 44px rgba(0,0,0,.6))}
-.heroArt .hOfficial{
-  top:6%;left:0;width:100%;
-  animation:bob 9s ease-in-out infinite;
-}
-.heroArt .hChibi{
-  bottom:2%;left:4%;width:31%;
-  animation:bob 6.5s ease-in-out infinite reverse;
-}
-@keyframes bob{0%,100%{transform:translateY(-2%)}50%{transform:translateY(2%)}}
-.heroScroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3}
+.heroScroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:4}
 .heroScroll i{display:block;width:1px;height:46px;background:linear-gradient(var(--flow),transparent);
   animation:drop 2.3s ease-in-out infinite}
 @keyframes drop{0%{transform:scaleY(.2);transform-origin:top;opacity:0}
@@ -212,10 +230,16 @@ footer{padding:clamp(48px,7vw,84px) clamp(18px,5vw,72px);background:#03101a;bord
   .g4{grid-template-columns:repeat(3,1fr)}
 }
 @media (max-width:860px){
-  .hero{grid-template-columns:1fr;padding-top:104px}
-  .heroArt{order:-1;max-width:440px;margin:0 auto;aspect-ratio:1/.72}
-  .heroArt::before{width:46%;right:4%;top:2%}
-  .heroArt .hChibi{width:28%;bottom:0;left:2%}
+  .hero{align-items:flex-end;padding:120px 22px 74px}
+  .heroCopy{max-width:100%}
+  .hero > .heroCopy::before{
+    background:linear-gradient(180deg,rgba(4,18,26,0) 4%,rgba(4,18,26,.58) 26%,rgba(4,18,26,.94) 46%);
+  }
+  .heroArt .hOfficial{width:126%;right:-13%;top:26%}
+  .heroArt .r1{width:62vw;right:-4%;top:9%}
+  .heroArt .r2{width:40vw;right:6%;top:19%}
+  .heroArt .r3{width:22vw;right:16%;top:28%}
+  .heroMeta{margin-top:26px}
   .duo{grid-template-columns:1fr}
   #nav nav{display:none}
 }

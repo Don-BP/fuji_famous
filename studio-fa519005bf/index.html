@@ -27,9 +27,9 @@
 
 <!-- ============================ hero ============================ -->
 <section id="top" class="hero">
-  <div class="heroArt">
+  <div class="heroArt" aria-hidden="true">
+    <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
     <img class="hOfficial" src="assets/fujie-official.png" alt="">
-    <img class="hChibi" src="assets/hero_chibi.png" alt="">
   </div>
   <div class="heroCopy">
     <p class="kicker" data-t="heroKicker">FUJIKIN MASCOT PROPOSAL</p>
@@ -39,6 +39,7 @@
       <a class="btn" href="game/" data-t="heroPlay">育ててみる</a>
       <a class="btn ghost" href="timeline/" data-t="heroStory">40年をたどる</a>
     </div>
+    <p class="heroMeta"><span data-t="heroMeta">1987 — 2026　／　世界初の完全養殖</span></p>
   </div>
   <div class="heroScroll"><i></i></div>
 </section>
@@ -112,7 +113,11 @@
     <p class="lineB" data-t="line3B">一匹の魚と水輪だけでモノグラムを組み、旅の道具に落としました。どこの家のまねでもありません。</p>
     <div class="grid g4" data-gallery="maison"></div>
 
-    <div class="lineHead"><span class="num">04</span><h3 data-t="line4H">和 ／ 工芸のことば</h3></div>
+    <div class="lineHead"><span class="num">04</span><h3 data-t="line5H">和紋のグッズ ／ 持ちあるくもの</h3></div>
+    <p class="lineB" data-t="line5B">和紋コレクションを、そのまま身のまわりの道具に。扇子、長財布、鞄、巾着、ハンカチ、メモ帳、風呂敷。柄はすべて上のコレクションと同じ版です。</p>
+    <div class="grid g4" data-gallery="wamongoods"></div>
+
+    <div class="lineHead"><span class="num">05</span><h3 data-t="line4H">和 ／ 工芸のことば</h3></div>
     <p class="lineB" data-t="line4B">浮世絵、金屏風、蒔絵、染付、藍染。日本の工芸が鯉や鶴を描いてきたやり方で、チョウザメを描くとどうなるか。</p>
     <div class="grid g4" data-gallery="wa"></div>
   </div>
@@ -144,9 +149,12 @@
   </div>
 </footer>
 
+<div id="buddy" aria-hidden="true"><img src="assets/hero_chibi.png" alt=""></div>
+
 <div id="lb" hidden><button id="lbClose" type="button" aria-label="close">✕</button><img id="lbImg" src="" alt=""><div id="lbCap"></div></div>
 
 <script src="data.js"></script>
 <script src="hub.js"></script>
+<script src="buddy.js"></script>
 </body>
 </html>
