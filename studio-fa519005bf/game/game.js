@@ -634,9 +634,12 @@ function initRace(){
 
     spawn--;
     if (spawn <= 0){
-      var gapY = 60 + Math.random()*(H-120), gapH = 118;
+      // the pillars used to arrive almost on top of each other, which left no
+      // time to line up the next gap
+      var gapH = 164, edge = gapH/2 + 28;
+      var gapY = edge + Math.random()*Math.max(0, H - edge*2);
       rocks.push({ x:W+30, gy:gapY, gh:gapH, passed:false });
-      spawn = 78;
+      spawn = 118;
     }
     for (var i = rocks.length-1; i >= 0; i--){
       var r = rocks[i]; r.x -= 2.9;
@@ -674,51 +677,79 @@ function initShell(){
     d.className = "shell";
     d.innerHTML = '<img class="pearlDot" src="art/pearl.png" alt="">' +
                   '<img class="shellImg" src="art/shell_closed.png" alt="">';
-    (function(el, idx){
-      el.addEventListener("pointerdown", function(){ pick(idx, el); });
-    })(d, i);
+    (function(el){
+      el.addEventListener("pointerdown", function(){ pick(el); });
+    })(d);
     host.appendChild(d); shells.push(d);
   }
-  var answer = 0;
+
+  /* The shells really do change places. `order[slot]` is whichever shell is
+     standing in that slot right now, and `pearl` is the shell element holding
+     the pearl - so when two shells swap, the pearl travels with its shell. */
+  var order = shells.slice(), home = [], pearl = shells[0];
+
+  function measure(){
+    home = shells.map(function(s){ return s.offsetLeft; });
+  }
+  function xFor(el, slot){
+    return home[slot] - home[shells.indexOf(el)];
+  }
+  function paint(dur, lifted){
+    order.forEach(function(el, slot){
+      var up = lifted && lifted.indexOf(el) >= 0 ? -22 : 0;
+      el.style.transition = dur ? "transform " + dur + "ms cubic-bezier(.45,.05,.3,1)" : "none";
+      el.style.transform = "translate(" + xFor(el, slot) + "px," + up + "px)";
+    });
+  }
+  function settle(dur){                       // set the pair back down mid-slide
+    order.forEach(function(el, slot){
+      el.style.transition = "transform " + Math.round(dur * .5) + "ms ease-in";
+      el.style.transform = "translate(" + xFor(el, slot) + "px,0px)";
+    });
+  }
 
   function newRound(){
     busy = true;
     round++;
     $("miniTime").textContent = L.round + " " + Math.min(round,5) + "/5";
-    answer = Math.floor(Math.random()*3);
-    shells.forEach(function(s,i){
+    order = shells.slice();
+    paint(0);
+    measure();
+    pearl = shells[Math.floor(Math.random()*3)];
+    shells.forEach(function(s){
       s.classList.remove("lift");
-      s.querySelector(".pearlDot").style.opacity = i === answer ? "1" : "0";
+      s.querySelector(".pearlDot").style.opacity = s === pearl ? "1" : "0";
     });
-    shells[answer].classList.add("lift");
+    pearl.classList.add("lift");
     setTimeout(function(){
       shells.forEach(function(s){
         s.classList.remove("lift");
         s.querySelector(".pearlDot").style.opacity = "0";
       });
-      shuffle(0);
-    }, 900);
+      setTimeout(function(){ swap(0, 6 + round * 2); }, 320);
+    }, 950);
   }
-  function shuffle(n){
-    if (n >= 5 + round){ busy = false; $("miniFoot").textContent = L.ctl_shell; return; }
+
+  function swap(n, total){
+    if (n >= total){ busy = false; $("miniFoot").textContent = L.ctl_shell; return; }
     $("miniFoot").textContent = "…";
-    shells.forEach(function(s){
-      var dx = (Math.random()-0.5) * 90;
-      s.style.transform = "translateX(" + dx + "px)";
-    });
-    setTimeout(function(){
-      shells.forEach(function(s){ s.style.transform = ""; });
-      setTimeout(function(){ shuffle(n+1); }, 130);
-    }, 170);
+    var a = Math.floor(Math.random()*3), b;
+    do { b = Math.floor(Math.random()*3); } while (b === a);
+    var t = order[a]; order[a] = order[b]; order[b] = t;
+    var dur = Math.max(165, 310 - round * 20);
+    paint(dur, [order[a], order[b]]);
+    setTimeout(function(){ settle(dur); }, Math.round(dur * .55));
+    setTimeout(function(){ swap(n+1, total); }, dur + 55);
   }
-  function pick(i, el){
+
+  function pick(el){
     if (busy) return;
     busy = true;
     el.classList.add("lift");
-    var ok = i === answer;
+    var ok = el === pearl;
     el.querySelector(".pearlDot").style.opacity = ok ? "1" : "0";
-    if (!ok){ shells[answer].classList.add("lift");
-              shells[answer].querySelector(".pearlDot").style.opacity = "1"; }
+    if (!ok){ pearl.classList.add("lift");
+              pearl.querySelector(".pearlDot").style.opacity = "1"; }
     if (ok) bumpScore(2);
     $("miniFoot").textContent = ok ? L.correct : L.wrong;
     setTimeout(function(){
@@ -726,6 +757,7 @@ function initShell(){
       else newRound();
     }, 1100);
   }
+
   newRound();
   MG.cleanup = function(){};
 }
