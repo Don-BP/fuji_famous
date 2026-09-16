@@ -192,7 +192,31 @@ a{color:inherit}
 .lineB{margin:0 0 30px;font-size:13px;line-height:1.95;color:#5b6b73;max-width:58ch}
 .band.dark .lineB{color:var(--steel)}
 
-.grid{display:grid;gap:clamp(10px,1.6vw,20px)}
+.grid{display:grid;gap:clamp(10px,1.6vw,20px);scroll-margin-top:86px}
+.card.off,.moreBtn.off{display:none}
+
+/* the water / Fuji switch that sits above a split line */
+.setTabs{display:flex;gap:6px;margin:0 0 14px}
+.setTab{
+  padding:7px 16px;border:1px solid currentColor;border-radius:999px;
+  background:transparent;color:inherit;opacity:.4;cursor:pointer;
+  font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.1em;
+  transition:opacity .25s,background .25s,color .25s;
+}
+.setTab:hover{opacity:.75}
+.setTab.on{opacity:1}
+.band.dark .setTab.on{background:var(--chrome);color:var(--abyss);border-color:var(--chrome)}
+.band .setTab.on{background:var(--ink);color:var(--washi);border-color:var(--ink)}
+.moreBtn{
+  display:block;margin:clamp(13px,1.8vw,20px) auto 0;padding:11px 28px;
+  border:1px solid currentColor;border-radius:999px;background:transparent;
+  color:inherit;opacity:.55;cursor:pointer;
+  font-family:inherit;font-size:11.5px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;transition:opacity .25s,background .25s,color .25s;
+}
+.moreBtn:hover{opacity:1}
+.band.dark .moreBtn:hover{background:var(--chrome);color:var(--abyss)}
+.band .moreBtn:hover{background:var(--ink);color:var(--washi)}
 .g2{grid-template-columns:repeat(2,1fr)}
 .g3{grid-template-columns:repeat(3,1fr)}
 .g4{grid-template-columns:repeat(4,1fr)}

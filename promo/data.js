@@ -14,16 +14,14 @@ window.DATA = {
     ["sticker_board_02", "スタンプ 02 ／ きもち", "Sticker set 02 — feelings"],
     ["sticker_sheet_03_action", "スタンプ 03 ／ うごき", "Sticker set 03 — action"],
     ["sticker_sheet_EN_01_chat", "英語版 01 ／ チャット", "English 01 — everyday chat"],
-    ["sticker_sheet_EN_02_action", "英語版 02 ／ うごき", "English 02 — mood and motion"],
-    ["linecut_jp", "切り出し済み ／ 日本語 40", "Cut out and ready — Japanese 40"],
-    ["linecut_action", "切り出し済み ／ うごき 24", "Cut out and ready — action 24"],
-    ["linecut_en", "切り出し済み ／ 英語 44", "Cut out and ready — English 44"]
+    ["sticker_sheet_EN_03_chat", "英語版 02 ／ あいさつ", "English 02 — replies and greetings"],
+    ["sticker_sheet_EN_02_action", "英語版 03 ／ うごき", "English 03 — mood and motion"]
   ],
 
   fish: [
     ["endangered_water", "絶滅危惧種としてのフジィ", "The fish, and how few are left"],
     ["shark_vs_sturgeon", "サメじゃないです", "Not a shark"],
-    ["badge_40", "1987–2027 ／ 40年", "1987-2027 — forty years"]
+    ["badge_40_fuji", "1987–2027 ／ 40年", "1987-2027 — forty years"]
   ],
 
   plush: [
@@ -41,7 +39,15 @@ window.DATA = {
     ["lunch_set", "ランチセット", "Bento, bottle, lunch cloth"],
     ["stationery_set", "ステーショナリー", "Washi tape, memo, files"],
     ["sweets_box", "おみやげ菓子", "Visitor-centre confectionery"],
-    ["shop_display", "ショップ什器", "Shop display"]
+    ["shop_display", "ショップ什器", "Shop display"],
+    ["chibi_fuji_acrylic_stands", "富士 アクリルスタンド", "Fuji acrylic stands"],
+    ["chibi_fuji_gacha", "富士 ガチャ 6種", "Fuji capsule toys, six"],
+    ["chibi_fuji_pins", "富士 ピンバッジ", "Fuji enamel pins"],
+    ["chibi_fuji_apparel", "富士 アパレル", "Fuji apparel"],
+    ["chibi_fuji_stationery", "富士 ステーショナリー", "Fuji stationery"],
+    ["chibi_fuji_sweets", "富士 おみやげ菓子", "Fuji confectionery box"],
+    ["chibi_fuji_lunch", "富士 ランチセット", "Fuji lunch set"],
+    ["chibi_fuji_shop", "富士 ショップ什器", "Fuji shop corner"]
   ],
 
   official: [
@@ -65,7 +71,15 @@ window.DATA = {
     ["official_glassware", "グラス", "Etched glassware"],
     ["official_desk_set", "デスクまわり", "Desk set"],
     ["official_gift_set", "ギフトセット", "Gift set"],
-    ["official_wall_relief", "レセプション", "Reception wall relief"]
+    ["official_wall_relief", "レセプション", "Reception wall relief"],
+    ["official_fuji_glass", "富士 クリスタル", "Fuji crystal paperweight"],
+    ["official_fuji_tote", "富士 帆布トート", "Fuji canvas tote"],
+    ["official_fuji_notebooks", "富士 ノート三種", "Fuji notebooks"],
+    ["official_fuji_pin_set", "富士 ピンバッジ", "Fuji pin set"],
+    ["official_fuji_umbrella", "富士 傘", "Fuji umbrella"],
+    ["official_fuji_desk_set", "富士 デスクまわり", "Fuji desk set"],
+    ["official_fuji_gift_set", "富士 ギフトセット", "Fuji gift set"],
+    ["official_fuji_wall_relief", "富士 レセプション", "Fuji reception relief"]
   ],
 
   wamongoods: [
@@ -80,7 +94,15 @@ window.DATA = {
     ["wamon_tenugui", "手ぬぐい", "Tenugui"],
     ["wamon_sake_set", "酒器", "Sake set"],
     ["wamon_umbrella", "和傘", "Umbrella"],
-    ["wamon_shop_table", "売り場", "Shop table"]
+    ["wamon_shop_table", "売り場", "Shop table"],
+    ["wamon_fuji_furoshiki", "富士 風呂敷", "Fuji furoshiki"],
+    ["wamon_fuji_tenugui", "富士 手ぬぐい", "Fuji tenugui"],
+    ["wamon_fuji_sensu", "富士 扇子", "Fuji folding fan"],
+    ["wamon_fuji_umbrella", "富士 和傘", "Fuji umbrella"],
+    ["wamon_fuji_pouches", "富士 巾着", "Fuji pouches"],
+    ["wamon_fuji_sake_set", "富士 酒器", "Fuji sake set"],
+    ["wamon_fuji_card_case", "富士 蒔絵 名刺入れ", "Fuji maki-e card case"],
+    ["wamon_fuji_shop_table", "富士 売り場", "Fuji shop table"]
   ],
 
   maison: [
@@ -91,7 +113,14 @@ window.DATA = {
     ["maison_small_goods", "小物", "Small leather goods"],
     ["maison_silk_scarf", "シルクスカーフ", "Silk twill scarf"],
     ["maison_midnight_bag", "ミッドナイト", "Midnight canvas weekender"],
-    ["maison_boutique", "ブティック", "Boutique vitrine"]
+    ["maison_boutique", "ブティック", "Boutique vitrine"],
+    ["maison_fuji_scarf", "富士 シルクスカーフ", "Fuji silk scarf"],
+    ["maison_fuji_tote", "富士 トート", "Fuji structured tote"],
+    ["maison_fuji_midnight_bag", "富士 ミッドナイト", "Fuji midnight bag"],
+    ["maison_fuji_trunk", "富士 トランク", "Fuji trunk"],
+    ["maison_fuji_small_goods", "富士 小物", "Fuji small leather goods"],
+    ["maison_fuji_duffle", "富士 ダッフル", "Fuji duffle"],
+    ["maison_fuji_boutique", "富士 ブティック", "Fuji boutique vitrine"]
   ],
 
   wamon: [
@@ -123,6 +152,22 @@ window.DATA = {
     ["wao_obi", "帯地 ／ 公式原画", "Obi, official artwork"],
     ["wao_scroll", "掛軸 ／ 公式原画", "Scroll, official artwork"],
     ["wao_tea_setting", "茶の設え ／ 公式原画", "Tea setting, official artwork"],
-    ["wao_ukiyoe", "木版 ／ 公式原画", "Woodblock, official artwork"]
+    ["wao_ukiyoe", "木版 ／ 公式原画", "Woodblock, official artwork"],
+    ["wa_fuji_ukiyoe", "富士 浮世絵", "Fuji ukiyo-e"],
+    ["wa_fuji_byobu", "富士 金屏風", "Fuji gold screen"],
+    ["wa_fuji_arita", "富士 染付 有田", "Fuji sometsuke porcelain"],
+    ["wa_fuji_makie", "富士 蒔絵箱", "Fuji maki-e box"],
+    ["wa_fuji_noren", "富士 藍染 暖簾", "Fuji indigo noren"],
+    ["wa_fuji_obi", "富士 帯地", "Fuji obi textile"],
+    ["wa_fuji_sumie", "富士 掛軸", "Fuji sumi-e scroll"],
+    ["wa_fuji_tea", "富士 茶の設え", "Fuji tea setting"],
+    ["wao_fuji_byobu", "富士 金屏風 ／ 公式原画", "Fuji gold screen — official artwork"],
+    ["wao_fuji_makie_box", "富士 蒔絵箱 ／ 公式原画", "Fuji maki-e box — official artwork"],
+    ["wao_fuji_noren", "富士 暖簾 ／ 公式原画", "Fuji noren — official artwork"],
+    ["wao_fuji_porcelain", "富士 染付 ／ 公式原画", "Fuji porcelain — official artwork"],
+    ["wao_fuji_obi", "富士 帯地 ／ 公式原画", "Fuji obi — official artwork"],
+    ["wao_fuji_scroll", "富士 掛軸 ／ 公式原画", "Fuji scroll — official artwork"],
+    ["wao_fuji_tea_setting", "富士 茶の設え ／ 公式原画", "Fuji tea setting — official artwork"],
+    ["wao_fuji_ukiyoe", "富士 浮世絵 ／ 公式原画", "Fuji ukiyo-e — official artwork"]
   ]
 };

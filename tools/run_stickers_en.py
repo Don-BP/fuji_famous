@@ -101,6 +101,30 @@ EN2 = [
 ]
 
 
+EN3 = [
+    '1. Fins pressed together in front of the snout in a pleading beg, big hopeful eye - "Please!"',
+    '2. Waving one fin breezily to brush the matter aside, easy relaxed smile - "No problem"',
+    '3. Clapping both pectoral fins together, small sparkles around the head - "Well done!"',
+    '4. Raising a tiny glass in one fin, head tipped back, bubbles rising - "Cheers!"',
+    '5. Sitting up behind a small steaming bowl, both fins together in thanks - "Time to eat!"',
+    '6. Cheeks puffed happily mid-mouthful, eye shut in bliss, sparkle above - "Yum!"',
+    '7. One fin thrust out flat toward the viewer, body leaning in urgently - "Wait!"',
+    '8. Straining forward with the whole body stretched long, effort lines behind - "Almost there"',
+    '9. Looking back over the shoulder wistfully, one small heart drifting up - "Miss you"',
+    '10. Holding out a small four-leaf clover in one fin, encouraging grin - "Good luck!"',
+    '11. A crisp little salute with one fin to the brow, body upright and neat - "Understood"',
+    '12. Spinning in a flurry of loose papers, eye whirling, tiny sweat drops - "So busy"',
+    '13. Peering around with a fin shading the eye, a small question mark above - "Where?"',
+    '14. Pointing at its own chest with one fin, eager and bright - "Me too!"',
+    '15. Nodding firmly with the eye shut, one fin raised in agreement - "Agreed"',
+    '16. Bouncing on the spot with both fins up, excitement lines radiating - "Cannot wait"',
+    '17. Stretching out long and content, small sparkles along the body - "Feeling good"',
+    '18. Frozen mid-fumble with a fin over the mouth, a single sweat drop - "Oops"',
+    '19. Bowing with one fin swept out in an inviting gesture - "Welcome!"',
+    '20. Tossing a small streamer with the tail, cheerful send-off pose - "Have fun!"',
+]
+
+
 def run(name, items):
     prompt = LOCK + COLOUR + ENGLISH + SHEET + "\n".join(items)
     r = gen(prompt, OUT + name, refs=[M, SMP, PREV], aspect="4:5")
@@ -114,3 +138,5 @@ if only in (None, "1"):
     run("sticker_sheet_EN_01_chat.png", EN1)
 if only in (None, "2"):
     run("sticker_sheet_EN_02_action.png", EN2)
+if only in (None, "3"):
+    run("sticker_sheet_EN_03_chat.png", EN3)

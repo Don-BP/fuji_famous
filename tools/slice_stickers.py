@@ -46,12 +46,16 @@ EN_01 = ["Morning!", "Yay!", "Thank you!", "OK!", "Sorry!", "On it!", "Nice!", "
 EN_02 = ["Let us go!", "Making waves", "Deep dive", "Splash!", "Creating the flow", "Upstream",
          "Chill", "Focus", "Teamwork", "Big win", "Power up", "Brrr", "Too hot", "Study time",
          "So tired", "Spin!", "Got it!", "Stop!", "High five", "Hero"]
+EN_03 = ["Please!", "No problem", "Well done!", "Cheers!", "Time to eat!", "Yum!", "Wait!",
+         "Almost there", "Miss you", "Good luck!", "Understood", "So busy", "Where?", "Me too!",
+         "Agreed", "Cannot wait", "Feeling good", "Oops", "Welcome!", "Have fun!"]
 
 SHEETS = [
     ("sticker_sheet_01.png", "jp", JP_01),
     ("sticker_sheet_02.png", "jp", JP_02),
     ("sticker_sheet_03_action.png", "jp_action", JP_03),
     ("sticker_sheet_EN_01_chat.png", "en", EN_01),
+    ("sticker_sheet_EN_03_chat.png", "en", EN_03),
     ("sticker_sheet_EN_02_action.png", "en", EN_02),
 ]
 

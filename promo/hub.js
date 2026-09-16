@@ -2,17 +2,95 @@
 (function () {
   "use strict";
 
-  /* ---------------- galleries ---------------- */
+  /* ---------------- galleries ----------------
+     Every goods line now exists twice: the original water pieces and the Fuji
+     collection. Showing both at once would make each line unreadably long, so a
+     line that has both grows a two-way switch and shows one set at a time. Long
+     sets are further cut to data-preview rows with a "show more" underneath.
+     Fuji assets are the ones whose id carries _fuji; nothing older does. */
   var CAPS = {};
+
+  function isFuji(id) { return id.indexOf("_fuji") > -1; }
+
   document.querySelectorAll("[data-gallery]").forEach(function (host) {
     var items = window.DATA[host.dataset.gallery] || [];
     host.innerHTML = items.map(function (it) {
       CAPS[it[0]] = { ja: it[1], en: it[2] };
-      return '<figure class="card" data-id="' + it[0] + '">' +
+      return '<figure class="card" data-id="' + it[0] + '"' +
+             (isFuji(it[0]) ? ' data-set="fuji"' : "") + ">" +
              '<img loading="lazy" src="assets/t/' + it[0] + '.jpg" alt="">' +
              '<figcaption data-cap="' + it[0] + '">' + it[1] + "</figcaption></figure>";
     }).join("");
+
+    /* only the long goods lines split; a short section shows everything */
+    var split = parseInt(host.dataset.preview, 10) > 0 &&
+                items.some(function (it) { return isFuji(it[0]); }) &&
+                items.some(function (it) { return !isFuji(it[0]); });
+    if (split) {
+      host.dataset.split = "1";
+      var tabs = document.createElement("div");
+      tabs.className = "setTabs";
+      tabs.innerHTML = '<button type="button" class="setTab on" data-set="water"></button>' +
+                       '<button type="button" class="setTab" data-set="fuji"></button>';
+      host.insertAdjacentElement("beforebegin", tabs);
+    }
+    if (parseInt(host.dataset.preview, 10)) {
+      host.classList.add("collapsed");
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "moreBtn";
+      host.insertAdjacentElement("afterend", btn);
+    }
+    sync(host);
   });
+
+  /* Decide what the grid shows: the active set, cut to the preview count while
+     collapsed. Called again whenever a switch, a toggle or the language moves. */
+  function sync(grid) {
+    var split = grid.dataset.split === "1",
+        fuji = grid.classList.contains("showFuji"),
+        shut = grid.classList.contains("collapsed"),
+        cap = parseInt(grid.dataset.preview, 10) || 0,
+        live = grid.dataset.touched === "1",
+        seen = 0, buried = 0;
+
+    [].forEach.call(grid.children, function (c) {
+      if (split && (c.dataset.set === "fuji") !== fuji) { c.classList.add("off"); return; }
+      seen++;
+      var over = cap && seen > cap && shut;
+      c.classList.toggle("off", over);
+      if (over) buried++;
+      else if (live) c.classList.add("on");
+    });
+
+    var tabs = grid.previousElementSibling;
+    if (tabs && tabs.classList.contains("setTabs")) {
+      [].forEach.call(tabs.children, function (t) {
+        var mine = (t.dataset.set === "fuji") === fuji;
+        t.classList.toggle("on", mine);
+        t.setAttribute("aria-pressed", mine ? "true" : "false");
+      });
+    }
+
+    var btn = grid.nextElementSibling;
+    if (btn && btn.classList.contains("moreBtn")) {
+      var hidden = buried || (seen > cap ? seen - cap : 0);
+      btn.classList.toggle("off", seen <= cap);
+      btn.textContent = lang === "en"
+        ? (shut ? "Show " + hidden + " more" : "Show fewer")
+        : (shut ? "ほか " + hidden + " 点を見る" : "閉じる");
+      btn.setAttribute("aria-expanded", shut ? "false" : "true");
+    }
+  }
+
+  function syncAll() {
+    document.querySelectorAll("[data-gallery]").forEach(sync);
+    document.querySelectorAll(".setTab").forEach(function (t) {
+      t.textContent = t.dataset.set === "fuji"
+        ? (lang === "en" ? "Mount Fuji" : "富士の意匠")
+        : (lang === "en" ? "Water" : "水の意匠");
+    });
+  }
 
   /* ---------------- language ---------------- */
   var EN = {
@@ -36,10 +114,10 @@
     fishB: "Sturgeon are listed by the IUCN as the most critically endangered group of species on earth; every surviving species is threatened. What Fujikin closed in 1998 was the full life cycle in a tank — which is to say, <strong>a way to make caviar without ever taking another fish from a river</strong>. What they built was not a delicacy. It was a way to stop catching them. 2027 is the fortieth year of that work.",
     charEyebrow: "PROPOSAL", charH: "Chibi Fujie — a second form",
     charB: "The official Fujie is not touched. As Article 7 of the manual requires, the original artwork is used exactly as supplied. Chibi Fujie is proposed as a <strong>second form</strong> to stand beside it: the sharp real fish for adults, this one for children.",
-    stkEyebrow: "GIVEAWAY", stkH: "A hundred and eight stickers",
-    stkB: "Sixty-four in Japanese, forty-four in English, every one cut out on its own and finished to the LINE spec. Given away free for adding the official account, so Fujie ends up inside people's conversations. First in the pack is \"Not a shark!\". The English set carries straight over to WhatsApp and Telegram.",
+    stkEyebrow: "GIVEAWAY", stkH: "A hundred and twenty-eight stickers",
+    stkB: "Sixty-four in Japanese, sixty-four in English, every one cut out on its own and finished to the LINE spec. Given away free for adding the official account, so Fujie ends up inside people's conversations. First in the pack is \"Not a shark!\". The English set carries straight over to WhatsApp and Telegram.",
     goodsEyebrow: "GOODS", goodsH: "Four lines",
-    goodsB: "One fish, four different shelves: the children's shelf, the gift shelf, the travel shelf and the craft shelf.",
+    goodsB: "One fish, four different shelves: the children's shelf, the gift shelf, the travel shelf and the craft shelf.<br>And Mount Fuji on every one of them. The name Fujikin comes from the mountain, so it now stands beside the water as the second house motif.",
     line1H: "01 — Chibi Fujie / toys and daily things",
     line1B: "The visitor-centre shelf and the capsule machine. Cheap, high volume, taken home.",
     line2H: "02 — The official line / gifts and ceremony",
@@ -74,6 +152,7 @@
       if (c) el.textContent = lang === "en" ? c.en : c.ja;
     });
     document.getElementById("langBtn").textContent = lang === "en" ? "日本語" : "EN";
+    syncAll();
     document.title = lang === "en"
       ? "Fujie is a real fish | FUJIE STUDIO"
       : "フジィは実在する ｜ FUJIE STUDIO";
@@ -113,6 +192,25 @@
     document.body.style.overflow = "";
   }
   document.addEventListener("click", function (e) {
+    var tab = e.target.closest(".setTab");
+    if (tab) {
+      var tgrid = tab.parentElement.nextElementSibling;
+      tgrid.dataset.touched = "1";
+      tgrid.classList.toggle("showFuji", tab.dataset.set === "fuji");
+      tgrid.classList.add("collapsed");
+      sync(tgrid);
+      return;
+    }
+    var btn = e.target.closest(".moreBtn");
+    if (btn) {
+      var grid = btn.previousElementSibling;
+      grid.dataset.touched = "1";
+      var opening = grid.classList.contains("collapsed");
+      grid.classList.toggle("collapsed");
+      sync(grid);
+      if (!opening) grid.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
     var card = e.target.closest(".card");
     if (card) { open(card.dataset.id); return; }
     if (e.target === lb || e.target.id === "lbClose") close();
