@@ -381,12 +381,53 @@ function dropPellets(){
 /* ================================================================
    MINI-GAMES
    ================================================================ */
-var MG = { active:null, raf:null, timer:null, score:0, left:0, onTap:null, cleanup:null };
+/* `live` is true only between the moment a game starts and the moment it is
+   finished or walked out of. Upstream Dash ends 700ms AFTER the crash so the
+   player sees it, and the 30-second clock is its own timer - either one could
+   otherwise fire into a game that is already over, or worse, into the NEXT
+   game, ending a fresh round on the spot. Everything that ends a game checks
+   this flag first. */
+var MG = { active:null, raf:null, timer:null, score:0, left:0, onTap:null,
+           cleanup:null, live:false, strikes:0 };
+
+/* Every game is now the same bargain: three mistakes and Fujie gives up on it,
+   see it through and he is cheered up exactly as much as any other game would
+   have cheered him up. What counts as a mistake is whatever that game is about
+   - an egg hitting the floor, a shark getting away, a crash, a wrong shell -
+   so each one still asks for its own kind of attention, but none of them is
+   worth more than the others and none of them is a guaranteed win. */
+var MAX_STRIKES = 3;
+var CLEAR_MOOD = 40, CLEAR_GROW = 3;    // finishing it
+var FAIL_MOOD  = 10, FAIL_GROW  = 0;    // he enjoyed the company anyway
+
+function paintLives(){
+  var box = $("miniLives"), html = "";
+  for (var i = 0; i < MAX_STRIKES; i++)
+    html += '<i class="' + (i < MG.strikes ? "spent" : "") + '"></i>';
+  box.innerHTML = html;
+}
+
+/* One mistake. Returns true when that was the last one, so a game can stop
+   whatever it was in the middle of doing. */
+function strike(){
+  if (!MG.live) return true;
+  MG.strikes++;
+  paintLives();
+  var pips = $("miniLives").children, pip = pips[MG.strikes - 1];
+  if (pip){ pip.classList.add("losing");
+            setTimeout(function(){ pip.classList.remove("losing"); }, 460); }
+  $("mini").classList.remove("shake"); void $("mini").offsetWidth;
+  $("mini").classList.add("shake");
+  setTimeout(function(){ $("mini").classList.remove("shake"); }, 420);
+  if (MG.strikes >= MAX_STRIKES){ endMini(false); return true; }
+  return false;
+}
 
 function startMini(kind){
   closeSheets();
   S.paused = true;
-  MG.active = kind; MG.score = 0; MG.left = 30;
+  MG.active = kind; MG.score = 0; MG.left = 30; MG.live = true; MG.strikes = 0;
+  paintLives();
   $("mini").className = "on mg-" + kind;   // per-game background plate
   $("miniScore").textContent = L.score + " 0";
   $("miniTime").textContent = L.time + " 30";
@@ -408,7 +449,7 @@ function startMini(kind){
     MG.timer = setInterval(function(){
       MG.left--;
       $("miniTime").textContent = L.time + " " + MG.left;
-      if (MG.left <= 0) endMini();
+      if (MG.left <= 0) endMini(true);   // seeing the clock out IS clearing it
     }, 1000);
   }
 }
@@ -418,26 +459,32 @@ function bumpScore(n){
   $("miniScore").textContent = L.score + " " + MG.score;
 }
 
-function endMini(){
+function endMini(cleared){
+  if (!MG.live) return;
+  MG.live = false;
   clearInterval(MG.timer); MG.timer = null;
   if (MG.raf) cancelAnimationFrame(MG.raf), MG.raf = null;
   if (MG.cleanup) MG.cleanup(), MG.cleanup = null;
   $("mini").classList.remove("on");
+  $("mini").classList.remove("shake");
 
-  var moodGain = Math.min(42, 14 + MG.score * 1.6);
-  var growGain = Math.min(3.2, MG.score * 0.14);
-  S.mood = Math.min(100, S.mood + moodGain);
-  S.growth = Math.min(100, S.growth + growGain);
+  // the score is still worth seeing, but it no longer decides the reward -
+  // every game that is seen through is worth the same to Fujie
+  S.mood   = Math.min(100, S.mood   + (cleared ? CLEAR_MOOD : FAIL_MOOD));
+  S.growth = Math.min(100, S.growth + (cleared ? CLEAR_GROW : FAIL_GROW));
   S.energy = Math.max(0, S.energy - 5);
 
   $("resScore").textContent = MG.score;
-  $("resTitle").textContent = L.resultTitle;
-  $("resMood").textContent = L.moodUp;
-  $("resGrow").textContent = L.growUp;
+  $("resArt").setAttribute("src", cleared ? "art/fujie_cheer.png" : "art/fujie_sad.png");
+  $("resultScreen").classList.toggle("failed", !cleared);
+  $("resTitle").textContent = cleared ? L.cleared : L.failed;
+  $("resMood").textContent  = cleared ? L.moodUp  : L.moodUpABit;
+  $("resGrow").textContent  = cleared ? L.growUp  : L.failedHint;
   $("resAgain").textContent = L.again;
-  $("resBack").textContent = L.back;
+  $("resBack").textContent  = L.back;
   $("resultScreen").classList.add("on");
-  cheer(); paint();
+  if (cleared) cheer();
+  paint();
 }
 $("resAgain").addEventListener("click", function(){
   $("resultScreen").classList.remove("on"); startMini(MG.active);
@@ -446,34 +493,101 @@ $("resBack").addEventListener("click", function(){
   $("resultScreen").classList.remove("on"); S.paused = false;
 });
 $("miniExit").addEventListener("click", function(){
-  clearInterval(MG.timer);
+  MG.live = false;
+  clearInterval(MG.timer); MG.timer = null;
   if (MG.raf) cancelAnimationFrame(MG.raf), MG.raf = null;
   if (MG.cleanup) MG.cleanup(), MG.cleanup = null;
   $("mini").classList.remove("on"); S.paused = false;
 });
 
-/* ---- shared canvas helper ---- */
-function canvasSetup(){
+/* ---- shared canvas helpers ---- */
+/* Both canvas games are written in frames: "fall 2.9 pixels" means 2.9 pixels
+   per refresh. On a 120Hz phone that is twice the speed and Upstream Dash is
+   unplayable through no fault of the player; on a stuttering machine it is
+   slow motion. This runs the game's own logic a whole number of sixtieths of a
+   second no matter how often the screen actually refreshes, so it plays at one
+   speed everywhere. `step` returning false stops the game after one last frame.
+   The catch-up is capped so a tab left in the background does not fast-forward
+   through the whole course the moment it comes back. */
+var STEP_MS = 1000 / 60;
+function driveAt60(step, draw){
+  var last = 0, acc = 0;
+  function loop(now){
+    if (!last) last = now;
+    acc += Math.min(100, now - last);
+    last = now;
+    while (acc >= STEP_MS){
+      acc -= STEP_MS;
+      if (step() === false){ draw(); return; }
+    }
+    draw();
+    MG.raf = requestAnimationFrame(loop);
+  }
+  MG.raf = requestAnimationFrame(loop);
+}
+
+/* The canvas is measured the instant the game opens, and the overlay it sits in
+   is still being laid out - it has come back 222 wide and ZERO high, which
+   draws the whole game into nothing while the clock runs down on a blank
+   screen. It also has to keep up afterwards: turning a phone sideways, or the
+   address bar sliding away as you play, changes the surface underneath a game
+   already in progress. So it re-measures on the next frame and on every resize,
+   and tells the game to move what it is holding to match. */
+function canvasSetup(onResize){
   var c = $("miniCanvas");
   $("miniDom").style.display = "none";
   c.style.display = "block";
-  var r = c.getBoundingClientRect();
-  var dpr = Math.min(2, window.devicePixelRatio || 1);
-  c.width = r.width * dpr; c.height = r.height * dpr;
-  var x = c.getContext("2d"); x.scale(dpr, dpr);
-  return { c:c, x:x, w:r.width, h:r.height };
+  var g = { c:c, x:null, w:0, h:0 }, first = true;
+
+  function fit(){
+    var r = c.getBoundingClientRect();
+    var w = Math.round(r.width)  || window.innerWidth  || 320;
+    var h = Math.round(r.height) || window.innerHeight || 480;
+    if (w === g.w && h === g.h) return;
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    c.width = w * dpr; c.height = h * dpr;      // this also wipes the context
+    g.x = c.getContext("2d"); g.x.scale(dpr, dpr);
+    var ow = g.w, oh = g.h;
+    g.w = w; g.h = h;
+    // the game lays itself out after this first call; `ow || w` covers the
+    // measurement that came back zero, which would otherwise scale by infinity
+    if (first) first = false;
+    else if (onResize) onResize(w, h, ow || w, oh || h);
+  }
+  fit();
+  requestAnimationFrame(fit);                   // once the overlay has settled
+
+  /* A window "resize" can arrive a frame BEFORE the canvas has been given its
+     new box, in which case re-measuring finds nothing changed and the game is
+     left drawing at the old size for good. Watching the element itself reports
+     the change when it has actually happened, so there is no race to lose. */
+  var ro = window.ResizeObserver ? new ResizeObserver(fit) : null;
+  if (ro) ro.observe(c); else addEventListener("resize", fit);
+  g.release = function(){
+    if (ro) ro.disconnect(); else removeEventListener("resize", fit);
+  };
+  return g;
 }
 
 /* ---- 1. EGG CATCH ---- */
 function initEgg(){
-  var g = canvasSetup(), W = g.w, H = g.h;
-  var px = W/2, eggs = [], spawn = 0, missed = 0;
+  var W, H, px, fw;
+  var eggs = [], spawn = 0, missed = 0;
   var img = ART.fujie_shell, egg = ART.roe_egg;
   var bits = [], happy = 0;   // catch sparkles, and how long Fujie stays delighted
   // Fujie holds the shell low and to his right, so the catch mouth is not the
   // centre of the sprite. BOWL_* locate the shell rim inside the artwork.
   var BOWL_X = 0.32, BOWL_Y = 0.52, BOWL_W = 0.33;
-  var fw = Math.min(150, W*0.42);
+
+  // the eggs in the air and Fujie himself keep their place on the new surface
+  var g = canvasSetup(function(w, h, ow, oh){
+    var sx = w/ow, sy = h/oh;
+    W = w; H = h; fw = Math.min(150, W*0.42);
+    px *= sx;
+    for (var i = 0; i < eggs.length; i++){ eggs[i].x *= sx; eggs[i].y *= sy; }
+    bits.length = 0;
+  });
+  W = g.w; H = g.h; px = W/2; fw = Math.min(150, W*0.42);
 
   function at(e){
     var r = g.c.getBoundingClientRect();
@@ -481,9 +595,16 @@ function initEgg(){
     px = Math.max(fw*BOWL_W, Math.min(W - fw*BOWL_W, t.clientX - r.left));
   }
   function down(e){ e.preventDefault(); at(e); }
+  function move(e){ if (e.buttons || e.pointerType === "touch") at(e); }
   g.c.addEventListener("pointerdown", down);
-  g.c.addEventListener("pointermove", function(e){ if (e.buttons || e.pointerType === "touch") at(e); });
-  MG.cleanup = function(){ g.c.removeEventListener("pointerdown", down); };
+  g.c.addEventListener("pointermove", move);
+  // the canvas outlives the round, so BOTH listeners have to come off or every
+  // replay stacks another copy on it
+  MG.cleanup = function(){
+    g.release();
+    g.c.removeEventListener("pointerdown", down);
+    g.c.removeEventListener("pointermove", move);
+  };
 
   /* a little shower of sparks and a rising "+1" when an egg lands */
   function burst(x, y){
@@ -494,11 +615,16 @@ function initEgg(){
     }
     bits.push({ x:x, y:y-8, vx:0, vy:-1.5, life:1, r:0, txt:"+1" });
   }
-  function drawBits(){
+  function stepBits(){
     for (var k = bits.length-1; k >= 0; k--){
       var b = bits[k];
       b.x += b.vx; b.y += b.vy; b.vy += 0.09; b.life -= 0.028;
-      if (b.life <= 0){ bits.splice(k,1); continue; }
+      if (b.life <= 0) bits.splice(k,1);
+    }
+  }
+  function drawBits(){
+    for (var k = bits.length-1; k >= 0; k--){
+      var b = bits[k];
       if (b.txt){
         g.x.fillStyle = "rgba(232,192,113," + b.life + ")";
         g.x.font = "700 17px sans-serif"; g.x.textAlign = "center";
@@ -510,25 +636,50 @@ function initEgg(){
     }
   }
 
-  function frame(){
-    g.x.clearRect(0,0,W,H);
-
+  // where the shell rim sits this frame - the catch line and the drawing agree
+  function rim(){
     var fh = fw * (img.naturalHeight/img.naturalWidth || 1);
     var topY = H - fh - 4;
-    var catchY = topY + fh*BOWL_Y, catchW = fw*BOWL_W;
+    return { fh:fh, topY:topY, catchY:topY + fh*BOWL_Y, catchW:fw*BOWL_W };
+  }
+
+  /* The eggs used to come down so thick that six were in the air at once -
+     fine when nothing was at stake, unfair now that three on the floor ends
+     it. They arrive about a second apart instead, which asks for attention
+     rather than luck. */
+  function nextSpawn(){ return 52 + Math.random()*40; }
+
+  function step(){
+    if (happy > 0) happy--;
+    spawn--;
+    if (spawn <= 0){ eggs.push({ x:30 + Math.random()*(W-60), y:-14,
+                                 v:1.9 + Math.random()*1.7 }); spawn = nextSpawn(); }
+    var r = rim();
+    for (var i = eggs.length-1; i >= 0; i--){
+      var e = eggs[i]; e.y += e.v;
+      if (e.y > r.catchY && e.y < r.catchY + 62 && Math.abs(e.x - px) < r.catchW){
+        eggs.splice(i,1); bumpScore(1); burst(e.x, e.y); happy = 34;
+      } else if (e.y > H+16){
+        eggs.splice(i,1); missed++;
+        if (strike()) return false;          // an egg on the floor is a mistake
+      }
+    }
+    stepBits();
+    return true;
+  }
+
+  function draw(){
+    g.x.clearRect(0,0,W,H);
+    var r = rim();
 
     // Fujie is drawn FIRST so the eggs always fall in front of him and stay
     // readable right up to the moment they drop into the shell.
     var pose = (happy > 0 && ART.fujie_shell_happy.naturalWidth)
              ? ART.fujie_shell_happy : img;
-    if (pose.naturalWidth) g.x.drawImage(pose, px - fw*BOWL_X, topY, fw, fh);
-    if (happy > 0) happy--;
+    if (pose.naturalWidth) g.x.drawImage(pose, px - fw*BOWL_X, r.topY, fw, r.fh);
 
-    spawn--;
-    if (spawn <= 0){ eggs.push({ x:30 + Math.random()*(W-60), y:-14,
-                                 v:1.9 + Math.random()*1.7 }); spawn = 26 + Math.random()*22; }
-    for (var i = eggs.length-1; i >= 0; i--){
-      var e = eggs[i]; e.y += e.v;
+    for (var i = 0; i < eggs.length; i++){
+      var e = eggs[i];
       // a soft halo lifts the dark egg off the dark water
       var gl = g.x.createRadialGradient(e.x, e.y, 2, e.x, e.y, 19);
       gl.addColorStop(0, "rgba(232,192,113,.40)");
@@ -540,17 +691,14 @@ function initEgg(){
         g.x.beginPath(); g.x.arc(e.x, e.y, 9, 0, 6.2832);
         g.x.fillStyle = "#6B7A80"; g.x.fill();
       }
-      if (e.y > catchY && e.y < catchY + 62 && Math.abs(e.x - px) < catchW){
-        eggs.splice(i,1); bumpScore(1); burst(e.x, e.y); happy = 34;
-      } else if (e.y > H+16){ eggs.splice(i,1); missed++; }
     }
 
     drawBits();
     g.x.fillStyle = "rgba(191,207,214,.75)"; g.x.font = "12px sans-serif";
     g.x.fillText(L.missed + " " + missed, 12, 20);
-    MG.raf = requestAnimationFrame(frame);
   }
-  frame();
+
+  driveAt60(step, draw);
 }
 
 /* ---- 2. WHACK-A-SHARK ---- */
@@ -580,20 +728,18 @@ function initShark(){
         var w = $("whacker"), urchin = cell.dataset.kind === "urchin";
 
         if (urchin){
-          // the one thing you must not hit: lose the streak, take a knock
+          // the one thing you must not hit
           cell.classList.add("bad");
           streak = 0;
           MG.score = Math.max(0, MG.score - 2);
           $("miniScore").textContent = L.score + " " + MG.score;
-          $("mini").classList.remove("shake"); void $("mini").offsetWidth;
-          $("mini").classList.add("shake");
           $("miniFoot").textContent = L.ouch;
           if (w){ w.src = "art/fujie_ouch.png"; w.classList.remove("swing"); }
+          var over = strike();
           timers.push(setTimeout(function(){
             if (w) w.src = "art/fujie_whack.png";
-            $("mini").classList.remove("shake");
             cell.classList.remove("bad");
-            showStreak();
+            if (!over) showStreak();
           }, 700));
           return;
         }
@@ -629,7 +775,12 @@ function initShark(){
       timers.push(setTimeout(function(){
         if (c.classList.contains("up")){
           c.classList.remove("up");
-          if (!urchin && streak){ streak = 0; showStreak(); }   // a missed shark breaks the run
+          // an urchin going back down untouched is CORRECT play; a shark
+          // slipping away is the mistake
+          if (!urchin){
+            streak = 0;
+            if (!strike()) showStreak();
+          }
         }
       }, upFor()));
     }
@@ -648,8 +799,7 @@ function initShark(){
 
 /* ---- 3. UPSTREAM DASH ---- */
 function initRace(){
-  var g = canvasSetup(), W = g.w, H = g.h;
-  var y = H/2, vy = 0, rocks = [], spawn = 0, dist = 0, dead = false;
+  var W, H, y, vy = 0, rocks = [], spawn = 0, dist = 0, dead = false;
   var img = ART.fujie_dash, rock = ART.rock_pillar, RW = 52;
 
   /* How the course is built.
@@ -664,10 +814,23 @@ function initRace(){
   var PITCH = 140, SPEED = 2.9, GRAV = 0.20, LIFT = 4.6, CLIMB = 1.5;
   var GAP_H = 170;
   var edge = GAP_H/2 + 26;
-  var lo = edge, hi = Math.max(edge, H - edge);
-  var maxUp = Math.min((hi - lo) * 0.62, PITCH * CLIMB);
-  var maxDown = maxUp * 1.6;
-  var lastGap = null;
+  var lo, hi, maxUp, maxDown, lastGap = null;
+  function measureCourse(){
+    lo = edge; hi = Math.max(edge, H - edge);
+    maxUp = Math.min((hi - lo) * 0.62, PITCH * CLIMB);
+    maxDown = maxUp * 1.6;
+  }
+
+  // a taller or shorter window mid-run: the course and the fish move with it,
+  // so nobody is dropped inside a pillar by turning their phone
+  var g = canvasSetup(function(w, h, ow, oh){
+    var sy = h/oh;
+    W = w; H = h; measureCourse();
+    y *= sy;
+    for (var i = 0; i < rocks.length; i++){ rocks[i].x *= w/ow; rocks[i].gy *= sy; }
+    if (lastGap !== null) lastGap = Math.max(lo, Math.min(hi, lastGap * sy));
+  });
+  W = g.w; H = g.h; y = H/2; measureCourse();
 
   function nextGapY(){
     if (lastGap === null) return (lo + hi) / 2;
@@ -700,16 +863,28 @@ function initRace(){
 
   function flap(e){ e.preventDefault(); if (!dead) vy = -LIFT; }
   g.c.addEventListener("pointerdown", flap);
-  MG.cleanup = function(){ g.c.removeEventListener("pointerdown", flap); };
+  var overT = null;   // the pause between the last crash and the result screen
+  MG.cleanup = function(){
+    clearTimeout(overT);
+    g.release();
+    g.c.removeEventListener("pointerdown", flap);
+  };
 
-  function frame(){
-    g.x.clearRect(0,0,W,H);
-    // current streaks
-    g.x.strokeStyle = "rgba(191,207,214,.10)"; g.x.lineWidth = 2;
-    for (var s = 0; s < 7; s++){
-      var sy = (s*H/7 + (dist*2)%(H/7));
-      g.x.beginPath(); g.x.moveTo(0, sy); g.x.lineTo(W, sy); g.x.stroke();
-    }
+  /* A crash costs a chance rather than the whole run. The pillar that was hit
+     is taken out of the way and the fish is left blinking and untouchable for
+     a moment, or he would simply crash into the same rock three times over and
+     lose before he had a chance to react. */
+  var inv = 0;
+  function crash(){
+    if (inv > 0) return;
+    for (var k = rocks.length-1; k >= 0; k--)
+      if (rocks[k].x < 140) rocks.splice(k,1);
+    y = H/2; vy = 0;
+    inv = 96;
+    if (strike()) dead = true;
+  }
+
+  function step(){
     vy += GRAV; y += vy;
     if (y < 24){ y = 24; vy = 0; }
     if (y > H-24){ y = H-24; vy = 0; }
@@ -721,28 +896,47 @@ function initRace(){
       rocks.push({ x:W+30, gy:gapY, gh:GAP_H, passed:false });
       spawn = PITCH;
     }
+    if (inv > 0) inv--;
     for (var i = rocks.length-1; i >= 0; i--){
       var r = rocks[i]; r.x -= SPEED;
-      // the jagged crystal end always points into the gap
-      drawRock(r.x, 0, r.gy - r.gh/2, false);
-      drawRock(r.x, r.gy + r.gh/2, H - (r.gy + r.gh/2), true);
       if (!r.passed && r.x + RW < 60){ r.passed = true; bumpScore(1); }
-      if (60+20 > r.x && 60-20 < r.x+RW &&
+      if (inv <= 0 && 60+20 > r.x && 60-20 < r.x+RW &&
           (y-16 < r.gy - r.gh/2 || y+16 > r.gy + r.gh/2)){
-        if (!dead){ dead = true; setTimeout(endMini, 700); }
+        crash();
+        if (dead){ overT = setTimeout(function(){ endMini(false); }, 700); break; }
+        break;                              // the course was just cleared around him
       }
       if (r.x < -40) rocks.splice(i,1);
     }
     dist++;
+    return !dead;   // one last frame is drawn, showing the crash
+  }
+
+  function draw(){
+    g.x.clearRect(0,0,W,H);
+    // current streaks
+    g.x.strokeStyle = "rgba(191,207,214,.10)"; g.x.lineWidth = 2;
+    for (var s = 0; s < 7; s++){
+      var sy = (s*H/7 + (dist*2)%(H/7));
+      g.x.beginPath(); g.x.moveTo(0, sy); g.x.lineTo(W, sy); g.x.stroke();
+    }
+    for (var i = 0; i < rocks.length; i++){
+      var r = rocks[i];
+      // the jagged crystal end always points into the gap
+      drawRock(r.x, 0, r.gy - r.gh/2, false);
+      drawRock(r.x, r.gy + r.gh/2, H - (r.gy + r.gh/2), true);
+    }
     var fw = 96, fh = fw * (img.naturalHeight/img.naturalWidth || .42);
     g.x.save();
     g.x.translate(60, y);
     g.x.rotate(Math.max(-0.5, Math.min(0.5, vy*0.06)));
+    // blinking says "you cannot be hit yet" without a word of explanation
+    if (inv > 0) g.x.globalAlpha = (Math.floor(inv/6) % 2) ? 0.28 : 0.85;
     if (img.naturalWidth) g.x.drawImage(img, -fw/2, -fh/2, fw, fh);
     g.x.restore();
-    if (!dead) MG.raf = requestAnimationFrame(frame);
   }
-  frame();
+
+  driveAt60(step, draw);
 }
 
 /* ---- 4. WHICH SHELL? ---- */
@@ -842,8 +1036,12 @@ function initShell(){
               pearl.querySelector(".pearlDot").style.opacity = "1"; }
     if (ok){ correct++; bumpScore(2); }
     $("miniFoot").textContent = ok ? L.correct : L.wrong;
+    // picking the wrong shell is this game's mistake; five rounds seen out is
+    // its time limit, so finishing them is what clears it
+    if (!ok && strike()) return;
     setTimeout(function(){
-      if (round >= 5) endMini();
+      if (!MG.live) return;
+      if (round >= 5) endMini(true);
       else newRound();
     }, 1100);
   }
