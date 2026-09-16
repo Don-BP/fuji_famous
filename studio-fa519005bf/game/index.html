@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap">
-<link rel="stylesheet" href="app.css?v=4">
+<link rel="stylesheet" href="app.css?v=6">
 </head>
 <body>
 
@@ -31,6 +31,12 @@
     <div id="bubble"></div>
     <div id="veil"><div class="zzz">z z z</div></div>
     <div id="note"><b></b><span></span></div>
+
+    <!-- the valve instrument, mounted on the tank and readable at a glance -->
+    <button id="flowMini" type="button" aria-label="flow">
+      <span class="dialWrap" data-dial="mini"></span>
+      <span class="dialCap" id="miniCap">流量</span>
+    </button>
   </div>
 
   <div id="deck">
@@ -59,11 +65,24 @@
   <div class="sheet" id="flowSheet">
     <div class="box">
       <h2 id="flowTitle">バルブ開度（流量）</h2>
-      <div id="track">
-        <div id="zone"></div>
-        <input id="flow" type="range" min="0" max="100" value="30" step="1" aria-label="flow">
+
+      <div id="flowRead">
+        <span class="dialWrap big" data-dial="big"></span>
+        <div id="flowSide">
+          <div id="flowState">緑の帯に合わせる</div>
+          <p id="flowHint">大きくなるほど、フジィに必要な流量は増えます。</p>
+        </div>
       </div>
-      <div id="flowState">緑の帯に合わせる</div>
+
+      <div id="valve">
+        <span class="vEnd" id="vClosed">閉</span>
+        <div id="track">
+          <div id="zone"></div>
+          <input id="flow" type="range" min="0" max="100" value="30" step="1" aria-label="flow">
+        </div>
+        <span class="vEnd" id="vOpen">開</span>
+      </div>
+
       <p id="flowNote">フジキンの超精密流体制御技術。水質はここで決まります。</p>
       <button class="btn ghost" id="flowClose" type="button">とじる</button>
     </div>
@@ -148,8 +167,8 @@
 
 </div>
 
-<script src="i18n.js?v=4"></script>
-<script src="game.js?v=4"></script>
+<script src="i18n.js?v=6"></script>
+<script src="game.js?v=6"></script>
 <script>
   // keep the start-screen title in sync with the language toggle
   (function(){

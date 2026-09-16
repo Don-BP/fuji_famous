@@ -67,6 +67,7 @@ function applyLang(){
     actFeedT:"feed", actPlayT:"play", actSleepT:"sleep", actFlowT:"flow",
     startMark:"startMark", startBtn:"startBtn",
     flowTitle:"flowTitle", flowNote:"flowNote", flowClose:"close",
+    flowHint:"flowHint", miniCap:"flowCap", vClosed:"flowClosed", vOpen:"flowOpen",
     pickTitle:"pickTitle", pickClose:"close",
     miniExit:"back", retryBtn:"retry", againBtn:"retry",
     winMark:"winMark", lostMark:"lostMark"
@@ -82,7 +83,7 @@ function applyLang(){
    ["gRaceT","g_race"],["gRaceD","g_race_d"],["gShellT","g_shell"],["gShellD","g_shell_d"]]
     .forEach(function(p){ var e = $(p[0]); if (e) e.textContent = L[p[1]]; });
 
-  if (S) { paint(); setStage(true); }
+  if (S) { paint(); setStage(true); drawZone(); }
 }
 $("langBtn").addEventListener("click", function(){
   lang = lang === "ja" ? "en" : "ja";
@@ -93,10 +94,63 @@ $("langBtn").addEventListener("click", function(){
 /* ---------------- flow band ---------------- */
 function band(g){ var c = 22 + g*0.58, w = 20 - g*0.07;
   return { lo:Math.max(0,c-w), hi:Math.min(100,c+w) }; }
+
+/* The dial. A 240-degree sweep read like any pressure gauge: the green sector is
+   the flow Fujie needs right now, the needle is where the valve is actually set.
+   It is drawn rather than painted so the sector can drift and narrow as he grows. */
+var DIAL_START = 150, DIAL_SWEEP = 240;
+
+function dialPt(r, deg){
+  var a = deg * Math.PI / 180;
+  return [50 + r * Math.cos(a), 50 + r * Math.sin(a)];
+}
+function dialArc(r, d0, d1){
+  var p0 = dialPt(r, d0), p1 = dialPt(r, d1);
+  return "M" + p0[0].toFixed(2) + " " + p0[1].toFixed(2) +
+         "A" + r + " " + r + " 0 " + (d1 - d0 > 180 ? 1 : 0) + " 1 " +
+         p1[0].toFixed(2) + " " + p1[1].toFixed(2);
+}
+function dialDeg(v){ return DIAL_START + (Math.max(0, Math.min(100, v)) / 100) * DIAL_SWEEP; }
+
+function buildDials(){
+  var ticks = "";
+  for (var v = 0; v <= 100; v += 12.5){
+    var d = dialDeg(v), a = dialPt(v % 25 ? 33 : 30, d), b = dialPt(36, d);
+    ticks += '<line class="tk' + (v % 25 ? "" : " maj") + '" x1="' + a[0].toFixed(2) +
+             '" y1="' + a[1].toFixed(2) + '" x2="' + b[0].toFixed(2) +
+             '" y2="' + b[1].toFixed(2) + '"/>';
+  }
+  var svg = '<svg viewBox="0 0 100 100" aria-hidden="true">' +
+    '<path class="arcAll" d="' + dialArc(26, DIAL_START, DIAL_START + DIAL_SWEEP) + '"/>' +
+    '<path class="arcGood" d=""/>' + ticks +
+    '<line class="needle" x1="50" y1="57" x2="50" y2="23"/>' +
+    '<circle class="hub" cx="50" cy="50" r="5"/></svg>';
+  var wraps = document.querySelectorAll(".dialWrap");
+  for (var i = 0; i < wraps.length; i++) wraps[i].innerHTML = svg;
+}
+
 function drawZone(){
-  var b = band(S.growth);
+  var b = band(S.growth), inBand = S.flow >= b.lo && S.flow <= b.hi;
   $("zone").style.left = b.lo + "%";
   $("zone").style.width = (b.hi - b.lo) + "%";
+
+  var good = dialArc(26, dialDeg(b.lo), dialDeg(b.hi));
+  var wraps = document.querySelectorAll(".dialWrap");
+  for (var i = 0; i < wraps.length; i++){
+    wraps[i].querySelector(".arcGood").setAttribute("d", good);
+    wraps[i].querySelector(".needle")
+      .setAttribute("transform", "rotate(" + (dialDeg(S.flow) + 90) + " 50 50)");
+    wraps[i].classList.toggle("off", !inBand);
+  }
+  $("flowMini").classList.toggle("alarm", !inBand);
+  setFlowState(inBand, b);
+}
+
+/* Says which way to turn the valve, not just that something is wrong. */
+function setFlowState(inBand, b){
+  var el = $("flowState");
+  el.textContent = inBand ? L.flowGood : (S.flow < b.lo ? L.flowMore : L.flowLess);
+  el.className = inBand ? "ok" : (S.flow < b.lo ? "more" : "less");
 }
 
 /* ---------------- stage ---------------- */
@@ -260,8 +314,7 @@ function tick(){
   var well = S.water > 38 && S.hunger > 22 && S.mood > 22 && S.energy > 15;
   if (well && !S.asleep) S.growth = Math.min(100, S.growth + 0.16);
 
-  $("flowState").textContent = inBand ? L.flowGood : L.flowBad;
-  $("flowState").style.color = inBand ? "var(--good)" : "var(--dim)";
+  setFlowState(inBand, b);
 
   setStage(); drawZone(); paint();
   for (var i = 0; i < MS_AT.length; i++) if (S.growth >= MS_AT[i]) showNote(i);
@@ -295,7 +348,8 @@ $("veil").addEventListener("click", wake);
 
 $("actFlow").addEventListener("click", function(){ openSheet("flowSheet"); });
 $("flowClose").addEventListener("click", function(){ closeSheets(); });
-$("flow").addEventListener("input", function(){ if (S) S.flow = +this.value; });
+$("flow").addEventListener("input", function(){ if (S){ S.flow = +this.value; drawZone(); } });
+$("flowMini").addEventListener("click", function(){ openSheet("flowSheet"); });
 
 $("actPlay").addEventListener("click", function(){
   if (!S || S.over || S.asleep) return;
@@ -850,6 +904,7 @@ for (var i = 0; i < 30; i++) B.push({ x:Math.random(), y:Math.random(),
 
 /* ---------------- boot ---------------- */
 S = fresh();
+buildDials();          // the dials must exist before applyLang refreshes them
 applyLang();
 setStage(); drawZone(); paint();
 })();

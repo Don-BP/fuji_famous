@@ -133,21 +133,67 @@ header{padding:12px 16px 6px;display:flex;align-items:center;gap:10px;z-index:4}
 .sheet p{margin:0;font-size:12px;line-height:1.8;color:var(--dim)}
 
 /* flow control */
-#track{position:relative;height:30px;display:flex;align-items:center}
-#track::before{content:"";position:absolute;left:0;right:0;top:9px;height:12px;
-  border-radius:99px;background:#082530}
-#zone{position:absolute;top:9px;height:12px;border-radius:99px;z-index:1;
+#track{position:relative;height:42px;display:flex;align-items:center}
+/* the pipe the water runs through */
+#track::before{content:"";position:absolute;left:0;right:0;top:14px;height:14px;
+  border-radius:99px;background:linear-gradient(#04141c,#0a2836);
+  box-shadow:inset 0 2px 5px rgba(0,0,0,.75),0 1px 0 rgba(191,207,214,.16)}
+#zone{position:absolute;top:14px;height:14px;border-radius:99px;z-index:1;
   background:rgba(79,214,168,.34);border:1px solid rgba(79,214,168,.7);
   box-shadow:0 0 12px rgba(79,214,168,.28);transition:left .6s,width .6s}
-#flow{-webkit-appearance:none;appearance:none;width:100%;height:12px;border-radius:99px;
+#flow{-webkit-appearance:none;appearance:none;width:100%;height:42px;border-radius:99px;
   background:transparent;outline:none;position:relative;z-index:2;margin:0}
-#flow::-webkit-slider-runnable-track{height:12px;border-radius:99px;background:transparent}
-#flow::-moz-range-track{height:12px;border-radius:99px;background:transparent}
-#flow::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;
-  background:var(--chrome);border:3px solid var(--flow);box-shadow:0 2px 10px rgba(0,0,0,.5)}
-#flow::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--chrome);
-  border:3px solid var(--flow)}
-#flowState{font-size:11.5px;font-weight:700;color:var(--dim)}
+#flow::-webkit-slider-runnable-track{height:42px;border-radius:99px;background:transparent}
+#flow::-moz-range-track{height:42px;border-radius:99px;background:transparent}
+/* the handle is a valve handwheel, so the control reads as a valve, not a volume slider */
+#flow::-webkit-slider-thumb{-webkit-appearance:none;width:38px;height:38px;border:0;
+  background:url("art/ui_valvewheel.png") center/contain no-repeat;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));cursor:grab}
+#flow::-moz-range-thumb{width:38px;height:38px;border:0;background:url("art/ui_valvewheel.png") center/contain no-repeat;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));cursor:grab}
+#flow:active::-webkit-slider-thumb{cursor:grabbing}
+/* ---------------- flow instrument ----------------
+   One dial, drawn twice: mounted small on the tank so the valve is never out of
+   sight, and large inside the panel where it is set. The green sector is the flow
+   Fujie needs now; the needle is where the valve actually sits. */
+.dialWrap{position:relative;display:block;aspect-ratio:1;width:100%;
+  background:url("art/ui_dial.png") center/contain no-repeat}
+.dialWrap svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.dialWrap .arcAll{fill:none;stroke:#0a2a38;stroke-width:7;stroke-linecap:round}
+.dialWrap .arcGood{fill:none;stroke:var(--good);stroke-width:7;stroke-linecap:round;
+  filter:drop-shadow(0 0 3px rgba(79,214,168,.75));transition:d .5s}
+.dialWrap .tk{stroke:#4d6f7e;stroke-width:1.1;stroke-linecap:round}
+.dialWrap .tk.maj{stroke:var(--steel);stroke-width:1.8}
+.dialWrap .needle{stroke:var(--chrome);stroke-width:3.2;stroke-linecap:round;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.6));transition:transform .35s ease-out}
+.dialWrap .hub{fill:var(--steel);stroke:#0a2a38;stroke-width:1.5}
+.dialWrap.off .needle{stroke:var(--bad)}
+.dialWrap.off .hub{fill:var(--bad)}
+
+/* mounted on the tank wall, top right */
+#flowMini{position:absolute;top:10px;right:10px;z-index:6;
+  width:clamp(58px,min(9vh,17vw),92px);padding:0;border:0;background:none;
+  cursor:pointer;display:grid;gap:2px;justify-items:center;
+  filter:drop-shadow(0 3px 10px rgba(0,0,0,.55));transition:transform .12s}
+#flowMini:active{transform:scale(.94)}
+#flowMini .dialCap{font-size:9px;font-weight:700;letter-spacing:.14em;
+  color:var(--steel);text-shadow:0 1px 3px rgba(0,0,0,.8)}
+#flowMini.alarm{animation:flowPulse 1.1s ease-in-out infinite}
+@keyframes flowPulse{0%,100%{filter:drop-shadow(0 3px 10px rgba(0,0,0,.55))}
+  50%{filter:drop-shadow(0 0 13px rgba(232,112,95,.95))}}
+
+/* the panel: dial on the left, what to do on the right */
+#flowRead{display:grid;grid-template-columns:clamp(104px,26vh,150px) 1fr;
+  align-items:center;gap:clamp(14px,2.2vh,26px)}
+#flowSide{display:grid;gap:8px}
+#flowState{font-size:clamp(14px,1.8vh,19px);font-weight:700;color:var(--dim)}
+#flowState.ok{color:var(--good)}
+#flowState.more,#flowState.less{color:var(--warn)}
+#flowHint{font-size:clamp(10.5px,1.3vh,13.5px);line-height:1.65;color:var(--dim);margin:0}
+
+/* the valve handle itself */
+#valve{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px}
+.vEnd{font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--dim)}
 
 /* game picker */
 #gameList{display:grid;gap:10px}

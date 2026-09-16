@@ -28,7 +28,10 @@ ja: {
 
   /* flow panel */
   flowTitle:"バルブ開度（流量）",
-  flowGood:"良好な流量です", flowBad:"緑の帯に合わせる",
+  flowGood:"ちょうどいい流量です", flowBad:"緑の帯に合わせる",
+  flowMore:"もう少し開ける →", flowLess:"← 少し閉める",
+  flowHint:"緑の範囲が、いまのフジィに必要な流量です。大きくなるほど右へ移り、範囲はせまくなります。",
+  flowCap:"流量", flowClosed:"閉", flowOpen:"開",
   flowNote:"フジキンの超精密流体制御技術。水質はここで決まります。",
   close:"とじる",
 
@@ -103,7 +106,10 @@ en: {
   need_water:"The water's dirty - check Flow", need_ok:"Happy!",
 
   flowTitle:"Valve opening (flow rate)",
-  flowGood:"Flow is good", flowBad:"Match the green band",
+  flowGood:"Flow is just right", flowBad:"Match the green band",
+  flowMore:"Open it further →", flowLess:"← Close it a little",
+  flowHint:"The green arc is the flow Fujie needs right now. As he grows it moves to the right, and it gets narrower.",
+  flowCap:"FLOW", flowClosed:"Shut", flowOpen:"Open",
   flowNote:"Fujikin’s ultra-precision fluid control. Water quality is decided here.",
   close:"Close",
 
