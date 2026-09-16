@@ -17,6 +17,9 @@
   /* ---------------- language ---------------- */
   var EN = {
     navWork: "Work", navChar: "Character", navGoods: "Goods", navWamon: "Patterns",
+    navBy: "Vittorio Zumpano / Brain Power Inc.",
+    heroBy: "Conceived and produced by Vittorio Zumpano — Brain Power Inc., Osaka",
+    footCredit: "Concept, design and build by <b>Vittorio Zumpano</b><br>Brain Power Inc., Osaka",
     heroKicker: "FUJIKIN MASCOT PROPOSAL",
     heroTitle: "Fujie is<br>a real fish.",
     heroLede: "Not an invented character. A sturgeon that has been swimming in a tank in Ibaraki since 1987. That one fact is what the whole proposal is built on.",

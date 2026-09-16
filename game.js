@@ -32,9 +32,13 @@ var ART = {};
  "pearl","title_fujie","fujie_cheer","fujie_sad"].forEach(function(n){
   var i = new Image(); i.src = "art/" + n + ".png"; ART[n] = i;
 });
+/* Wide windows get the plates repainted for a wide frame; phones keep the
+   portrait ones. WIDE.matches decides, and the tank follows a window resize. */
+var WIDE = matchMedia("(min-width:1100px)");
+function plate(n){ return "art/" + n + (WIDE.matches ? "_wide" : "") + ".jpg"; }
 ["bg_title","bg_egg","bg_shark","bg_race","bg_shell","bg_tank_early","bg_tank_grown",
  "bg_result","bg_lost","bg_win","bg_sheet"].forEach(function(n){
-  var i = new Image(); i.src = "art/" + n + ".jpg";
+  var i = new Image(); i.src = plate(n);
 });
 /* expression sprites - preloaded so the face swaps without a flash */
 ["larva","fry","young"].forEach(function(st){
@@ -110,7 +114,7 @@ function setStage(force){
   $("tank").style.setProperty("--t2", st.t2);
   // the nursery trough gives way to the big rearing tank once he is a fry
   $("tankArt").style.backgroundImage =
-    'url("art/' + (idx >= 2 ? "bg_tank_grown" : "bg_tank_early") + '.jpg")';
+    'url("' + plate(idx >= 2 ? "bg_tank_grown" : "bg_tank_early") + '")';
   if (grew) cheer();
 }
 function cheer(){
@@ -793,6 +797,9 @@ function initShell(){
   newRound();
   MG.cleanup = function(){ stopped = true; };
 }
+
+/* swapping between a phone-width and a desktop-width window mid-game */
+WIDE.addEventListener("change", function(){ if (S) setStage(true); });
 
 $("gEgg").addEventListener("click", function(){ startMini("egg"); });
 $("gShark").addEventListener("click", function(){ startMini("shark"); });

@@ -443,4 +443,18 @@ header > *{pointer-events:auto}
   #miniHead,#miniFoot{max-width:1280px;margin-inline:auto;width:100%}
   #holes{max-width:1000px;margin-inline:auto;left:0;right:0}
   #shells{max-width:1000px;margin-inline:auto;left:0;right:0}
+
+  /* the plates were painted portrait; these are the same scenes repainted for a
+     wide frame, so a desktop window is not looking at a cropped, doubled-up
+     phone picture. Phones never download them. */
+  #mini.mg-egg{background:linear-gradient(rgba(4,18,26,.18),rgba(4,18,26,.18)),url("art/bg_egg_wide.jpg") center/cover}
+  #mini.mg-shark{background:linear-gradient(rgba(4,18,26,.26),rgba(4,18,26,.26)),url("art/bg_shark_wide.jpg") center/cover}
+  #mini.mg-race{background:linear-gradient(rgba(4,18,26,.22),rgba(4,18,26,.22)),url("art/bg_race_wide.jpg") center/cover}
+  #mini.mg-shell{background:linear-gradient(rgba(4,18,26,.30),rgba(4,18,26,.30)),url("art/bg_shell_wide.jpg") center/cover}
+  #startScreen{background:linear-gradient(rgba(4,16,23,.40),rgba(4,16,23,.74)),url("art/bg_title_wide.jpg") center/cover}
+  #resultScreen{background:linear-gradient(rgba(4,16,23,.42),rgba(4,16,23,.70)),url("art/bg_result_wide.jpg") center/cover}
+  #lostScreen{background:linear-gradient(rgba(3,10,15,.22),rgba(3,10,15,.60)),url("art/bg_lost_wide.jpg") center/cover}
+  #winScreen{background:linear-gradient(rgba(4,16,23,.30),rgba(4,16,23,.82)),url("art/bg_win_wide.jpg") center/cover}
+  .sheet{background:linear-gradient(rgba(3,14,20,.68),rgba(3,14,20,.86)),url("art/bg_sheet_wide.jpg") center/cover}
+  #tankArt{background-image:url("art/bg_tank_early_wide.jpg")}
 }

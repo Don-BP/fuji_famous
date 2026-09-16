@@ -28,6 +28,8 @@
   /* ---------------- language ---------------- */
   var EN = {
     back: "Back",
+    barBy: "Vittorio Zumpano / Brain Power Inc.",
+    credit: "Conceived and produced by Vittorio Zumpano — Brain Power Inc., Osaka",
     kicker: "FUJIKIN STURGEON PROGRAMME",
     heroTitle: "From a single egg",
     heroLede: "In 1987 it started with one scientist's remark.<br>This is the record of the forty years it took to reach a world first.",

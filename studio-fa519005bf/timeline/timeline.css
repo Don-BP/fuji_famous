@@ -69,6 +69,9 @@ body{
   padding:6px 2px;white-space:nowrap;
 }
 #bar .back:hover{color:var(--flow)}
+#bar .barBy{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--dim);white-space:nowrap}
+.credit{margin:34px 0 0;font-size:11px;line-height:1.9;letter-spacing:.08em;color:var(--dim)}
+@media (max-width:760px){#bar .barBy{display:none}}
 #progress{flex:1;height:2px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden}
 #progress i{display:block;height:100%;width:0;background:var(--flow);transition:width .15s linear}
 #langBtn{
