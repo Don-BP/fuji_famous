@@ -10,6 +10,11 @@
    The film is 73 stills, not a <video>: seeking a video on
    scroll is unreliable on Safari and stutters on touch. Stills
    drawn to a canvas are exact and reversible.
+
+   There are two films of the same 73 moments: a wide one shot
+   for landscape screens, and an upright one shot for phones.
+   Cropping the wide frame down to a phone would leave a sliver,
+   so the upright pass exists to be shown whole.
    ============================================================ */
 (function () {
   "use strict";
@@ -25,10 +30,32 @@
   var stop    = document.querySelector(".band:not(.dark)");   // first white band
   if (!stop) return;
 
-  /* --- tall, narrow screens keep the hero they already have.
-         Must stay in step with the media query in hub.css. --- */
-  var FITS = "(min-width:700px) and (min-aspect-ratio:11/10)";
-  if (!window.matchMedia(FITS).matches) return;
+  /* --- which of the two films this screen gets.
+         Must stay in step with the media queries in hub.css. --- */
+  var WIDE = "(min-width:700px) and (min-aspect-ratio:11/10)";
+  var TALL = "(max-aspect-ratio:9/10)";
+
+  function whichFilm() {
+    var retina = (window.devicePixelRatio || 1) > 1.5;
+    if (window.matchMedia(WIDE).matches) {
+      /* A phone turned on its side lands here too, and it has already paid
+         for the upright film once. Size the wide film by how wide the
+         window actually is rather than by pixel density, so a rotated
+         phone fetches the small pass and a real desktop still gets the
+         large one. The widest phone in landscape is under 1000. */
+      return BASE + (window.matchMedia("(min-width:1000px)").matches
+                     ? "w1280/" : "w720/");
+    }
+    if (window.matchMedia(TALL).matches) {
+      return BASE + (retina ? "m720/" : "m480/");
+    }
+    /* anything in between - a short landscape phone, a narrow desktop
+       window - is a bad fit for either film, and the CSS hides the canvas
+       there anyway, so the hero keeps the water it was painted with */
+    return null;
+  }
+
+  if (!whichFilm()) return;
 
   var reduce  = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
 
@@ -39,12 +66,8 @@
 
   if (reduce || thrifty) { still(); return; }
 
-  /* ---------------- which size ---------------- */
-  var big = window.matchMedia("(min-width:1100px)").matches ||
-            (window.devicePixelRatio || 1) > 1.5;
-  var dir = BASE + (big ? "w1280/" : "w720/");
-
   /* ---------------- load ---------------- */
+  var dir     = null;
   var frames  = new Array(COUNT);
   var ready   = 0;
   var loaded  = false;
@@ -53,14 +76,32 @@
   function pad(n) { return ("00" + n).slice(-3); }
 
   function load() {
+    var want = whichFilm();
+    if (!want || want === dir) return;    // already showing the right one
+
+    /* a phone turned on its side is a different film, not the same one
+       cropped: throw the frames away and fetch the other pass. The old
+       ones stay on screen until the first new frame lands. */
+    dir = want;
+    frames = new Array(COUNT);
+    ready = 0;
+    loaded = false;
+    shown = -1;
+
     for (var i = 0; i < COUNT; i++) {
-      (function (i) {
+      (function (i, mine) {
         var im = new Image();
         im.decoding = "async";
-        im.onload  = function () { frames[i] = im; if (++ready === 1) { start(); } if (ready === COUNT) loaded = true; };
+        im.onload  = function () {
+          if (dir !== mine) return;       // a rotation overtook this frame
+          frames[i] = im;
+          if (++ready === 1) { start(); }
+          if (ready === COUNT) loaded = true;
+          draw(true);
+        };
         im.onerror = function () { if (!failed && ready === 0) { failed = true; still(); } };
-        im.src = dir + "f_" + pad(i + 1) + ".webp";
-      })(i);
+        im.src = mine + "f_" + pad(i + 1) + ".webp";
+      })(i, dir);
     }
   }
 
@@ -131,13 +172,24 @@
     requestAnimationFrame(function () { queued = false; draw(false); });
   }
 
+  var running = false;
+
   function start() {
     document.documentElement.classList.add("filmOn");
     root.classList.add("isLive");
     resize();
+    if (running) return;              // a rotation reloads frames, not listeners
+    running = true;
     addEventListener("scroll", onScroll, { passive: true });
-    addEventListener("resize", debounce(resize, 120));
-    addEventListener("orientationchange", debounce(resize, 200));
+    addEventListener("resize", debounce(refit, 120));
+    addEventListener("orientationchange", debounce(refit, 200));
+  }
+
+  /* the window changed shape: the canvas has to be remeasured, and the
+     shape may have crossed from one film to the other */
+  function refit() {
+    resize();
+    load();
   }
 
   function debounce(fn, ms) {

@@ -42,6 +42,14 @@ FILES = [
     ("03_plushie/plush_mascot_set.png",         False, 1600),
     ("03_plushie/plush_mascot_rail.png",        False, 1400),
     ("03_plushie/plush_mascot_blindbag.png",    False, 1400),
+    # one picture per new idea, sitting in the corner of its own slide - the
+    # box is under five inches wide, so 1100px is already more than the
+    # slide can show
+    ("20_new_ideas/aquaworld_c_both.png",       False, 1100),
+    ("20_new_ideas/letter_final.png",           False, 1100),
+    ("20_new_ideas/cover_set_sheet.png",        False, 1100),
+    ("20_new_ideas/openday_final.jpg",          False, 1100),
+    ("20_new_ideas/sday_final.png",             False, 1100),
 ]
 
 total_before = total_after = 0
