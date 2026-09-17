@@ -155,7 +155,7 @@
     rt2B: "Fujikin sells sturgeon fry to farms across Japan. Release Chibi Fujie to those customers free of charge and Fujie appears on tins of domestic caviar nationwide. No extra cost, only the existing trade network. A B2B company reaching the dinner table by a route no other company can copy.",
     fxT1: "AM", fxT2: "NOON", fxT3: "PM", fxT4: "NIGHT",
     fxEyebrow: "EXPECTED EFFECT", fxH: "One day in 2027.",
-    fxB: "The brief says television advertising is not being considered. Nothing here is bought space. So the effect does not show up as a ratings figure. It shows up as a day like this one.",
+    fxB: "Everything above this line is finished and attached to this entry. This is what it adds up to, told as one day.<br>The brief says television advertising is not being considered. Nothing here is bought space. So the effect does not show up as a ratings figure. It shows up as a day like this one.",
     fx1H: "Hitachiota, feeding time, 7 a.m.",
     fx1B: "At the Satomi farm the whole surface of the water boils. A keeper films twenty seconds on a phone and posts it in Chibi Fujie's voice: \"Breakfast again. For ten thousand of us.\" The followers, 114 a year ago, have watched this every week since. One of them works in the prefecture's fisheries office and forwards today's post around the building.",
     fx2H: "A high school in Osaka, social studies",
