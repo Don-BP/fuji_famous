@@ -78,12 +78,12 @@ def main():
     # switch from its own cache and there is no way to tell from the outside.
     # Stamping each reference with a hash of the file forces a fresh fetch the
     # moment the file actually changes, and never otherwise.
-    for f in ("index.html", "hub.css", "hub.js", "hero.js", "data.js", "buddy.js"):
+    for f in ("index.html", "hub.css", "hub.js", "hero.js", "data.js", "buddy.js", "cases.js"):
         shutil.copy2(PROMO / f, DIST / f)
     shutil.copytree(PROMO / "timeline", DIST / "timeline")
 
     html = (DIST / "index.html").read_text(encoding="utf-8")
-    for f in ("hub.css", "hub.js", "hero.js", "data.js", "buddy.js"):
+    for f in ("hub.css", "hub.js", "hero.js", "data.js", "buddy.js", "cases.js"):
         v = hashlib.sha1((DIST / f).read_bytes()).hexdigest()[:8]
         html = html.replace('"%s"' % f, '"%s?v=%s"' % (f, v))
     (DIST / "index.html").write_text(html, encoding="utf-8")
