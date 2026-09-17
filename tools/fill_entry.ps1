@@ -6,7 +6,7 @@ $json = "D:\Fuji_Famous\tools\entry_fields.json"
 $f = (Get-Content $json -Raw -Encoding UTF8) | ConvertFrom-Json
 
 $w = New-Object -ComObject Word.Application
-$w.Visible = $false
+$w.Visible = $true   # hidden Word hung on open; visible is reliable
 $w.DisplayAlerts = 0
 $d = $w.Documents.Open($f.src, $false, $false)
 
@@ -30,6 +30,18 @@ Set-AfterLabel $d $f.labels.group   $f.group                   | Out-Null
 Set-AfterLabel $d $f.labels.idea    $f.idea                    | Out-Null
 Set-AfterLabel $d $f.labels.summary ("`r" + $f.summary)        | Out-Null
 Set-AfterLabel $d $f.labels.effect  ("`r" + $f.effect)         | Out-Null
+
+# The effect box grew past the page when the 2027 scenes went in, so the
+# whole box (summary and effect) is set a little smaller. Size lives in JSON.
+if ($f.boxFontSize) {
+    $inBox = $false
+    foreach ($p in $d.Paragraphs) {
+        $t = ($p.Range.Text -replace "[`r`a]", "").Trim()
+        if ($t.StartsWith($f.labels.summary)) { $inBox = $true }
+        if ($t.StartsWith($f.labels.stop))    { $inBox = $false }
+        if ($inBox) { $p.Range.Font.Size = $f.boxFontSize }
+    }
+}
 
 $d.SaveAs2($f.dest, 12)   # wdFormatXMLDocument
 $d.Close($false)
