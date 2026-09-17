@@ -313,15 +313,18 @@ footer{padding:clamp(48px,7vw,84px) clamp(18px,5vw,72px);background:#03101a;bord
 /* ============================================================
    the scroll-driven hero film
 
-   Landscape screens only. A phone held upright would have to crop
-   a 1.95:1 frame down to a sliver, which turns the fish into a
-   smear behind the headline - so on tall narrow screens the hero
-   keeps the painted water it has always had and the 73 frames are
-   never downloaded at all.
+   Two films of the same 73 moments: a wide one for landscape
+   screens and an upright one for phones. Cropping the 1.95:1
+   frame down to a phone would leave a sliver and smear the fish
+   behind the headline, so the upright pass is shown instead.
+
+   Screens that are neither - a short landscape phone, a narrow
+   desktop window - keep the painted water the hero started with
+   and download no frames at all.
    ============================================================ */
 #heroFilm{display:none}
 
-@media (min-width:700px) and (min-aspect-ratio:11/10){
+@media (min-width:700px) and (min-aspect-ratio:11/10), (max-aspect-ratio:9/10){
   #heroFilm{
     display:block;position:fixed;inset:0;z-index:0;
     background:#04121a url("assets/film/poster.jpg") center 42% / cover no-repeat;
@@ -341,9 +344,6 @@ footer{padding:clamp(48px,7vw,84px) clamp(18px,5vw,72px);background:#03101a;bord
   .filmOn .hero{background:none}
   .filmOn .hero::after{opacity:.5}
   .filmOn .heroArt{display:none}
-  .filmOn .hero > .heroCopy::before{
-    background:linear-gradient(100deg,rgba(4,18,26,.94) 20%,rgba(4,18,26,.72) 44%,rgba(4,18,26,.12) 74%,transparent 86%);
-  }
 
   /* the dark band becomes a tinted pane of glass over the film */
   .filmOn .band.dark{
@@ -366,6 +366,40 @@ footer{padding:clamp(48px,7vw,84px) clamp(18px,5vw,72px);background:#03101a;bord
   /* the first white band is opaque - it covers the film, and that is the
      end of it. No fade to manage. */
   .filmOn #character{box-shadow:0 -40px 60px -30px rgba(4,18,26,.9)}
+}
+
+/* the wide film puts the fish on the right, so the copy is shielded from
+   the left; the upright film puts it overhead, so the shield comes up from
+   the bottom instead. The phone hero is already bottom-aligned with a
+   vertical scrim, so the upright case only has to deepen what is there. */
+@media (min-width:700px) and (min-aspect-ratio:11/10){
+  .filmOn .hero > .heroCopy::before{
+    background:linear-gradient(100deg,rgba(4,18,26,.94) 20%,rgba(4,18,26,.72) 44%,rgba(4,18,26,.12) 74%,transparent 86%);
+  }
+}
+
+@media (max-aspect-ratio:9/10){
+  #heroFilm{background-image:url("assets/film/poster_m.jpg")}
+
+  /* The copy scrim is a box 220vh tall hung off the copy, so its gradient
+     stops land wherever that box happens to fall - fine for a sideways
+     wash, useless for judging height. The hero is exactly one screen tall,
+     so put the scrim on the hero instead and the percentages mean what
+     they say.
+
+     It clears the top fifth. The film starts with the drawn Fujie low in
+     dark water and ends with the real fish high in the sunlight, so the
+     fish swims out from behind the headline and into the open as the page
+     is read - which is the argument the page is making. */
+  .filmOn .hero{
+    background:linear-gradient(180deg,
+      rgba(4,18,26,0) 20%,
+      rgba(4,18,26,.55) 31%,
+      rgba(4,18,26,.90) 44%,
+      rgba(4,18,26,.96) 62%,
+      rgba(4,18,26,.97) 100%);
+  }
+  .filmOn .hero > .heroCopy::before{display:none}
 }
 
 /* ---------------- the case buttons and panel ---------------- */
