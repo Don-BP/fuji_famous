@@ -23,7 +23,7 @@ BIG, THUMB, Q = 1600, 700, 82
 GALLERY_DIRS = ["01_character", "02_stickers", "03_plushie", "07_merch_chibi",
                 "08_merch_official", "09_merch_maison", "10_merch_wa", "11_wamon",
                 "12_merch_official_2", "13_merch_wamon", "14_merch_wa_official",
-                 "17_act2_gallery",
+                 "17_act2_gallery", "21_manholes",
                 # the Fuji collection: one folder per line, flat filenames
                 "19_fujisan", "19_fujisan/chibi", "19_fujisan/official",
                 "19_fujisan/wa", "19_fujisan/wa_official", "19_fujisan/wamon",
