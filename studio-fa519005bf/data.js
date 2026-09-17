@@ -2,6 +2,15 @@
    tools/build_site.py; the build fails loudly if one is missing. */
 window.DATA = {
 
+  manhole: [
+    ["manhole_01_mountain_official", "駅前 ／ 富士と公式フジィ", "The station — Mount Fuji and the official Fujie"],
+    ["manhole_02_seigaiha_official", "市役所前 ／ 青海波", "City hall — seigaiha waves"],
+    ["manhole_03_reeds_official", "市街地 ／ 水輪と芦", "The main street — ripples and reeds"],
+    ["manhole_04_mountain_chibi", "養魚場の門 ／ 富士とちびフジィ", "The farm gate — Mount Fuji and Chibi Fujie"],
+    ["manhole_05_river_chibi", "川沿い ／ ちびフジィ", "By the river — Chibi Fujie"],
+    ["manhole_06_lotus_chibi", "公園 ／ 蒓の池", "The park — the lotus pond"]
+  ],
+
   character: [
     ["master_v3_wave", "ちびフジィ マスター", "Chibi Fujie — master design"],
     ["master_turnaround", "ターンアラウンド", "Turnaround model sheet"],

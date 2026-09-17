@@ -222,6 +222,7 @@ a{color:inherit}
 .band .moreBtn:hover{background:var(--ink);color:var(--washi)}
 .g2{grid-template-columns:repeat(2,1fr)}
 .g3{grid-template-columns:repeat(3,1fr)}
+.ideaGrid{margin-top:clamp(28px,4vw,44px)}
 .g4{grid-template-columns:repeat(4,1fr)}
 /* Each card is a <figure>, and a browser gives every figure 40px of margin
    down each side by default. Nothing here ever took it off, so every card was
