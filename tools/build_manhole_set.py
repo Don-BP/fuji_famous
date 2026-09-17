@@ -7,8 +7,11 @@ three covers, Chibi Fujie on two. Nothing about either character is redrawn.
 Output: Fujie_Creative/20_new_ideas/cover_*.png  and  cover_set_sheet.png
 """
 import pathlib
+import sys
 import numpy as np
 from PIL import Image, ImageFilter, ImageChops
+sys.path.insert(0, str(pathlib.Path(__file__).parent))
+from cast_art import cast
 
 ROOT = pathlib.Path("D:/Fuji_Famous")
 OUT = ROOT / "Fujie_Creative" / "20_new_ideas"
@@ -28,19 +31,27 @@ def cutout(path, white_key=False):
 
 
 def field_circle(im):
-    """Find the coloured resin field: centre and radius, in pixels."""
+    """Find the resin field: the disc inside the iron ring. Rays out from the
+    middle until they run into a long stretch of iron."""
     a = np.asarray(im.convert("RGB")).astype(int)
-    m = ((a[:, :, 2] > a[:, :, 0] + 10) | (a[:, :, 1] > a[:, :, 0] + 10))
-    h, w = m.shape
-    m[: int(h * .04)] = False; m[int(h * .96):] = False
-    m[:, : int(w * .04)] = False; m[:, int(w * .96):] = False
-    ys, xs = np.nonzero(m)
-    cx, cy = (xs.min() + xs.max()) / 2, (ys.min() + ys.max()) / 2
-    r = min(xs.max() - xs.min(), ys.max() - ys.min()) / 2
-    return cx, cy, r
+    h, w, _ = a.shape
+    mx = a.max(2)
+    iron = ((mx - a.min(2)) < 28) & (mx < 120)
+    cy, cx = h / 2, w / 2
+    hits = []
+    for t in np.linspace(0, 2 * np.pi, 180, endpoint=False):
+        dx, dy, run = np.cos(t), np.sin(t), 0
+        for r in range(30, int(min(h, w) / 2)):
+            if iron[int(cy + dy * r), int(cx + dx * r)]:
+                run += 1
+                if run >= 14:
+                    hits.append(r - 13); break
+            else:
+                run = 0
+    return cx, cy, float(np.median(hits))
 
 
-def lay(base, art, cx, cy, r, wu, dy=0, flip=False, outline=2.4, shade=0.7):
+def lay(base, art, cx, cy, r, wu, dy=0, flip=False, outline=1.6, shade=0.0):
     art = art.transpose(Image.FLIP_LEFT_RIGHT) if flip else art
     fa = art.size[0] / art.size[1]
     W = 2 * wu * r
@@ -70,15 +81,18 @@ def lay(base, art, cx, cy, r, wu, dy=0, flip=False, outline=2.4, shade=0.7):
 # blank, character, width across the field, vertical nudge, mirrored, how much
 # of the cover's own light and texture the design picks up
 COVERS = [
-    ("cover_station",  "cover_blank_river",   "official", 0.60, -0.22, False, 0.70),
-    ("cover_cityhall", "cover_blank_wave",    "official", 0.62,  0.00, False, 0.70),
-    ("cover_farmgate", "cover_blank_hills",   "official", 0.62,  0.08, True,  0.70),
-    ("cover_park",     "cover_blank_bubbles", "chibi",    0.58,  0.02, False, 0.60),
-    ("cover_street",   "cover_blank_reeds",   "chibi",    0.60, -0.02, True,  0.12),
+    ("cover_station",  "cover_blank_river",   "official", 0.76, -0.26, False, 0.0),
+    ("cover_cityhall", "cover_blank_wave",    "official", 0.72,  0.00, False, 0.0),
+    ("cover_farmgate", "cover_blank_hills",   "official", 0.78,  0.40, True,  0.0),
+    ("cover_park",     "cover_blank_bubbles", "chibi",    0.62,  0.00, False, 0.0),
+    ("cover_street",   "cover_blank_reeds",   "chibi",    0.68,  0.02, True,  0.0),
 ]
 
 if __name__ == "__main__":
-    art = {"official": cutout(OFFICIAL), "chibi": cutout(CHIBI, white_key=True)}
+    # both characters are first turned into something castable: flat opaque
+    # cells walled in raised iron, no gloss and no see-through edges
+    art = {"official": cast(OFFICIAL, colours=5, line=5, scale=0.5, simplify=7),
+           "chibi": cast(CHIBI, colours=6, line=5, scale=0.7, simplify=5)}
     made = []
     for name, blank, who, wu, dyf, flip, shade in COVERS:
         base = Image.open(OUT / (blank + ".png")).convert("RGB")

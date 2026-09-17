@@ -45,6 +45,9 @@ FIELDS = {
 }
 
 if __name__ == "__main__":
+    only = [a for a in sys.argv[1:] if not a.startswith("-")]
     for name, field in FIELDS.items():
+        if only and not any(o in name for o in only):
+            continue
         print(name, flush=True)
         gen(RULES + field, OUT + name + ".png", aspect="1:1")
