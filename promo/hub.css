@@ -381,25 +381,29 @@ footer{padding:clamp(48px,7vw,84px) clamp(18px,5vw,72px);background:#03101a;bord
 @media (max-aspect-ratio:9/10){
   #heroFilm{background-image:url("assets/film/poster_m.jpg")}
 
-  /* The copy scrim is a box 220vh tall hung off the copy, so its gradient
-     stops land wherever that box happens to fall - fine for a sideways
-     wash, useless for judging height. The hero is exactly one screen tall,
-     so put the scrim on the hero instead and the percentages mean what
-     they say.
+  /* The scrim has to travel with the copy, not with the hero.
 
-     It clears the top fifth. The film starts with the drawn Fujie low in
-     dark water and ends with the real fish high in the sunlight, so the
-     fish swims out from behind the headline and into the open as the page
-     is read - which is the argument the page is making. */
-  .filmOn .hero{
+     Sideways it can hang off anything, because the dark end is pinned to
+     the left edge of the screen and stays there. Vertically it cannot: a
+     scrim the height of the hero is nearly solid at its foot, so the
+     moment the page moves at all, that solid foot is the whole screen and
+     the film vanishes behind it exactly as it starts running.
+
+     So the box is the copy plus a little air. It darkens before the
+     headline, holds through the copy, and fades out over the gap beneath
+     it - reaching zero just as the dark band below starts its own tint, so
+     the two meet without a seam. Scroll, and the scrim leaves with the
+     words and the water opens up behind them. */
+  .filmOn .hero > .heroCopy::before{
+    left:-100vw;width:300vw;
+    top:-13vh;height:calc(100% + 9vh);
     background:linear-gradient(180deg,
-      rgba(4,18,26,0) 20%,
-      rgba(4,18,26,.55) 31%,
-      rgba(4,18,26,.90) 44%,
-      rgba(4,18,26,.96) 62%,
-      rgba(4,18,26,.97) 100%);
+      rgba(4,18,26,0)    0%,
+      rgba(4,18,26,.58) 13%,
+      rgba(4,18,26,.93) 27%,
+      rgba(4,18,26,.95) 90%,
+      rgba(4,18,26,0)  100%);
   }
-  .filmOn .hero > .heroCopy::before{display:none}
 }
 
 /* ---------------- the case buttons and panel ---------------- */
