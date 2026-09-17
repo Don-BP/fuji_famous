@@ -23,7 +23,7 @@
 | File | What it is |
 |---|---|
 | `エントリーシート_記入済.docx` | The official entry sheet, filled in |
-| `フジィは実在する_企画書.pptx` | The 22-slide proposal deck |
+| `フジィは実在する_企画書.pptx` | The 25-slide proposal deck |
 | `フジィを育てよう.html` | The playable simulator (6.9 MB, opens in any browser, works offline) |
 
 The HTML is 6.9 MB, so Gmail will offer to send it as a Google Drive link rather
