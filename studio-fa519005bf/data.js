@@ -2,6 +2,11 @@
    tools/build_site.py; the build fails loudly if one is missing. */
 window.DATA = {
 
+  voice: [
+    ["voice_01_feeding", "給餌の時間 ／ 沸き立つ水面と、卵から出てくる一尾", "Feeding time — the surface boiling, and a fish leaving the egg"],
+    ["voice_02_post", "投稿 ／ ちびフジィの声で、一行だけ添えて", "The post — one line, in Chibi Fujie's voice"]
+  ],
+
   manhole: [
     ["manhole_01_mountain_official", "駅前 ／ 富士と公式フジィ", "The station — Mount Fuji and the official Fujie"],
     ["manhole_02_seigaiha_official", "市役所前 ／ 青海波", "City hall — seigaiha waves"],
