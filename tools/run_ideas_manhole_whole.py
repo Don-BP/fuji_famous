@@ -57,6 +57,47 @@ TAKES = {
     "whole_official_3": (OFFICIAL, OFFICIAL_REF + COVER + "The field around him is teal water with "
                          "flat concentric ripple rings behind him and a clump of flat reeds rising "
                          "from the bottom left."),
+    # Fujikin's own Fuji language: indigo and white, a plain snow-capped
+    # silhouette, wave lines at the foot, nothing else
+    "whole_fuji_official_1": (OFFICIAL, OFFICIAL_REF + COVER + "Behind him, filling the upper half "
+                              "of the cover, is Mount Fuji as a plain flat indigo silhouette with a "
+                              "clean white snow cap, against an off-white sky. Below him, flat white "
+                              "and pale blue wave crests across the bottom. Only three colours: "
+                              "indigo, white and the silver of the fish."),
+    "whole_fuji_official_2": (OFFICIAL, OFFICIAL_REF + COVER + "Mount Fuji sits small and flat in "
+                              "indigo with a white snow cap on the far side of the water, and the "
+                              "lower third of the cover is a bold seigaiha wave pattern in white on "
+                              "indigo. He swims across the middle."),
+    "whole_fuji_chibi_1": (CHIBI, CHIBI_REF + COVER + "He is in front of Mount Fuji, drawn as a "
+                           "plain flat indigo silhouette with a clean white snow cap filling the "
+                           "upper half, with flat white wave crests curling across the bottom. Only "
+                           "indigo, white and his own silver-grey."),
+}
+
+# the pair together under Mount Fuji: the official fish and Chibi on one cover
+BOTH_REF = (
+    "TWO characters are attached. The FIRST is the official Fujie: a realistic silver sturgeon in "
+    "side profile, long flat snout, four barbels, rows of pale bony scutes, small dark eye, large "
+    "swept tail. The SECOND is Chibi Fujie, his cute form: the same sturgeon drawn small and round "
+    "with a big dark eye, a smile, four little barbels, a row of scutes down the back and fins only "
+    "- no arms, no legs. Cast BOTH of them into the cover, redrawn as flat cast-and-resin artwork, "
+    "each keeping his own shape, face and proportions. They are the same fish in two forms, so they "
+    "must look related: same silver-grey and white. Neither is a dolphin, a shark or a whale.\n\n"
+)
+
+BOTH = {
+    "whole_fuji_both_1": BOTH_REF + COVER + "Mount Fuji fills the upper half as a plain flat indigo "
+        "silhouette with a clean white snow cap. The big official Fujie swims across the middle in "
+        "side profile, and little Chibi Fujie sits above his back towards the right, smaller and "
+        "facing the viewer. Flat white wave crests curl across the bottom.",
+    "whole_fuji_both_2": BOTH_REF + COVER + "Mount Fuji sits flat and indigo with a white snow cap "
+        "across the top. Below, the big official Fujie swims to the left across the lower half, and "
+        "Chibi Fujie swims just above him to the right, clearly the smaller of the two. A band of "
+        "white seigaiha waves runs along the very bottom.",
+    "whole_fuji_both_3": BOTH_REF + COVER + "A plain flat indigo Mount Fuji with a white snow cap "
+        "behind. The official Fujie curves around the lower left of the circle and Chibi Fujie is "
+        "upright in the middle right, the two of them framing the mountain between them, with flat "
+        "white wave crests at the foot.",
 }
 
 if __name__ == "__main__":
@@ -66,3 +107,8 @@ if __name__ == "__main__":
             continue
         print(name, flush=True)
         gen(prompt, OUT + name + ".png", refs=[ref], aspect="1:1")
+    for name, prompt in BOTH.items():
+        if only and not any(o in name for o in only):
+            continue
+        print(name, flush=True)
+        gen(prompt, OUT + name + ".png", refs=[OFFICIAL, CHIBI], aspect="1:1")

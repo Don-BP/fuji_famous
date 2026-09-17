@@ -9,11 +9,11 @@ from PIL import Image
 OUT = pathlib.Path("D:/Fuji_Famous/Fujie_Creative/20_new_ideas")
 
 SET = [
-    "whole_official_1",   # city hall - seigaiha waves
-    "whole_official_2",   # the farm gate - the valley at dawn
-    "whole_official_3",   # the station - ripples and reeds
-    "whole_chibi_1",      # a park - river blue, reeds
-    "whole_chibi_3",      # a side street - lotus pond
+    "whole_fuji_both_2",     # the station - Mount Fuji, both Fujies, seigaiha waves
+    "whole_fuji_official_1",  # city hall - Mount Fuji and the official fish
+    "whole_fuji_chibi_1",     # the farm gate - Mount Fuji and Chibi
+    "whole_official_1",       # a main street - seigaiha, the official fish
+    "whole_chibi_3",          # a park - Chibi in the lotus pond
 ]
 
 W, H, BG = 1200, 896, (243, 242, 237)
