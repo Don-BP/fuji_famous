@@ -33,7 +33,7 @@ view" when Gmail prompts — otherwise the recipient gets a request-access scree
 Everything is also live at
 **https://don-bp.github.io/fuji_famous/studio-fa519005bf/** — the hub, the 40-year
 timeline and the game, all from that one address. The same link is printed on
-slide 18. It is unlisted and carries a no-index instruction, so it works for
+slide 26. It is unlisted and carries a no-index instruction, so it works for
 anyone who has it but cannot be found by searching.
 
 ---
@@ -55,7 +55,7 @@ anyone who has it but cannot be found by searching.
 
 【添付資料】
 1. エントリーシート（Word）
-2. 企画書（PowerPoint／全21ページ）
+2. 企画書（PowerPoint／全30ページ）
 3. 体験版「フジィを育てよう」（HTML／ブラウザでそのまま開けます）
 
 本企画の中心にあるのは、フジキンが1987年から積み上げてきた
@@ -81,7 +81,7 @@ don@brain-power.jp
 ## Before you send — check these
 
 - [ ] Subject line matches exactly: `フジィを有名にする！アイデアコンテスト エントリー`
-- [ ] Your name is spelled how you want it on the entry sheet and on slides 1 and 21
+- [ ] Your name is spelled how you want it on the entry sheet and on slides 1 and 30
 - [ ] All three files attached
 - [ ] If the HTML went as a Drive link, sharing is set to "anyone with the link can view"
 - [ ] Open `フジィを育てよう.html` once yourself to confirm it runs on your machine
