@@ -142,7 +142,7 @@
     rtEyebrow2: "THE ONE NOBODY ELSE CAN COPY", rt2H: "Turn trade customers' packaging into advertising",
     rt2B: "Fujikin sells sturgeon fry to farms across Japan. Release Chibi Fujie to those customers free of charge and Fujie appears on tins of domestic caviar nationwide. No extra cost, only the existing trade network. A B2B company reaching the dinner table by a route no other company can copy.",
     aquaEyebrow: "IF THE AQUARIUM AGREES", aquaH: "A fish that is not a shark, next to the sharks",
-    aquaB: "Aqua World in Ōarai is known for its sharks. Put one small tank beside them with a real Fujie from the Satomi farm, and one line on the panel: \"Not a shark! Far rarer than a shark.\" The fish everyone mistakes for a shark, next to the real thing. There is no clearer way in. It depends on the aquarium saying yes.",
+    aquaB: "Aqua World in Ōarai is known for its sharks. Give the sturgeon a full exhibit tank of their own beside them, stocked from the Satomi farm, and one line on the panel: \"Not a shark! Far rarer than a shark.\" The fish everyone mistakes for a shark, next to the real thing. There is no clearer way in. It depends on the aquarium saying yes.",
     letterEyebrow: "TO THE FISH YOUR OWN AGE", letterH: "The hundred-year letter",
     letterB: "A child who visits the farm writes to \"the class of 2027\" — the fish that hatched that year. The letter is sealed, to be opened in 2030 on the hundredth anniversary. No single fish needs tracking: farm fish are raised in year-groups, and the year they hatched is always known. A sturgeon can outlive a person. The fish your own age is a companion for life.",
     manholeEyebrow: "WITH HITACHIOTA CITY", manholeH: "Fujie manhole covers",
