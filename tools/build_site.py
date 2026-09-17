@@ -45,6 +45,7 @@ VERBATIM = [
     (SITE / "art" / "bg_win.jpg", "bg_win.jpg"),
     (CRE / "20_new_ideas" / "aquaworld_c_both.png", "idea_aquaworld.png"),
     (CRE / "20_new_ideas" / "letter_final.png", "idea_letter.png"),
+    (CRE / "20_new_ideas" / "cover_set_sheet.png", "idea_manhole.png"),
 ]
 
 
