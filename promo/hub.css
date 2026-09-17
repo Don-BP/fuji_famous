@@ -453,3 +453,21 @@ footer{padding:clamp(48px,7vw,84px) clamp(18px,5vw,72px);background:#03101a;bord
   #navNow{display:inline}
 }
 @media (max-width:620px){.toc{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------------- chapter breaks, second pass: an act break, not a caption ---------------- */
+.chapter{
+  position:relative;overflow:hidden;min-height:clamp(420px,64vh,640px);display:flex;align-items:center;
+  padding:clamp(56px,9vw,110px) clamp(18px,5vw,72px);
+  background:radial-gradient(120% 90% at 18% 30%,#0f3446 0%,#061c28 55%,#04121a 100%);color:var(--chrome);
+}
+.chapter::before{
+  content:attr(data-num);position:absolute;right:-.06em;bottom:-.28em;font-family:var(--display);
+  font-size:clamp(220px,42vw,560px);line-height:1;color:rgba(73,210,240,.07);letter-spacing:-.04em;pointer-events:none;
+}
+.chapter::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(73,210,240,.55),transparent)}
+.chapter .wrap{border-top:0;padding-top:0;display:block;position:relative}
+.chapter .chNum{display:block;font-size:12px;letter-spacing:.34em;color:var(--flow);margin-bottom:22px}
+.chapter .chNum::before{content:"CHAPTER ";}
+.chapter h2{font-size:clamp(40px,7.5vw,88px);line-height:1.12;color:#fff;margin:0 0 22px}
+.chapter p{font-size:clamp(14px,1.6vw,17px);color:var(--steel);max-width:36em;line-height:1.9}
+.chapter + .band{padding-top:clamp(56px,8vw,96px)}

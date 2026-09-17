@@ -314,7 +314,7 @@ s.addNotes("キャラクターの最大の弱点（サメに見える）を、�
 /* =============== 9. SIX MOVES =============== */
 s = P.addSlide(); dark(s);
 eyebrow(s, "全体像", true);
-s.addText("6 つの施策", { x: M, y: 0.62, w: 8, h: 0.8, fontFace: FH, fontSize: 34,
+s.addText("11 の施策", { x: M, y: 0.62, w: 8, h: 0.8, fontFace: FH, fontSize: 34,
   bold: true, color: "FFFFFF", isTextBox: true, margin: 0 });
 s.addText("上から順に実施します。①がなければ②以降は成立しません。", {
   x: M, y: 1.5, w: 9, h: 0.35, fontFace: FB, fontSize: 13, color: C.steel,
@@ -326,16 +326,21 @@ const moves = [
   ["ちびフジィの無償開放", "稚魚取引先のパッケージを広告に変える"],
   ["会いに行けるマスコット", "里美養魚場を限定公開する"],
   ["1987 年の物語を映像化", "ロケ地はすべて自社保有"],
+  ["水族館のサメの隣に", "アクアワールド大洗に本物のフジィの水槽を"],
+  ["100 年の手紙", "同い年の「2027 年組」に書き、100 周年に開封"],
+  ["フジィのマンホール", "常陸太田市内に 3〜5 枚"],
+  ["年に一度の公開日", "地元 40 家族。手紙と、はじめてのキャビア"],
+  ["「チョウザメの日」を登録", "日本記念日協会へ。誕生日と公開日を重ねる"],
 ];
 moves.forEach((m, i) => {
-  const col = i % 2, row = Math.floor(i / 2);
-  const x = M + col * 6.05, y = 2.2 + row * 1.52;
-  card(s, x, y, 5.75, 1.3, true);
-  numDot(s, i + 1, x + 0.35, y + 0.44, true);
-  s.addText(m[0], { x: x + 0.95, y: y + 0.24, w: 4.6, h: 0.38, fontFace: FH, fontSize: 15,
+  const col = i % 3, row = Math.floor(i / 3);
+  const x = M + col * 4.03, y = 2.05 + row * 1.2;
+  card(s, x, y, 3.8, 1.05, true);
+  numDot(s, i + 1, x + 0.3, y + 0.34, true);
+  s.addText(m[0], { x: x + 0.85, y: y + 0.14, w: 2.85, h: 0.34, fontFace: FH, fontSize: 12.5,
     bold: true, color: "FFFFFF", isTextBox: true, margin: 0 });
-  s.addText(m[1], { x: x + 0.95, y: y + 0.66, w: 4.6, h: 0.5, fontFace: FB, fontSize: 11,
-    color: C.dimOnDark, lineSpacing: 17, isTextBox: true, margin: 0 });
+  s.addText(m[1], { x: x + 0.85, y: y + 0.5, w: 2.85, h: 0.48, fontFace: FB, fontSize: 9.5,
+    color: C.dimOnDark, lineSpacing: 14, isTextBox: true, margin: 0 });
 });
 
 /* =============== 8. 施策1 ちびフジィ =============== */
@@ -486,6 +491,101 @@ film.forEach((f, i) => {
     color: C.dimOnDark, lineSpacing: 19, isTextBox: true, margin: 0 });
 });
 foot(s, "短尺縦型（SNS）と長尺（会社案内・採用）の 2 形態で展開", true);
+
+/* =============== 施策 7 =============== */
+s = P.addSlide(); light(s);
+eyebrow(s, "施策 7 ―― 水族館と組めば");
+title(s, "サメの水槽の隣に、サメじゃない魚を。");
+body(s, "アクアワールド茨城県大洗水族館はサメの展示で知られています。その隣に小さな水槽を一つ置き、里美養魚場から来た本物のフジィを泳がせます。パネルの一言は「サメじゃないです。サメより、ずっと少ないんです」。誰もがサメだと思う魚を、本物のサメの隣に。これ以上わかりやすい入口はありません。水族館の判断が前提の提案です。", { x: M, y: 2.35, w: 11.8, h: 1.5, fontSize: 13 });
+const pts7 = [
+  ["届く相手", "フジキンが自前では集められない規模の来館者に、年間を通じて"],
+  ["好きになる理由", "水族館に来る人は、はじめから魚を好きになりに来ている"],
+  ["最初の一歩", "2027 年度に小規模な特設水槽を提案。実現すれば 40 周年の企画展へ"],
+];
+pts7.forEach((v, i) => {
+  const y = 4.45 + i * 0.78;
+  numDot(s, i + 1, M, y);
+  s.addText(v[0], { x: M + 0.62, y: y - 0.02, w: 4.2, h: 0.3, fontFace: FH, fontSize: 12.5,
+    bold: true, color: C.ink, isTextBox: true, margin: 0 });
+  s.addText(v[1], { x: M + 0.62, y: y + 0.28, w: 10.6, h: 0.3, fontFace: FB, fontSize: 10.5,
+    color: C.muted, isTextBox: true, margin: 0 });
+});
+
+/* =============== 施策 8 =============== */
+s = P.addSlide(); light(s);
+eyebrow(s, "施策 8 ―― 同い年の魚に");
+title(s, "100 年の手紙。");
+body(s, "養魚場を訪れた子どもが、その年に卵からかえった「2027 年組」に手紙を書きます。封をして、開けるのは 2030 年、創業 100 周年の日。一尾ずつを追う必要はありません。魚は年ごとの組で育てられ、いつかえったかは必ずわかっています。チョウザメは人より長く生きることがあります。同い年の魚は、一生の相手になります。", { x: M, y: 2.35, w: 11.8, h: 1.5, fontSize: 13 });
+const pts8 = [
+  ["届く相手", "学校・家庭・地域。「預けたもの」としてフジキンの名前が残る"],
+  ["好きになる理由", "「あの会社の魚」が「わたしの年の魚」になる"],
+  ["最初の一歩", "2027 年の公開日に最初の手紙を集める。便箋と、封をする箱と、開封の日付だけ"],
+];
+pts8.forEach((v, i) => {
+  const y = 4.45 + i * 0.78;
+  numDot(s, i + 1, M, y);
+  s.addText(v[0], { x: M + 0.62, y: y - 0.02, w: 4.2, h: 0.3, fontFace: FH, fontSize: 12.5,
+    bold: true, color: C.ink, isTextBox: true, margin: 0 });
+  s.addText(v[1], { x: M + 0.62, y: y + 0.28, w: 10.6, h: 0.3, fontFace: FB, fontSize: 10.5,
+    color: C.muted, isTextBox: true, margin: 0 });
+});
+
+/* =============== 施策 9 =============== */
+s = P.addSlide(); light(s);
+eyebrow(s, "施策 9 ―― 常陸太田市と");
+title(s, "常陸太田に、フジィのマンホール。");
+body(s, "駅前、市役所、養魚場の門。市内に 3〜5 枚。カラーの蓋には公式のフジィを原画どおりの色で（色の再現はマニュアル管理者の確認を条件に）、別の蓋にはちびフジィを。キャラクターのマンホールは日本では収集の対象で、地元紙が必ず報じ、蓋を巡って旅をする人がいます。", { x: M, y: 2.35, w: 11.8, h: 1.5, fontSize: 13 });
+const pts9 = [
+  ["届く相手", "見つけた人が自分で撮り、自分で載せる。写真は撮った本人が広める"],
+  ["残るもの", "一度置けば何十年も。維持費はほぼなし。常陸太田が「フジィのふるさと」に"],
+  ["最初の一歩", "2027 年度に市へ共同設置を提案。デザインは本エントリー添付を叩き台に"],
+];
+pts9.forEach((v, i) => {
+  const y = 4.45 + i * 0.78;
+  numDot(s, i + 1, M, y);
+  s.addText(v[0], { x: M + 0.62, y: y - 0.02, w: 4.2, h: 0.3, fontFace: FH, fontSize: 12.5,
+    bold: true, color: C.ink, isTextBox: true, margin: 0 });
+  s.addText(v[1], { x: M + 0.62, y: y + 0.28, w: 10.6, h: 0.3, fontFace: FB, fontSize: 10.5,
+    color: C.muted, isTextBox: true, margin: 0 });
+});
+
+/* =============== 施策 10 =============== */
+s = P.addSlide(); light(s);
+eyebrow(s, "施策 10 ―― 里美養魚場");
+title(s, "年に一度の公開日 ―― 手紙と、はじめてのキャビア。");
+body(s, "抽選で選ばれた地元の 40 家族。午前は「2027 年組」への手紙、午後は小さな匙で、日本で初めてこの魚からつくられたキャビアを一口。1987 年にボルガ川の船の上でフジキンの社員が初めて口にしたのと、同じものです。40 席しかないから、話になります。ロケ地もキャビアも自社のもので、外に頼むものがありません。", { x: M, y: 2.35, w: 11.8, h: 1.5, fontSize: 13 });
+const pts10 = [
+  ["届く相手", "地元紙は毎年取材に来る。当たった家族は載せ、外れた家族は来年を待つ"],
+  ["好きになる理由", "遠い高級品が、自分の町の誇りに変わる"],
+  ["最初の一歩", "2027 年、初回は 40 家族から。応募は市の広報と公式アカウントで"],
+];
+pts10.forEach((v, i) => {
+  const y = 4.45 + i * 0.78;
+  numDot(s, i + 1, M, y);
+  s.addText(v[0], { x: M + 0.62, y: y - 0.02, w: 4.2, h: 0.3, fontFace: FH, fontSize: 12.5,
+    bold: true, color: C.ink, isTextBox: true, margin: 0 });
+  s.addText(v[1], { x: M + 0.62, y: y + 0.28, w: 10.6, h: 0.3, fontFace: FB, fontSize: 10.5,
+    color: C.muted, isTextBox: true, margin: 0 });
+});
+
+/* =============== 施策 11 =============== */
+s = P.addSlide(); light(s);
+eyebrow(s, "施策 11 ―― 記念日登録");
+title(s, "「チョウザメの日」を、正式に登録する。");
+body(s, "日本記念日協会に登録すると、記念日はカレンダーや「今日は何の日」の枠に載り、地方紙や情報番組が毎年拾います。費用は登録料だけ。日付はフジィの誕生日（ふ化の季節に定めた日）とし、公開日と手紙をこの日に重ねます。現存するチョウザメは全種が絶滅危惧種ですが、この魚のための日はまだありません。", { x: M, y: 2.35, w: 11.8, h: 1.5, fontSize: 13 });
+const pts11 = [
+  ["届く相手", "毎年、何もしなくても一度は名前が出る日ができる"],
+  ["好きになる理由", "一社のマスコットではなく、一つの種の顔になる"],
+  ["最初の一歩", "2027 年度、日付を決めて登録。書類一式と登録料で済む"],
+];
+pts11.forEach((v, i) => {
+  const y = 4.45 + i * 0.78;
+  numDot(s, i + 1, M, y);
+  s.addText(v[0], { x: M + 0.62, y: y - 0.02, w: 4.2, h: 0.3, fontFace: FH, fontSize: 12.5,
+    bold: true, color: C.ink, isTextBox: true, margin: 0 });
+  s.addText(v[1], { x: M + 0.62, y: y + 0.28, w: 10.6, h: 0.3, fontFace: FB, fontSize: 10.5,
+    color: C.muted, isTextBox: true, margin: 0 });
+});
 
 /* =============== 15. グッズ =============== */
 s = P.addSlide(); light(s);
