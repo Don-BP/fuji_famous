@@ -381,31 +381,28 @@ footer{padding:clamp(48px,7vw,84px) clamp(18px,5vw,72px);background:#03101a;bord
 @media (max-aspect-ratio:9/10){
   #heroFilm{background-image:url("assets/film/poster_m.jpg")}
 
-  /* Sideways the scrim can hang off the copy, because its dark end is
-     pinned to the left edge of the screen and stays there. Upright it has
-     to be the hero itself, because the only thing that matters is where it
-     ENDS: the hero is clipped at its own foot, so wherever the gradient
-     has got to by then is chopped off in a straight line across the
-     screen. Hung on the copy, that line fell at whatever depth the copy
-     happened to reach - a hard seam.
+  /* The scrim covers the copy and nothing else.
 
-     On the hero, the last stop is the foot, so it can be told to arrive at
-     nothing exactly there, and the dark band below opens at nothing too.
-     The two meet with no edge to see. The dark middle still tracks the
-     copy, so scrolling still walks the scrim off the top of the screen and
-     opens the water up behind the words. */
-  .filmOn .hero > .heroCopy::before{display:none}
-  .filmOn .hero{
+     Measured against the hero it cannot do that, because the hero is a
+     whole screen tall and the copy is only as tall as the words: on a
+     short window the copy fills it, on a tall one the copy sits at the
+     foot and the middle is open water. Stops set as fractions of the hero
+     black out that open water and the fish in it.
+
+     So it is measured against the copy, which is the thing it is for, and
+     it stops 60px short of the hero's foot. The hero clips its own
+     background, and anything still dark when it reaches that edge gets cut
+     off in a straight line - which is where the seam came from. Ending
+     above the cut, there is nothing to clip: it reaches nothing on its
+     own, and the dark band below opens at nothing too. */
+  .filmOn .hero > .heroCopy::before{
+    left:-100vw;width:300vw;
+    top:-13vh;height:calc(100% + 13vh + 60px);
     background:linear-gradient(180deg,
       rgba(4,18,26,0)    0%,
-      rgba(4,18,26,.30) 18%,
-      rgba(4,18,26,.92) 28%,
-      rgba(4,18,26,.94) 82%,
-      /* eased out rather than dropped, or the top of the fall reads as a
-         line of its own right where the scrim is still at its darkest */
-      rgba(4,18,26,.86) 88%,
-      rgba(4,18,26,.60) 93%,
-      rgba(4,18,26,.26) 97%,
+      rgba(4,18,26,.55) 14%,
+      rgba(4,18,26,.90) 23%,
+      rgba(4,18,26,.93) 92%,
       rgba(4,18,26,0)  100%);
   }
 
