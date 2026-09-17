@@ -407,3 +407,49 @@ footer{padding:clamp(48px,7vw,84px) clamp(18px,5vw,72px);background:#03101a;bord
   #caseClose{position:static;display:inline-block;margin:0 0 20px}
   .caseTitle{padding-right:0}
 }
+
+/* ---------------- chapters, contents grid, the idea template ---------------- */
+#navNow{display:none;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--flow);white-space:nowrap;margin-left:auto}
+#navBar{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:linear-gradient(90deg,var(--cyan),var(--flow));transition:width .15s linear}
+#chapters a.on{color:var(--flow)}
+.chapter{padding:clamp(56px,9vw,110px) clamp(18px,5vw,72px) 0;background:var(--washi);color:var(--ink)}
+.chapter .wrap{border-top:1px solid rgba(19,26,30,.14);padding-top:26px;display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
+.chapter .chNum{font-family:var(--display);font-size:clamp(28px,5vw,46px);color:var(--verm);letter-spacing:.02em}
+.chapter h2{margin:0;font-family:var(--serif);font-weight:600;font-size:clamp(24px,4vw,40px);letter-spacing:.03em}
+.chapter p{margin:0;flex-basis:100%;font-size:13.5px;color:#5b6b73;line-height:1.9}
+.chapter + .band{padding-top:clamp(36px,5vw,56px)}
+.tocGroup{margin-top:34px}
+.tocGroup h3{margin:0 0 12px;display:flex;align-items:baseline;gap:12px;font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:.04em}
+.tocGroup h3 span{font-family:var(--display);font-size:12px;color:var(--cyan)}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.toc a{
+  display:block;text-decoration:none;color:var(--chrome);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  background:rgba(255,255,255,.03);transition:.2s;
+}
+.toc a:hover{transform:translateY(-3px);border-color:rgba(73,210,240,.5)}
+.toc a img,.toc a i{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.toc a i{background:linear-gradient(135deg,#0b2a38,#071a24);position:relative}
+.toc a i::after{content:"";position:absolute;inset:0;background:url("assets/buddy_neutral.png") center/34% no-repeat;opacity:.35}
+.toc a.day i{background:linear-gradient(135deg,#be342a,#7a1f18)}
+.toc a span{display:block;padding:10px 12px 12px;font-size:12px;font-weight:700;letter-spacing:.04em;line-height:1.5}
+.ideaNum{font-family:var(--display);font-size:12px;color:var(--cyan);margin-right:10px;letter-spacing:.04em}
+.band:not(.dark) .ideaNum{color:var(--verm)}
+.ideaWrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.ideaText .intro{margin-bottom:26px}
+.ideaText .caseRow{margin:0;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn.small{padding:11px 20px;font-size:11.5px}
+.ideaArt{display:block;margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;background:rgba(255,255,255,.03)}
+.band:not(.dark) .ideaArt{border-color:rgba(19,26,30,.12);background:rgba(19,26,30,.03)}
+.ideaArt img{display:block;width:100%;height:100%;object-fit:cover}
+.ideaArt.ph{display:flex;align-items:center;justify-content:center;position:relative;background:linear-gradient(135deg,#0b2a38,#071a24)}
+.band:not(.dark) .ideaArt.ph{background:linear-gradient(135deg,#e9e1d1,#dcd2bd)}
+.ideaArt.ph::before{content:"";position:absolute;inset:0;background:url("assets/buddy_neutral.png") center/28% no-repeat;opacity:.3}
+.ideaArt.ph span{position:relative;font-size:11px;font-weight:700;letter-spacing:.24em;color:var(--steel);padding:8px 14px;border:1px dashed currentColor;border-radius:999px}
+.band:not(.dark) .ideaArt.ph span{color:#7a6a55}
+@media (max-width:860px){
+  .ideaWrap{grid-template-columns:1fr}
+  .ideaArt{order:-1;aspect-ratio:16/10}
+  #chapters{display:none}
+  #navNow{display:inline}
+}
+@media (max-width:620px){.toc{grid-template-columns:repeat(2,1fr)}}

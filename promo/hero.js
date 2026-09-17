@@ -22,7 +22,7 @@
 
   var canvas  = document.getElementById("heroFilmC");
   var ctx     = canvas.getContext("2d", { alpha: false });
-  var stop    = document.getElementById("character");   // first white band
+  var stop    = document.querySelector(".band:not(.dark)");   // first white band
   if (!stop) return;
 
   /* --- tall, narrow screens keep the hero they already have.

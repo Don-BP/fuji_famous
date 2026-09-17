@@ -5,7 +5,7 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>フジィは実在する ｜ FUJIE STUDIO</title>
-<meta name="description" content="フジキンのマスコット「フジィ」のための企画一式。遊べる育成シミュレーター、40年の年表、キャラクター提案、スタンプ、グッズ、和紋コレクション。">
+<meta name="description" content="フジキンのマスコット「フジィ」を有名にするための企画一式。十三の施策を五つの章で。">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,21 +15,23 @@
 <body>
 
 <!-- the scroll-driven hero film: a fixed canvas behind everything.
-     The hero and the dark band are translucent so it shows through;
-     the first white band covers it and the film is done. -->
+     The hero and the dark bands are translucent so it shows through;
+     the first light band covers it and the film is done. -->
 <div id="heroFilm" aria-hidden="true"><canvas id="heroFilmC"></canvas></div>
 
 <header id="nav">
   <a class="brand" href="#top">FUJIE<span>STUDIO</span></a>
   <span class="by" data-t="navBy">Vittorio Zumpano ／ 株式会社ブレインパワー</span>
-  <nav>
-    <a href="#work" data-t="navWork">作品</a>
-    <a href="#character" data-t="navChar">キャラクター</a>
-    <a href="#fish" data-t="navFish">この魚</a>
-    <a href="#goods" data-t="navGoods">グッズ</a>
-    <a href="#wamon" data-t="navWamon">和紋</a>
+  <nav id="chapters">
+    <a href="#ch1" data-ch="1" data-t="navCh1">この魚</a>
+    <a href="#ch2" data-ch="2" data-t="navCh2">二つの姿</a>
+    <a href="#ch3" data-ch="3" data-t="navCh3">施策</a>
+    <a href="#ch4" data-ch="4" data-t="navCh4">受け皿</a>
+    <a href="#ch5" data-ch="5" data-t="navCh5">2027</a>
   </nav>
+  <span id="navNow" aria-hidden="true"></span>
   <button id="langBtn" type="button">EN</button>
+  <i id="navBar"></i>
 </header>
 
 <!-- ============================ hero ============================ -->
@@ -45,62 +47,62 @@
     <p class="lede" data-t="heroLede">想像上のキャラクターではありません。1987年、故 西堀栄三郎先生の一言から始まり、いま茨城県常陸太田市の里美養魚場に 1 万尾以上が泳いでいる、実在のチョウザメです。描かれたマスコットは、どこの会社でもつくれます。生きているマスコットは、フジキンにしかいません。ここから先は、その一点をどこまで広げられるかの話です。</p>
     <div class="heroBtns">
       <a class="btn" href="game/" data-t="heroPlay">育ててみる</a>
-      <a class="btn ghost" href="timeline/" data-t="heroStory">40年をたどる</a>
+      <a class="btn ghost" href="#contents" data-t="heroContents">目次へ</a>
     </div>
     <p class="heroMeta"><span data-t="heroMeta">1987 — 2027　／　世界初の完全養殖から、40年目へ</span></p>
   </div>
   <div class="heroScroll"><i></i></div>
 </section>
 
-<!-- ============================ the two experiences ============================ -->
-<section id="work" class="band dark">
+<!-- ============================ contents ============================ -->
+<section id="contents" class="band dark">
   <div class="wrap">
-    <p class="eyebrow" data-t="workEyebrow">つくったもの</p>
-    <h2 class="sectionH" data-t="workH">グッズではないものから、先に二つ。</h2>
-    <p class="intro" data-t="workB">募集要項には「グッズ製作などの枠にとどまらない、幅広い視点のアイデア」とあります。ですので、まず枠の外から始めました。どちらもブラウザで開くだけ。アプリも会員登録もいりません。見学者センターのタブレット、採用ページ、学校見学で配るリンク——置く場所は、すでに社内にあります。</p>
+    <p class="eyebrow" data-t="tocEyebrow">目次</p>
+    <h2 class="sectionH" data-t="tocH">十三の施策を、五つの章で。</h2>
+    <p class="intro" data-t="tocB">上から順に読めば一つの話になります。急ぐ方は、気になる一枚を押してください。その施策まで飛びます。</p>
 
-    <div class="duo">
-      <div class="duoCol">
-      <a class="feature" href="game/">
-        <div class="featureArt game"></div>
-        <div class="featureBody">
-          <span class="tag" data-t="tagGame">育成シミュレーター</span>
-          <h3 data-t="gameH">フジィを育てよう</h3>
-          <p data-t="gameB">ごはん、あそび、ねむり、水流。四つの世話と四つのミニゲームで、一粒の卵を成魚まで育てます。90秒で終わり、終わったときには「フジキンは、チョウザメを卵から卵まで育てきった会社だ」と、遊んだ本人が知っています。会社案内を一行も読ませずに。日本語／英語。</p>
-          <span class="go" data-t="gameGo">あそぶ →</span>
-        </div>
-      </a>
-      <p class="caseRow"><button type="button" class="caseBtn" data-case="game" data-ja="「フジィを育てよう」の施策を読む" data-en="The plan behind Raise Fujie"></button></p>
+    <div class="tocGroup"><h3><span>01</span><b data-t="ch1Name">この魚</b></h3>
+      <div class="toc">
+        <a href="#fish"><img src="assets/t/endangered_water.jpg" alt=""><span data-t="tFish">実在する、絶滅危惧種</span></a>
       </div>
-
-      <div class="duoCol">
-      <a class="feature" href="timeline/">
-        <div class="featureArt story"></div>
-        <div class="featureBody">
-          <span class="tag" data-t="tagStory">スクロール年表</span>
-          <h3 data-t="storyH">一粒の卵から</h3>
-          <p data-t="storyB">1987年の一言から、世界初の完全養殖、日本初のキャビア、そして2027年の40年目まで。指を下ろすだけで40年が流れていきます。社史ではなく、物語として書きました。読み終えた人は、バルブの会社を好きになっています。</p>
-          <span class="go" data-t="storyGo">読む →</span>
-        </div>
-      </a>
-      <p class="caseRow"><button type="button" class="caseBtn" data-case="story" data-ja="「一粒の卵から」の施策を読む" data-en="The plan behind From a single egg"></button></p>
+    </div>
+    <div class="tocGroup"><h3><span>02</span><b data-t="ch2Name">二つの姿</b></h3>
+      <div class="toc">
+        <a href="#character"><img src="assets/t/master_v3_wave.jpg" alt=""><span data-t="tChibi">ちびフジィ</span></a>
+        <a href="#stickers"><img src="assets/t/sticker_board_01.jpg" alt=""><span data-t="tStk">スタンプ 128 種</span></a>
+      </div>
+    </div>
+    <div class="tocGroup"><h3><span>03</span><b data-t="ch3Name">施策</b></h3>
+      <div class="toc">
+        <a href="#game"><img src="assets/shot_game.jpg" alt=""><span data-t="tGame">フジィを育てよう</span></a>
+        <a href="#story"><img src="assets/shot_timeline.jpg" alt=""><span data-t="tStory">一粒の卵から</span></a>
+        <a href="#voice" class="ph"><i></i><span data-t="tVoice">フジィに「中の人」を</span></a>
+        <a href="#packaging"><img src="assets/t/caviar_tin.jpg" alt=""><span data-t="tPack">取引先のパッケージ</span></a>
+        <a href="#aquaworld" class="ph"><i></i><span data-t="tAqua">水族館のサメの隣に</span></a>
+        <a href="#letter" class="ph"><i></i><span data-t="tLetter">100 年の手紙</span></a>
+        <a href="#manhole" class="ph"><i></i><span data-t="tManhole">フジィのマンホール</span></a>
+        <a href="#openday" class="ph"><i></i><span data-t="tOpen">年に一度の公開日</span></a>
+        <a href="#sturgeonday" class="ph"><i></i><span data-t="tSday">チョウザメの日</span></a>
+      </div>
+    </div>
+    <div class="tocGroup"><h3><span>04</span><b data-t="ch4Name">受け皿</b></h3>
+      <div class="toc">
+        <a href="#plush"><img src="assets/t/plush_studio_front.jpg" alt=""><span data-t="tPlush">ぬいぐるみとマスコット</span></a>
+        <a href="#goods"><img src="assets/t/official_leather_tote.jpg" alt=""><span data-t="tGoods">五つのライン</span></a>
+        <a href="#wamon"><img src="assets/t/wamon_collection_board.jpg" alt=""><span data-t="tWamon">和紋コレクション</span></a>
+      </div>
+    </div>
+    <div class="tocGroup"><h3><span>05</span><b data-t="ch5Name">2027 年の、ある一日</b></h3>
+      <div class="toc">
+        <a href="#effect" class="ph day"><i></i><span data-t="tDay">これで、何が起きるか</span></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================ character ============================ -->
-<section id="character" class="band">
-  <div class="wrap">
-    <p class="eyebrow" data-t="charEyebrow">提案</p>
-    <h2 class="sectionH" data-t="charH">ちびフジィ ── 二つめの姿</h2>
-    <p class="intro" data-t="charB">公式のフジィは一切変えません。マニュアル第7条のとおり、原画はそのまま使います。ちびフジィは、その隣に置く<strong>二つめの姿</strong>としての提案です。大人にはあの精悍な一匹を、子どもにはこちらを。一つの姿で全世代を取りにいくと、どちらも中途半端になります。二つあれば、贈答の席とガチャの棚を同時に取れます。</p>
-    <p class="caseRow"><button type="button" class="caseBtn" data-case="chibi"></button></p>
-    <div class="grid g4" data-gallery="character"></div>
-  </div>
-</section>
+<!-- ============================ chapter 1: the fish ============================ -->
+<div class="chapter" id="ch1"><div class="wrap"><span class="chNum">01</span><h2 data-t="ch1Name">この魚</h2><p data-t="ch1Line">なぜ、この企画は成り立つのか。</p></div></div>
 
-<!-- ============================ the fish ============================ -->
 <section id="fish" class="band cream">
   <div class="wrap">
     <p class="eyebrow" data-t="fishEyebrow">この魚について</p>
@@ -110,10 +112,22 @@
   </div>
 </section>
 
-<!-- ============================ stickers ============================ -->
-<section class="band dark">
+<!-- ============================ chapter 2: two forms ============================ -->
+<div class="chapter" id="ch2"><div class="wrap"><span class="chNum">02</span><h2 data-t="ch2Name">二つの姿</h2><p data-t="ch2Line">公式のフジィは守り、もう一つの姿で人と会う。</p></div></div>
+
+<section id="character" class="band">
   <div class="wrap">
-    <p class="eyebrow" data-t="stkEyebrow">LINE スタンプ</p>
+    <p class="eyebrow"><span class="ideaNum">01</span><span data-t="charEyebrow">提案</span></p>
+    <h2 class="sectionH" data-t="charH">ちびフジィ ── 二つめの姿</h2>
+    <p class="intro" data-t="charB">公式のフジィは一切変えません。マニュアル第7条のとおり、原画はそのまま使います。ちびフジィは、その隣に置く<strong>二つめの姿</strong>としての提案です。大人にはあの精悍な一匹を、子どもにはこちらを。一つの姿で全世代を取りにいくと、どちらも中途半端になります。二つあれば、贈答の席とガチャの棚を同時に取れます。</p>
+    <p class="caseRow"><button type="button" class="caseBtn" data-case="chibi"></button></p>
+    <div class="grid g4" data-gallery="character"></div>
+  </div>
+</section>
+
+<section id="stickers" class="band dark">
+  <div class="wrap">
+    <p class="eyebrow"><span class="ideaNum">02</span><span data-t="stkEyebrow">LINE スタンプ</span></p>
     <h2 class="sectionH" data-t="stkH">スタンプ 128 種</h2>
     <p class="intro" data-t="stkB">日本語 64 種と英語 64 種。すべて一点ずつ切り出し、LINE の規格（370×320・背景透過）に仕上げてあります。友だち追加で無料配布します。<br>スタンプが強いのは、広告とちがって<strong>人が人に送る</strong>からです。一枚送られるたび、フジィは知らない誰かの画面に出ます。そこに出稿費はかかりません。一番手は「サメじゃないです」——この一言だけで、チョウザメの話が始まります。海外向けの 64 種は、そのまま WhatsApp や Telegram にも回せます。</p>
     <p class="caseRow"><button type="button" class="caseBtn" data-case="stickers"></button></p>
@@ -121,82 +135,178 @@
   </div>
 </section>
 
-<!-- ============================ the two routes ============================ -->
-<section id="routes" class="band cream">
-  <div class="wrap">
-    <p class="eyebrow" data-t="rtEyebrow">まだ写真のない二つ</p>
-    <h2 class="sectionH" data-t="rtH">フジキンにしかない、二つの経路。</h2>
-    <p class="intro" data-t="rtB">ここまでのものは、つくれば誰でも持てます。この二つは、フジキンにしか持てません。養魚場と、稚魚の取引網です。どちらも新しい投資ではなく、すでに社内にあるものを表に出すだけです。</p>
+<!-- ============================ chapter 3: the ideas ============================ -->
+<div class="chapter" id="ch3"><div class="wrap"><span class="chNum">03</span><h2 data-t="ch3Name">施策</h2><p data-t="ch3Line">募集要項の「グッズの枠にとどまらない」を、九つ。</p></div></div>
 
-    <div class="lineHead"><span class="num">01</span><h3 data-t="rt1H">フジィに「中の人」を</h3></div>
-    <p class="lineB" data-t="rt1B">給餌の時間、水面が一斉に沸き立つ数十秒。卵から出てくる一尾。誰も見たことのない映像を、フジキンだけが持っています。ロケ地はすべて自社保有で、制作費はほぼかかりません。公式 Instagram の 114 フォロワーは、弱点ではなく余白です。</p>
-    <p class="caseRow"><button type="button" class="caseBtn" data-case="voice"></button></p>
-
-    <div class="lineHead"><span class="num">02</span><h3 data-t="rt2H">取引先のパッケージを、そのまま広告に変える</h3></div>
-    <p class="lineB" data-t="rt2B">フジキンは稚魚を全国の養殖業者に販売しています。その取引先にちびフジィを無償開放すれば、日本中の国産キャビアの缶にフジィが載ります。追加費用はかからず、既存の取引網だけで成立します。BtoB 企業が食卓に届く、他社には真似のできない経路です。</p>
-    <p class="caseRow"><button type="button" class="caseBtn" data-case="packaging"></button></p>
+<section id="game" class="band idea">
+  <div class="wrap ideaWrap">
+    <div class="ideaText">
+      <p class="eyebrow"><span class="ideaNum">03</span><span data-t="tagGame">育成シミュレーター</span></p>
+      <h2 class="sectionH" data-t="gameH">フジィを育てよう</h2>
+      <p class="intro" data-t="gameB">ごはん、あそび、ねむり、水流。四つの世話と四つのミニゲームで、一粒の卵を成魚まで育てます。90秒で終わり、終わったときには「フジキンは、チョウザメを卵から卵まで育てきった会社だ」と、遊んだ本人が知っています。会社案内を一行も読ませずに。日本語／英語。</p>
+      <p class="caseRow"><a class="btn small" href="game/" data-t="gameGo">あそぶ →</a><button type="button" class="caseBtn" data-case="game"></button></p>
+    </div>
+    <a class="ideaArt" href="game/"><img src="assets/shot_game.jpg" alt=""></a>
   </div>
 </section>
 
-<!-- ============================ goods ============================ -->
-<section id="goods" class="band">
-  <div class="wrap">
-    <p class="eyebrow" data-t="goodsEyebrow">グッズ</p>
-    <h2 class="sectionH" data-t="goodsH">五つのライン</h2>
-    <p class="intro" data-t="goodsB">同じ一匹の魚から、客層のちがう五つの棚をつくります。子どもの棚、贈答の棚、旅の棚、文様の棚、そして工芸の棚。どれかを選ぶ必要はありません。原画は一つ、出口が五つあるということです。<br>そして、どの棚にも富士があります。フジキンという社名は富士に由来します。水にくわえて、富士をもう一つの意匠として据えました。海外のお客様にお渡しするとき、説明が一言で済みます。</p>
-    <p class="caseRow"><button type="button" class="caseBtn" data-case="goods"></button></p>
-
-    <div class="lineHead"><span class="num">01</span><h3 data-t="line1H">ちびフジィ ／ 日用品とおもちゃ</h3></div>
-    <p class="lineB" data-t="line1B">見学者センターとガチャの棚。安く、数が出て、持ち帰られるもの。子どもが一つ持って帰った日から、その家の食卓でフジキンの名前が出ます。</p>
-    <div class="grid g4" data-gallery="chibi" data-preview="8"></div>
-
-    <div class="lineHead"><span class="num">02</span><h3 data-t="line2H">公式ライン ／ 贈答と式典</h3></div>
-    <p class="lineB" data-t="line2B">公式原画と、フジキンがすでに使っている水輪の意匠だけで組んだ、大人のための一式。原画には一切手を入れていません。式典にも来客にも、そのまま出せます。取引先の机の上に残るものは、出稿より長く効きます。</p>
-    <div class="grid g4" data-gallery="official" data-preview="8"></div>
-
-    <div class="lineHead"><span class="num">03</span><h3 data-t="line3H">Maison Fujie ／ 革と帆布</h3></div>
-    <p class="lineB" data-t="line3B">一匹の魚と水輪だけでモノグラムを組み、旅の道具に落としました。どこの家のまねでもありません。企業ノベルティに見えないノベルティです。もらった方が本当に使えば、フジィは空港にも出張先にも出ていきます。</p>
-    <div class="grid g4" data-gallery="maison" data-preview="8"></div>
-
-    <div class="lineHead"><span class="num">04</span><h3 data-t="line5H">和紋のグッズ ／ 持ちあるくもの</h3></div>
-    <p class="lineB" data-t="line5B">和紋コレクションを、そのまま身のまわりの道具に。扇子、長財布、鞄、巾着、ハンカチ、メモ帳、風呂敷。柄はすべて上のコレクションと同じ版です。一度描けば、どの品目にも乗ります。</p>
-    <div class="grid g4" data-gallery="wamongoods" data-preview="8"></div>
-
-    <div class="lineHead"><span class="num">05</span><h3 data-t="line4H">和 ／ 工芸のことば</h3></div>
-    <p class="lineB" data-t="line4B">浮世絵、金屏風、蒔絵、染付、藍染。日本の工芸が鯉や鶴を描いてきたやり方で、チョウザメを描くとどうなるか。鯉と鶴は描かれつくしました。この魚は、まだ誰も描いていません。</p>
-    <div class="grid g4" data-gallery="wa" data-preview="8"></div>
+<section id="story" class="band dark idea">
+  <div class="wrap ideaWrap">
+    <div class="ideaText">
+      <p class="eyebrow"><span class="ideaNum">04</span><span data-t="tagStory">スクロール年表</span></p>
+      <h2 class="sectionH" data-t="storyH">一粒の卵から</h2>
+      <p class="intro" data-t="storyB">1987年の一言から、世界初の完全養殖、日本初のキャビア、そして2027年の40年目まで。指を下ろすだけで40年が流れていきます。社史ではなく、物語として書きました。読み終えた人は、バルブの会社を好きになっています。</p>
+      <p class="caseRow"><a class="btn small" href="timeline/" data-t="storyGo">読む →</a><button type="button" class="caseBtn" data-case="story"></button></p>
+    </div>
+    <a class="ideaArt" href="timeline/"><img src="assets/shot_timeline.jpg" alt=""></a>
   </div>
 </section>
 
-<!-- ============================ plush ============================ -->
-<section class="band dark">
+<section id="voice" class="band idea">
+  <div class="wrap ideaWrap">
+    <div class="ideaText">
+      <p class="eyebrow"><span class="ideaNum">05</span><span data-t="rtEyebrow">フジキンにしかない経路</span></p>
+      <h2 class="sectionH" data-t="rt1H">フジィに「中の人」を</h2>
+      <p class="intro" data-t="rt1B">給餌の時間、水面が一斉に沸き立つ数十秒。卵から出てくる一尾。誰も見たことのない映像を、フジキンだけが持っています。ロケ地はすべて自社保有で、制作費はほぼかかりません。公式 Instagram の 114 フォロワーは、弱点ではなく余白です。</p>
+      <p class="caseRow"><button type="button" class="caseBtn" data-case="voice"></button></p>
+    </div>
+    <figure class="ideaArt ph"><span data-t="phLabel">イメージ制作中</span></figure>
+  </div>
+</section>
+
+<section id="packaging" class="band dark idea">
+  <div class="wrap ideaWrap">
+    <div class="ideaText">
+      <p class="eyebrow"><span class="ideaNum">06</span><span data-t="rtEyebrow2">他社に真似できない施策</span></p>
+      <h2 class="sectionH" data-t="rt2H">取引先のパッケージを、そのまま広告に変える</h2>
+      <p class="intro" data-t="rt2B">フジキンは稚魚を全国の養殖業者に販売しています。その取引先にちびフジィを無償開放すれば、日本中の国産キャビアの缶にフジィが載ります。追加費用はかからず、既存の取引網だけで成立します。BtoB 企業が食卓に届く、他社には真似のできない経路です。</p>
+      <p class="caseRow"><button type="button" class="caseBtn" data-case="packaging"></button></p>
+    </div>
+    <figure class="ideaArt"><img src="assets/caviar_tin.jpg" alt=""></figure>
+  </div>
+</section>
+
+<section id="aquaworld" class="band idea">
+  <div class="wrap ideaWrap">
+    <div class="ideaText">
+      <p class="eyebrow"><span class="ideaNum">07</span><span data-t="aquaEyebrow">水族館と組めば</span></p>
+      <h2 class="sectionH" data-t="aquaH">サメの水槽の隣に、サメじゃない魚を</h2>
+      <p class="intro" data-t="aquaB">大洗のアクアワールドは、サメの展示で知られています。その隣に小さな水槽を一つ置き、里美養魚場から来た本物のフジィを泳がせます。パネルの一言は「サメじゃないです。サメより、ずっと少ないんです」。誰もがサメだと思う魚を、本物のサメの隣に。これ以上わかりやすい入口はありません。水族館の判断が前提です。</p>
+      <p class="caseRow"><button type="button" class="caseBtn" data-case="aquaworld"></button></p>
+    </div>
+    <figure class="ideaArt ph"><span data-t="phLabel">イメージ制作中</span></figure>
+  </div>
+</section>
+
+<section id="letter" class="band dark idea">
+  <div class="wrap ideaWrap">
+    <div class="ideaText">
+      <p class="eyebrow"><span class="ideaNum">08</span><span data-t="letterEyebrow">同い年の魚に</span></p>
+      <h2 class="sectionH" data-t="letterH">100 年の手紙</h2>
+      <p class="intro" data-t="letterB">養魚場を訪れた子どもが、その年に卵からかえった「2027 年組」に手紙を書きます。封をして、開けるのは 2030 年、創業 100 周年の日。一尾ずつを追う必要はありません。魚は年ごとの組で育てられ、いつかえったかは必ずわかっています。チョウザメは人より長く生きることがあります。同い年の魚は、一生の相手になります。</p>
+      <p class="caseRow"><button type="button" class="caseBtn" data-case="letter"></button></p>
+    </div>
+    <figure class="ideaArt ph"><span data-t="phLabel">イメージ制作中</span></figure>
+  </div>
+</section>
+
+<section id="manhole" class="band idea">
+  <div class="wrap ideaWrap">
+    <div class="ideaText">
+      <p class="eyebrow"><span class="ideaNum">09</span><span data-t="manholeEyebrow">常陸太田市と</span></p>
+      <h2 class="sectionH" data-t="manholeH">フジィのマンホール</h2>
+      <p class="intro" data-t="manholeB">駅前、市役所、養魚場の門。市内に 3〜5 枚、カラーの蓋には公式のフジィを原画どおりの色で、別の蓋にはちびフジィを。キャラクターのマンホールは日本では集める人がいて、地元紙が必ず報じます。一度置けば何十年も残り、写真は撮った本人が広めます。常陸太田が、フジィのふるさとになります。</p>
+      <p class="caseRow"><button type="button" class="caseBtn" data-case="manhole"></button></p>
+    </div>
+    <figure class="ideaArt ph"><span data-t="phLabel">イメージ制作中</span></figure>
+  </div>
+</section>
+
+<section id="openday" class="band dark idea">
+  <div class="wrap ideaWrap">
+    <div class="ideaText">
+      <p class="eyebrow"><span class="ideaNum">10</span><span data-t="openEyebrow">里美養魚場</span></p>
+      <h2 class="sectionH" data-t="openH">年に一度の公開日</h2>
+      <p class="intro" data-t="openB">抽選で選ばれた地元の 40 家族。午前は「2027 年組」への手紙、午後は小さな匙で、日本で初めてこの魚からつくられたキャビアを。1987 年にボルガ川の船の上でフジキンの社員が初めて口にしたのと、同じものです。40 席しかないから、話になります。ロケ地もキャビアも自社のもので、外に頼むものがありません。</p>
+      <p class="caseRow"><button type="button" class="caseBtn" data-case="openday"></button></p>
+    </div>
+    <figure class="ideaArt ph"><span data-t="phLabel">イメージ制作中</span></figure>
+  </div>
+</section>
+
+<section id="sturgeonday" class="band idea">
+  <div class="wrap ideaWrap">
+    <div class="ideaText">
+      <p class="eyebrow"><span class="ideaNum">11</span><span data-t="sdayEyebrow">記念日登録</span></p>
+      <h2 class="sectionH" data-t="sdayH">「チョウザメの日」を、正式に登録する</h2>
+      <p class="intro" data-t="sdayB">日本記念日協会に登録すると、記念日はカレンダーや「今日は何の日」の枠に載り、地方紙や情報番組が毎年拾います。日付はフジィの誕生日。公開日も、手紙も、この日に重ねます。現存するチョウザメは全種が絶滅危惧種ですが、この魚のための日はまだありません。最初に定めれば、フジィは一社のマスコットではなく、一つの種の顔になります。</p>
+      <p class="caseRow"><button type="button" class="caseBtn" data-case="sturgeonday"></button></p>
+    </div>
+    <figure class="ideaArt ph"><span data-t="phLabel">イメージ制作中</span></figure>
+  </div>
+</section>
+
+<!-- ============================ chapter 4: the landing place ============================ -->
+<div class="chapter" id="ch4"><div class="wrap"><span class="chNum">04</span><h2 data-t="ch4Name">受け皿</h2><p data-t="ch4Line">好きになった人が、手に取るもの。</p></div></div>
+
+<section id="plush" class="band dark">
   <div class="wrap">
-    <p class="eyebrow" data-t="plushEyebrow">ぬいぐるみ</p>
+    <p class="eyebrow"><span class="ideaNum">12</span><span data-t="plushEyebrow">ぬいぐるみ</span></p>
     <h2 class="sectionH" data-t="plushH">ぬいぐるみとマスコット</h2>
     <p class="intro" data-t="plushB">同じ一匹を、抱けるものと、鞄に下げられるものに分けました。前者は棚に置かれ、後者は街に出ていきます。広告は出した分しか出ませんが、これは売れた分だけ増えていきます。</p>
     <p class="caseRow"><button type="button" class="caseBtn" data-case="plush"></button></p>
 
     <div class="lineHead"><h3 data-t="plush1H">ぬいぐるみ ／ 3サイズ</h3></div>
     <p class="lineB" data-t="plush1B">10cm・25cm・50cm。稚魚・幼魚・成魚の三段階が、そのまま商品ラインになります。育つ魚だから、サイズ違いにも意味があります。</p>
-    <div class="grid g4" data-gallery="plush" data-preview="8"></div>
+    <div class="grid g4" data-gallery="plush" data-preview="4"></div>
 
     <div class="lineHead"><h3 data-t="plush2H">マスコット キーホルダー</h3></div>
     <p class="lineB" data-t="plush2B">いちばん安く、いちばん遠くまで行く一点。鞄に下がった瞬間から、毎日人目に触れます。通勤電車でも、教室でも、海外の空港でも。買った方が、そのまま媒体になります。</p>
-    <div class="grid g4" data-gallery="mascot" data-preview="8"></div>
+    <div class="grid g4" data-gallery="mascot" data-preview="4"></div>
   </div>
 </section>
 
-<!-- ============================ wamon ============================ -->
+<section id="goods" class="band">
+  <div class="wrap">
+    <p class="eyebrow"><span class="ideaNum">13</span><span data-t="goodsEyebrow">グッズ</span></p>
+    <h2 class="sectionH" data-t="goodsH">五つのライン</h2>
+    <p class="intro" data-t="goodsB">同じ一匹の魚から、客層のちがう五つの棚をつくります。子どもの棚、贈答の棚、旅の棚、文様の棚、そして工芸の棚。どれかを選ぶ必要はありません。原画は一つ、出口が五つあるということです。<br>そして、どの棚にも富士があります。フジキンという社名は富士に由来します。水にくわえて、富士をもう一つの意匠として据えました。海外のお客様にお渡しするとき、説明が一言で済みます。</p>
+    <p class="caseRow"><button type="button" class="caseBtn" data-case="goods"></button></p>
+
+    <div class="lineHead"><span class="num">01</span><h3 data-t="line1H">ちびフジィ ／ 日用品とおもちゃ</h3></div>
+    <p class="lineB" data-t="line1B">見学者センターとガチャの棚。安く、数が出て、持ち帰られるもの。子どもが一つ持って帰った日から、その家の食卓でフジキンの名前が出ます。</p>
+    <div class="grid g4" data-gallery="chibi" data-preview="4"></div>
+
+    <div class="lineHead"><span class="num">02</span><h3 data-t="line2H">公式ライン ／ 贈答と式典</h3></div>
+    <p class="lineB" data-t="line2B">公式原画と、フジキンがすでに使っている水輪の意匠だけで組んだ、大人のための一式。原画には一切手を入れていません。式典にも来客にも、そのまま出せます。取引先の机の上に残るものは、出稿より長く効きます。</p>
+    <div class="grid g4" data-gallery="official" data-preview="4"></div>
+
+    <div class="lineHead"><span class="num">03</span><h3 data-t="line3H">Maison Fujie ／ 革と帆布</h3></div>
+    <p class="lineB" data-t="line3B">一匹の魚と水輪だけでモノグラムを組み、旅の道具に落としました。どこの家のまねでもありません。企業ノベルティに見えないノベルティです。もらった方が本当に使えば、フジィは空港にも出張先にも出ていきます。</p>
+    <div class="grid g4" data-gallery="maison" data-preview="4"></div>
+
+    <div class="lineHead"><span class="num">04</span><h3 data-t="line5H">和紋のグッズ ／ 持ちあるくもの</h3></div>
+    <p class="lineB" data-t="line5B">和紋コレクションを、そのまま身のまわりの道具に。扇子、長財布、鞄、巾着、ハンカチ、メモ帳、風呂敷。柄はすべて下のコレクションと同じ版です。一度描けば、どの品目にも乗ります。</p>
+    <div class="grid g4" data-gallery="wamongoods" data-preview="4"></div>
+
+    <div class="lineHead"><span class="num">05</span><h3 data-t="line4H">和 ／ 工芸のことば</h3></div>
+    <p class="lineB" data-t="line4B">浮世絵、金屏風、蒔絵、染付、藍染。日本の工芸が鯉や鶴を描いてきたやり方で、チョウザメを描くとどうなるか。鯉と鶴は描かれつくしました。この魚は、まだ誰も描いていません。</p>
+    <div class="grid g4" data-gallery="wa" data-preview="4"></div>
+  </div>
+</section>
+
 <section id="wamon" class="band cream">
   <div class="wrap">
     <p class="eyebrow" data-t="wamonEyebrow">パターン</p>
     <h2 class="sectionH" data-t="wamonH">フジィ 和紋コレクション</h2>
     <p class="intro" data-t="wamonB">日本の文様は、意味で選ばれてきました。青海波は海、鱗は魚の鱗、立涌はのぼる流れ、麻の葉は育つこと。この魚のために選び、この魚のために描き足した 18 種です。亀甲の節にはバルブのハンドル、矢絣は逆流、小紋の粒はキャビア。意味のある柄だから、渡すときに説明ができます。説明できる柄は、贈り物になります。</p>
-    <div class="grid g2" data-gallery="wamon" data-preview="4"></div>
+    <div class="grid g2" data-gallery="wamon" data-preview="2"></div>
   </div>
 </section>
 
-<!-- ============================ expected effect ============================ -->
+<!-- ============================ chapter 5: one day in 2027 ============================ -->
+<div class="chapter" id="ch5"><div class="wrap"><span class="chNum">05</span><h2 data-t="ch5Name">2027 年の、ある一日</h2><p data-t="ch5Line">ここまでのすべてを合わせると、何が起きるか。</p></div></div>
+
 <section id="effect" class="band">
   <div class="wrap">
     <p class="eyebrow" data-t="fxEyebrow">期待される効果</p>
@@ -235,6 +345,5 @@
 <script src="hero.js"></script>
 <script src="hub.js"></script>
 <script src="cases.js"></script>
-<script src="buddy.js"></script>
 </body>
 </html>

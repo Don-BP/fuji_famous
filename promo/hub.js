@@ -104,29 +104,59 @@
 
   /* ---------------- language ---------------- */
   var EN = {
-    navWork: "Work", navChar: "Character", navFish: "The fish", navGoods: "Goods", navWamon: "Patterns",
     navBy: "Vittorio Zumpano / Brain Power Inc.",
+    navCh1: "The fish", navCh2: "Two forms", navCh3: "Ideas", navCh4: "Goods", navCh5: "2027",
     heroBy: "Conceived and produced by Vittorio Zumpano — Brain Power Inc., Osaka",
     footCredit: "Concept, design and build by <b>Vittorio Zumpano</b><br>Brain Power Inc., Osaka",
     heroKicker: "ENTRY — THE \"MAKE FUJIE FAMOUS\" IDEA CONTEST",
     heroTitle: "Fujie is<br>a real fish.",
     heroLede: "Not an invented character. A sturgeon that began with one remark from the late Eizaburo Nishibori in 1987, and of which more than ten thousand now swim at the Satomi farm in Hitachiota, Ibaraki. Any company can commission a drawn mascot. Only Fujikin has one that is alive. Everything past this point is what that single fact can be stretched into.",
-    heroPlay: "Raise one", heroStory: "Forty years",
+    heroPlay: "Raise one", heroContents: "Contents",
     heroMeta: "1987 — 2027　/　FORTY YEARS OF THE WORLD'S FIRST FULL-CYCLE STURGEON FARMING",
-    workEyebrow: "MADE FOR THIS ENTRY", workH: "Two things that are not goods at all.",
-    workB: "The brief asks for ideas that do not stay inside the frame of merchandise, so this starts outside it. Both open in a browser. No app, no sign-up. The tablet in the visitor centre, the recruiting page, a link handed out on a school visit — the places to put them already exist inside the company.",
-    tagGame: "RAISING SIM", gameH: "Raise Fujie",
-    gameB: "Feed, play, sleep, flow. Four kinds of care and four mini-games take a single egg all the way to a grown fish. It is over in ninety seconds, and by then the player knows that Fujikin is the company that raised a sturgeon from egg to egg — without having read a line of the company brochure. Japanese and English.",
-    gameGo: "Play →",
-    tagStory: "SCROLLING TIMELINE", storyH: "From a single egg",
-    storyB: "From one remark in 1987 to the world's first full-cycle farming, Japan's first caviar, and on to the fortieth year in 2027. Forty years go past under one thumb. It is written as a story rather than a company history. People come out of it liking a valve company.",
-    storyGo: "Read →",
+    tocEyebrow: "CONTENTS", tocH: "Thirteen ideas, in five chapters.",
+    tocB: "Read top to bottom and it is one story. In a hurry? Tap any tile and the page jumps to that idea.",
+    ch1Name: "The fish", ch1Line: "Why any of this holds together.",
+    ch2Name: "Two forms", ch2Line: "Protect the official Fujie; meet people as the other one.",
+    ch3Name: "Ideas", ch3Line: "Nine answers to the brief's \"beyond goods\".",
+    ch4Name: "Goods", ch4Line: "What people pick up once they like him.",
+    ch5Name: "One day in 2027", ch5Line: "What all of it adds up to.",
+    tFish: "Real, and endangered", tChibi: "Chibi Fujie", tStk: "128 stickers",
+    tGame: "Raise Fujie", tStory: "From a single egg", tVoice: "Give Fujie a voice", tPack: "Trade customers' packaging",
+    tAqua: "Next to the sharks", tLetter: "The hundred-year letter", tManhole: "Fujie manhole covers", tOpen: "One open day a year", tSday: "Sturgeon Day",
+    tPlush: "Plush and mascot", tGoods: "Five lines", tWamon: "The pattern collection", tDay: "So what happens",
+    phLabel: "IMAGE IN PRODUCTION",
     fishEyebrow: "ABOUT THIS FISH", fishH: "Fujie is real. Fujie is also endangered.",
     fishB: "Sturgeon are listed by the IUCN as the most critically endangered group of species on earth; every surviving species is threatened. What Fujikin closed in 1998 was the full life cycle in a tank — which is to say, <strong>a way to make caviar without ever taking another fish from a river</strong>. What they built was not a delicacy. It was a way to stop catching them. In the first year 5% survived — 95 of every 100 fish died. They kept going for eleven years; in 1998 a fish raised from an egg laid eggs of its own, and in 2002 Japan's first domestic caviar shipped.<br>This is the strongest thing in the proposal. A mascot that is only cute gets forgotten. Fujie comes with a reason to care. Valves for semiconductor fabs are a long way from most people's lives. A company that worked out how to increase a fish without catching any is not. 2027 is the fortieth year of that work.",
     charEyebrow: "PROPOSAL", charH: "Chibi Fujie — a second form",
     charB: "The official Fujie is not touched. As Article 7 of the manual requires, the original artwork is used exactly as supplied. Chibi Fujie is proposed as a <strong>second form</strong> to stand beside it: the sharp real fish for adults, this one for children. One form trying to reach every age reaches neither well. Two forms take the gift counter and the capsule machine at the same time.",
     stkEyebrow: "LINE STICKERS", stkH: "A hundred and twenty-eight stickers",
     stkB: "Sixty-four in Japanese, sixty-four in English, every one cut out on its own and finished to the LINE spec. Free for adding the official account.<br>Stickers do something advertising cannot: <strong>people send them to each other</strong>. Every time one is sent, Fujie lands on a screen nobody paid to reach. First in the pack is \"Not a shark!\" — one line, and the sturgeon conversation has started. The English sixty-four carry straight over to WhatsApp and Telegram.",
+    tagGame: "RAISING SIM", gameH: "Raise Fujie",
+    gameB: "Feed, play, sleep, flow. Four kinds of care and four mini-games take a single egg all the way to a grown fish. It is over in ninety seconds, and by then the player knows that Fujikin is the company that raised a sturgeon from egg to egg — without having read a line of the company brochure. Japanese and English.",
+    gameGo: "Play →",
+    tagStory: "SCROLLING TIMELINE", storyH: "From a single egg",
+    storyB: "From one remark in 1987 to the world's first full-cycle farming, Japan's first caviar, and on to the fortieth year in 2027. Forty years go past under one thumb. It is written as a story rather than a company history. People come out of it liking a valve company.",
+    storyGo: "Read →",
+    rtEyebrow: "A ROUTE ONLY FUJIKIN HAS", rt1H: "Give Fujie a voice",
+    rt1B: "Feeding time, when the whole surface boils for a few dozen seconds. A single fish hatching from an egg. Footage nobody has seen, and only Fujikin has it. Every location is company-owned and it costs almost nothing to shoot. The official Instagram's 114 followers are not a weakness but room.",
+    rtEyebrow2: "THE ONE NOBODY ELSE CAN COPY", rt2H: "Turn trade customers' packaging into advertising",
+    rt2B: "Fujikin sells sturgeon fry to farms across Japan. Release Chibi Fujie to those customers free of charge and Fujie appears on tins of domestic caviar nationwide. No extra cost, only the existing trade network. A B2B company reaching the dinner table by a route no other company can copy.",
+    aquaEyebrow: "IF THE AQUARIUM AGREES", aquaH: "A fish that is not a shark, next to the sharks",
+    aquaB: "Aqua World in Ōarai is known for its sharks. Put one small tank beside them with a real Fujie from the Satomi farm, and one line on the panel: \"Not a shark! Far rarer than a shark.\" The fish everyone mistakes for a shark, next to the real thing. There is no clearer way in. It depends on the aquarium saying yes.",
+    letterEyebrow: "TO THE FISH YOUR OWN AGE", letterH: "The hundred-year letter",
+    letterB: "A child who visits the farm writes to \"the class of 2027\" — the fish that hatched that year. The letter is sealed, to be opened in 2030 on the hundredth anniversary. No single fish needs tracking: farm fish are raised in year-groups, and the year they hatched is always known. A sturgeon can outlive a person. The fish your own age is a companion for life.",
+    manholeEyebrow: "WITH HITACHIOTA CITY", manholeH: "Fujie manhole covers",
+    manholeB: "The station, city hall, the farm gate. Three to five across the town — coloured covers with the official Fujie in exactly the colours of the original, others with Chibi Fujie. Character manholes are collected in Japan and the local paper always reports them. Installed once, they stay for decades, and the photographs are spread by the people who take them. Hitachiota becomes Fujie's home town.",
+    openEyebrow: "AT THE SATOMI FARM", openH: "One open day a year",
+    openB: "Forty local families, chosen by lottery. In the morning, letters to the class of 2027; in the afternoon, a small spoon, and the caviar first made in Japan from this fish — the same thing someone from Fujikin first tasted on a boat on the Volga in 1987. Forty seats is what makes it a story. The place and the caviar are both the company's own; nothing is bought in.",
+    sdayEyebrow: "A REGISTERED DAY", sdayH: "Register \"Sturgeon Day\" officially",
+    sdayB: "Register it with Japan's anniversary association and the day goes into calendars and the \"what day is it today\" slots that local papers and morning shows fill every year. The date is Fujie's birthday; the open day and the letters fall on it. Every surviving sturgeon species is endangered and there is no day for them yet. Set the first one, and Fujie becomes the face of a species rather than one company's mascot.",
+    plushEyebrow: "PLUSH", plushH: "Plush and mascot",
+    plushB: "The same fish split in two: one you can hold, one you can hang on a bag. The first sits on a shelf, the second goes out into the city. Advertising runs for as long as it is paid for. This runs for as long as people keep buying it.",
+    plush1H: "Plush / three sizes",
+    plush1B: "10cm, 25cm, 50cm. Fry, young fish, grown fish — the three stages are the product line. It is a fish that grows, so the sizes mean something.",
+    plush2H: "Mascot keychain",
+    plush2B: "The cheapest single item in the range and the one that travels furthest. From the moment it is hanging on a bag it is seen every day: on the train, in a classroom, in an airport abroad. The person who bought it becomes the medium.",
     goodsEyebrow: "GOODS", goodsH: "Five lines",
     goodsB: "One fish, five different shelves: the children's shelf, the gift shelf, the travel shelf, the pattern shelf and the craft shelf. There is no need to choose between them — one piece of artwork, five ways out of the building.<br>And Mount Fuji on every one of them. The name Fujikin comes from the mountain, so it now stands beside the water as the second house motif. Hand one of these to an overseas customer and the explanation takes a sentence.",
     line1H: "Chibi Fujie / toys and daily things",
@@ -136,23 +166,11 @@
     line3H: "Maison Fujie / leather and canvas",
     line3B: "One fish and one ripple, worked into a monogram and put on travel goods. It imitates no existing house. This is the line that does not look like corporate merchandise, and if people actually use it, Fujie turns up in airports and on business trips.",
     line5H: "Wamon goods / things you carry",
-    line5B: "The pattern collection put straight onto everyday objects: fans, wallets, bags, pouches, handkerchiefs, notepads, furoshiki. Every print is the same artwork as the swatches above. Draw it once and it goes onto anything.",
+    line5B: "The pattern collection put straight onto everyday objects: fans, wallets, bags, pouches, handkerchiefs, notepads, furoshiki. Every print is the same artwork as the swatches below. Draw it once and it goes onto anything.",
     line4H: "Wa / the language of craft",
     line4B: "Woodblock, gold screens, maki-e, blue-and-white, indigo. What happens when Japanese craft draws a sturgeon the way it has always drawn carp and cranes. Carp and cranes are finished. Nobody has drawn this fish yet.",
     wamonEyebrow: "PATTERNS", wamonH: "The Fujie pattern collection",
     wamonB: "Japanese patterns have always been chosen for what they mean. Seigaiha is the sea, uroko is a fish's scales, tatewaku is rising current, asanoha is growing. Eighteen patterns chosen for this fish and drawn for it: valve handwheels at the tortoise-shell nodes, arrows pointing upstream, caviar as a komon. Because each pattern means something, it can be explained when it is handed over — and a pattern that can be explained becomes a gift.",
-    plushEyebrow: "PLUSH", plushH: "Plush and mascot",
-    plushB: "The same fish split in two: one you can hold, one you can hang on a bag. The first sits on a shelf, the second goes out into the city. Advertising runs for as long as it is paid for. This runs for as long as people keep buying it.",
-    plush1H: "Plush / three sizes",
-    plush1B: "10cm, 25cm, 50cm. Fry, young fish, grown fish — the three stages are the product line. It is a fish that grows, so the sizes mean something.",
-    plush2H: "Mascot keychain",
-    plush2B: "The cheapest single item in the range and the one that travels furthest. From the moment it is hanging on a bag it is seen every day: on the train, in a classroom, in an airport abroad. The person who bought it becomes the medium.",
-    rtEyebrow: "TWO WITHOUT PHOTOS YET", rtH: "Two routes only Fujikin has.",
-    rtB: "Everything above this could be made by anyone who chose to. These two cannot: they need the farm, and the fry trade network. Neither is a new investment. Both are things the company already owns, brought out into the open.",
-    rt1H: "Give Fujie a voice",
-    rt1B: "Feeding time, when the whole surface boils for a few dozen seconds. A single fish hatching from an egg. Footage nobody has seen, and only Fujikin has it. Every location is company-owned and it costs almost nothing to shoot. The official Instagram's 114 followers are not a weakness but room.",
-    rt2H: "Turn trade customers' packaging into advertising",
-    rt2B: "Fujikin sells sturgeon fry to farms across Japan. Release Chibi Fujie to those customers free of charge and Fujie appears on tins of domestic caviar nationwide. No extra cost, only the existing trade network. A B2B company reaching the dinner table by a route no other company can copy.",
     fxT1: "AM", fxT2: "NOON", fxT3: "PM", fxT4: "NIGHT",
     fxEyebrow: "EXPECTED EFFECT", fxH: "One day in 2027.",
     fxB: "Everything above this line is finished and attached to this entry. This is what it adds up to, told as one day.<br>The brief says television advertising is not being considered. Nothing here is bought space. So the effect does not show up as a ratings figure. It shows up as a day like this one.",
@@ -251,4 +269,22 @@
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && !lb.hidden) close();
   });
+
+  /* ---------------- chapter bar ---------------- */
+  var chLinks = [].slice.call(document.querySelectorAll("#chapters a")),
+      chMarks = chLinks.map(function (a) { return document.querySelector(a.getAttribute("href")); }),
+      navNow = document.getElementById("navNow"),
+      navBar = document.getElementById("navBar");
+  function chapterSync() {
+    var y = window.scrollY + 120, cur = -1;
+    chMarks.forEach(function (m, i) { if (m && m.offsetTop <= y) cur = i; });
+    chLinks.forEach(function (a, i) { a.classList.toggle("on", i === cur); });
+    navNow.textContent = cur < 0 ? "" : chLinks[cur].textContent;
+    var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+    navBar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + "%";
+  }
+  window.addEventListener("scroll", chapterSync, { passive: true });
+  window.addEventListener("resize", chapterSync);
+  document.getElementById("langBtn").addEventListener("click", chapterSync);
+  chapterSync();
 })();
