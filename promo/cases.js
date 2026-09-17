@@ -191,21 +191,21 @@ window.CASES = {
     ja: {
       kicker: "施策 07 ── 水族館と組めば", title: "サメの水槽の隣に、サメじゃない魚を",
       beats: [
-        ["場面", "大洗のアクアワールド。日本有数のサメの展示の前で、子どもが立ち止まります。その隣に、小さな水槽が一つ。銀色の、サメによく似た魚が泳いでいて、パネルにはちびフジィがこう言っています。「サメじゃないです。サメより、ずっと少ないんです」。魚は里美養魚場から来た本物のフジィです。"],
+        ["場面", "大洗のアクアワールド。日本有数のサメの展示の前で、子どもが立ち止まります。その隣に、もう一枚の大きな水槽。銀色の、サメによく似た魚が何尾も泳いでいて、パネルにはちびフジィがこう言っています。「サメじゃないです。サメより、ずっと少ないんです」。魚は里美養魚場から来た本物のフジィで、一メートルを超えます。"],
         ["どう届くか", "アクアワールド茨城県大洗水族館は、県内でも指折りの集客施設で、サメの展示種数の多さで知られています。誰もがサメだと思う魚を、サメの本物の隣に置く。これ以上わかりやすい入口はありません。同じ茨城県内で、県の水産振興とも方向が一致します。"],
         ["フジィと、フジキンを好きになる理由", "水族館に来る人は、はじめから魚を好きになりに来ています。そこで「絶滅危惧種」「世界初の完全養殖」「川から獲らなくていい技術」を、生きた魚の前で読む。展示は説明ではなく、体験になります。帰りの車で「あの魚、バルブの会社が育ててるんだって」と話が出れば、それが目的です。"],
         ["期待される効果", "フジキンが自前ではつくれない規模の来場者に、年間を通じて届きます。サメじゃないです、というスタンプの一言に、行ける場所ができます。水族館側にも新しい展示という利点があり、双方に理由のある提携です。"],
-        ["最初の一歩", "水族館の判断が前提です。まず 2027 年度に、サメ展示の隣での小規模な特設水槽を提案します。実現すれば、40 周年の 2027 年に「一粒の卵から」の企画展へ広げる道が開けます。"]
+        ["最初の一歩", "水族館の判断が前提です。まず 2027 年度に、サメ展示の隣にチョウザメの展示水槽を設ける提案をします。実現すれば、40 周年の 2027 年に「一粒の卵から」の企画展へ広げる道が開けます。"]
       ]
     },
     en: {
       kicker: "IDEA 07 — if the aquarium agrees", title: "A fish that is not a shark, next to the sharks",
       beats: [
-        ["The scene", "Aqua World in Ōarai. In front of one of Japan's biggest shark exhibits, a child stops. Beside it is one small tank. A silver fish that looks very much like a shark is swimming in it, and on the panel Chibi Fujie says: \"Not a shark! Far rarer than a shark.\" The fish is a real Fujie, brought from the Satomi farm."],
+        ["The scene", "Aqua World in Ōarai. In front of one of Japan's biggest shark exhibits, a child stops. Beside it is a second full-size tank. Several silver fish that look very much like sharks are swimming in it, and on the panel Chibi Fujie says: \"Not a shark! Far rarer than a shark.\" The fish are real Fujies, over a metre long, brought from the Satomi farm."],
         ["How it reaches people", "Aqua World Ibaraki is one of the prefecture's biggest attractions and is known for the number of shark species it keeps. Put the fish everyone mistakes for a shark next to the real thing. There is no clearer way in. It is in the same prefecture, and it points the same way as Ibaraki's own fisheries policy."],
         ["Why they come to like Fujie, and Fujikin", "People come to an aquarium already wanting to like fish. There, in front of a living one, they read \"endangered\", \"world's first full-cycle farming\", \"a way to never take one from a river\". The exhibit is not an explanation; it is an encounter. If the drive home includes \"that fish is raised by a valve company\", that was the point."],
         ["Expected effect", "Year-round reach to a public Fujikin could never assemble on its own. The sticker line \"Not a shark!\" gets a place you can actually go. The aquarium gains a new exhibit, so both sides have a reason — which is what makes a partnership hold."],
-        ["The first step", "This depends on the aquarium. In fiscal 2027, propose a small special tank beside the shark exhibit. If it works, it opens the way to a \"from a single egg\" exhibition for the fortieth year."]
+        ["The first step", "This depends on the aquarium. In fiscal 2027, propose a sturgeon exhibit tank beside the shark exhibit. If it works, it opens the way to a \"from a single egg\" exhibition for the fortieth year."]
       ]
     }
   },
