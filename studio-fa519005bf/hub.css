@@ -401,3 +401,9 @@ footer{padding:clamp(48px,7vw,84px) clamp(18px,5vw,72px);background:#03101a;bord
 .caseBeat h3{margin:4px 0 10px;font-family:var(--serif);font-weight:600;font-size:16.5px;letter-spacing:.03em}
 .caseBeat p{margin:0;font-size:13.5px;line-height:2.05;color:#3d4a51}
 
+
+/* on a phone the close button sits above the text instead of over it */
+@media (max-width:640px){
+  #caseClose{position:static;display:inline-block;margin:0 0 20px}
+  .caseTitle{padding-right:0}
+}
