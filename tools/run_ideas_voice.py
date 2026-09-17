@@ -90,11 +90,15 @@ TAKES = {
 
     # The phone is the hero: what the post actually looks like.
     "voice_b": PANEL_LAYOUT + HALL + BOIL +
-               "LEFT LARGE PANEL: an ordinary smartphone held upright in two Japanese hands fills most of "
-               "the panel, seen slightly from above. Its screen is entirely filled by the vertical "
-               "clip of the boiling water, with one empty dark strip across the lower third of the "
-               "screen and an empty pale circle at the left end of that strip. Behind and around "
-               "the phone, softly out of focus, the real tank rim and the real churn. "
+               "LEFT LARGE PANEL: an ordinary smartphone held upright in two hands fills most of "
+               "the panel, seen slightly from above. The hands and forearms are JAPANESE: slim, "
+               "smooth and almost hairless, with fair even skin - not thick, pale, hairy Western "
+               "forearms, which an earlier attempt produced and which were thrown away. Nothing "
+               "else intrudes into the bottom of the panel: no head, no hair, no dark shape at the "
+               "bottom edge, just the hands, the phone and the tank. Its screen is entirely filled "
+               "by the vertical clip of the boiling water, with one empty dark strip across the "
+               "lower third of the screen and an empty pale circle at the left end of that strip. "
+               "Behind and around the phone, softly out of focus, the real tank rim and the churn. "
                "TOP RIGHT PANEL: the boiling surface photographed straight down from above, filling "
                "the panel - backs, snouts and spray, no people. "
                "BOTTOM RIGHT PANEL: a Japanese keeper's hands tipping feed from a scoop into the "
@@ -115,6 +119,59 @@ TAKES = {
                "showing the churning water as a vertical clip with one empty dark strip across the "
                "lower third and an empty pale circle at the left end of that strip.",
 }
+
+
+# ---------------------------------------------------------------------------
+# The four-scene version. The earlier takes each showed the boiling water AND a
+# phone, so putting two of them side by side repeated both. This one carries the
+# four scenes once each: feeding, the boil, the filming, the egg.
+# ---------------------------------------------------------------------------
+
+GRID4 = (
+    "*** LAYOUT ***\n"
+    "This image is a FOUR-PANEL editorial photo grid: two panels across and two panels down, four "
+    "equal rectangles filling the frame, separated by thin, clean, even white gutters and sitting "
+    "flush to the edges. All four are photographs in the same documentary style, light and colour. "
+    "No text on the layout, no captions, no numbering, no border around the outside.\n\n"
+)
+
+BIG_LEFT = (
+    "*** LAYOUT ***\n"
+    "This image is a FOUR-PANEL editorial photo layout. One LARGE VERTICAL panel fills the left "
+    "half of the frame, and THREE smaller panels are stacked one above another filling the right "
+    "half. The panels are separated by thin, clean, even white gutters and sit flush to the edges. "
+    "All four are photographs in the same documentary style, light and colour. No text on the "
+    "layout, no captions, no numbering, no border around the outside.\n\n"
+)
+
+FOUR = (
+    "The four panels show FOUR DIFFERENT MOMENTS of the same morning, each appearing ONCE. Nothing "
+    "is repeated: there is exactly one panel of feeding, one of the water, one of the phone and one "
+    "of the egg.\n"
+    "FEEDING: a Japanese keeper's hands tipping pellets from a scoop into a rearing tank. The tank "
+    "is CENTRED in its panel, round and square in the middle of the frame, the falling feed and the "
+    "first rise of the water at the centre. No phone in this panel.\n"
+    "THE WATER: the surface of the tank BOILING, photographed close and from above - dozens of big "
+    "sturgeon crowding and turning through the surface, backs and snouts breaking the water, white "
+    "spray frozen in the air. No people and no phone in this panel.\n"
+    "THE PHONE: an ordinary smartphone held upright in two Japanese hands - slim, smooth, "
+    "almost hairless forearms, fair even skin, never thick pale hairy Western forearms. The phone "
+    "fills its panel and its screen is entirely filled by the vertical clip of the churning water, "
+    "with one plain EMPTY dark translucent strip across the lower third of the screen and a plain "
+    "EMPTY pale circle at the left end of that strip. Behind the phone, soft and out of focus, the "
+    "hall. No tank of boiling water in sharp focus in this panel.\n"
+    "THE EGG: an extreme close-up of one translucent amber sturgeon egg at the moment of hatching, "
+    "a tiny larva emerging, under soft hatchery light against dark water. Nothing else in frame.\n"
+)
+
+TAKES["voice_d"] = GRID4 + HALL + FOUR + (
+    "Arrange them clockwise from the top left: feeding, then the water, then the egg, then the "
+    "phone.")
+
+TAKES["voice_e"] = BIG_LEFT + HALL + FOUR + (
+    "The LARGE LEFT panel is THE WATER. The three stacked panels on the right are, from top to "
+    "bottom: feeding, the phone, and the egg.")
+
 
 if __name__ == "__main__":
     wanted = sys.argv[1:] or list(TAKES)

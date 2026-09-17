@@ -20,20 +20,23 @@ from PIL import Image, ImageDraw, ImageFont
 from build_sday_screen import keyed
 
 ROOT = pathlib.Path("D:/Fuji_Famous/Fujie_Creative")
-PLATE = ROOT / "20_new_ideas" / "voice_a.png"
 CHIBI = ROOT / "01_character" / "master_v3_wave.png"
-OUT = ROOT / "20_new_ideas" / "voice_plate.png"
-
 CAPTION = "今日もごはん。1万匹分"
-STRIP = (948, 332, 1095, 363)   # the empty caption strip on the phone screen
-CIRCLE = (947, 336, 975, 360)   # the empty avatar disc at its left end
+
+# Each take frames the phone differently, so the empty strip and the empty avatar
+# disc sit in a different place on each one. Measured off the plates.
+PLATES = {
+    "voice_a": {"strip": (948, 332, 1095, 363), "circle": (947, 336, 975, 360)},
+    "voice_b": {"strip": (234, 555, 377, 588), "circle": (235, 560, 262, 585)},
+    "voice_d": {"strip": (246, 746, 351, 771), "circle": (247, 751, 265, 768)},
+}
 GAP = 6                         # breathing room between the avatar and the words
 INK = (255, 255, 255)
 FONT = "C:/Windows/Fonts/YuGothB.ttc"
 SS = 8                          # supersampling, for clean type at this size
 
 
-def avatar(plate, fish):
+def avatar(plate, fish, CIRCLE):
     """Chibi Fujie in the account's profile circle, masked to a disc."""
     l, t, r, b = CIRCLE
     d = min(r - l, b - t)
@@ -58,7 +61,7 @@ def avatar(plate, fish):
     print(f"  avatar {d}px at {cx},{cy}", flush=True)
 
 
-def caption(plate):
+def caption(plate, STRIP, CIRCLE):
     """The line from the case copy, set in the empty strip."""
     l, t, r, b = STRIP
     l = CIRCLE[2] + GAP
@@ -79,8 +82,13 @@ def caption(plate):
 
 
 if __name__ == "__main__":
-    plate = Image.open(PLATE).convert("RGBA")
-    avatar(plate, keyed(CHIBI))
-    caption(plate)
-    plate.convert("RGB").save(OUT)
-    print("WROTE", OUT)
+    fish = keyed(CHIBI)
+    for name in (sys.argv[1:] or list(PLATES)):
+        print(name, flush=True)
+        STRIP, CIRCLE = PLATES[name]["strip"], PLATES[name]["circle"]
+        plate = Image.open(ROOT / "20_new_ideas" / (name + ".png")).convert("RGBA")
+        avatar(plate, fish, CIRCLE)
+        caption(plate, STRIP, CIRCLE)
+        out = ROOT / "20_new_ideas" / (name.replace("voice_", "voice_plate_") + ".png")
+        plate.convert("RGB").save(out)
+        print("  WROTE", out, flush=True)
