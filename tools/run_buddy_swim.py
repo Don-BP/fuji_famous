@@ -33,6 +33,11 @@ Takes the raw white-background render and turns it into the file the page uses:
 
   1. Cuts the white away frame by frame with the same flood-fill as
      tools/cutout.py, so his own pale belly survives and the edge stays soft.
+     Then it clears the gaps the flood cannot reach: when he lifts a flipper
+     away from his tail, the daylight between them is walled off by his own
+     outline, and the fill never gets in. Those are told apart from his belly
+     by what surrounds them - a real gap is ringed by the black outline on
+     nearly every side, a highlight on his belly is not.
   2. Crops every frame to one shared box, so the cut-out does not wobble.
   3. Ends the loop at the frame that best matches the first one, so it repeats
      without a visible jump.
@@ -60,6 +65,12 @@ SRC = CHAR / "swim_src" / "chibi_swim_raw.mp4"
 SENTINEL = (255, 0, 255)
 FLOOD_THRESH = 32          # how far from white still counts as background
 FEATHER = 1.0              # soft edge, in pixels, before the resize
+
+# walled-off daylight: near-white, big enough to see, and ringed by his outline
+GAP_WHITE = 244            # every channel at least this bright
+GAP_MIN_AREA = 500         # smaller than this is a speck, not a gap
+GAP_RING_DARK = 0.35       # how much of what surrounds it must be black outline
+DARK = 120                 # a channel this low is outline, not shading
 MARGIN = 0.03              # breathing room kept around the shared crop box
 WIDE = 320                 # finished width; he is never drawn wider than 172
 FPS = 24                   # what the render came out at
@@ -95,6 +106,44 @@ def background_mask(im):
     return np.all(np.array(work) == np.array(SENTINEL), axis=-1)
 
 
+def walled_off_gaps(im, bg):
+    """White the flood could not reach because his own outline shuts it in.
+
+    Everything near-white that the border fill missed is a candidate. The ones
+    that are really background - the daylight between a raised flipper and the
+    tail - are surrounded by the black outline on nearly every side. The pale
+    shine on his belly is surrounded by his own grey, so it stays.
+    """
+    rgb = np.asarray(im).astype(int)
+    candidate = (rgb.min(axis=2) >= GAP_WHITE) & ~bg
+    if not candidate.any():
+        return np.zeros_like(bg)
+
+    flat = Image.fromarray((candidate * 255).astype(np.uint8))
+    # anything that survives being eaten in from all sides is worth looking at;
+    # this skips the hundreds of one-pixel specks along the outline
+    seeds = np.asarray(flat.filter(ImageFilter.MinFilter(5))) > 127
+
+    found = np.zeros_like(bg)
+    taken = np.zeros_like(bg)
+    for y, x in np.argwhere(seeds):
+        if taken[y, x]:
+            continue
+        probe = flat.copy()
+        ImageDraw.floodfill(probe, (int(x), int(y)), 1)
+        blob = candidate & (np.asarray(probe) == 1)
+        taken |= blob
+        if blob.sum() < GAP_MIN_AREA:
+            continue
+        grown = np.asarray(
+            Image.fromarray((blob * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(5))
+        ) > 127
+        ring = grown & ~blob
+        if ring.any() and (rgb[ring].min(axis=1) < DARK).mean() >= GAP_RING_DARK:
+            found |= blob
+    return found
+
+
 def loop_length(frames, earliest=None):
     """The frame after which the clip is closest to where it started."""
     earliest = earliest or len(frames) // 2
@@ -115,12 +164,16 @@ def main():
     raw = frames_from(SRC)
     print("%d frames at %dx%d" % (len(raw), raw[0].width, raw[0].height))
 
-    cut, boxes = [], []
+    cut, boxes, gapped = [], [], 0
     for im in raw:
         bg = background_mask(im)
         if bg.mean() < 0.02:
             sys.exit("only %.1f%% of a frame reads as background - "
                      "the character needs more margin" % (bg.mean() * 100))
+        gaps = walled_off_gaps(im, bg)
+        if gaps.any():
+            gapped += 1
+            bg = bg | gaps
         alpha = Image.fromarray(np.where(bg, 0, 255).astype(np.uint8))
         if FEATHER:
             alpha = alpha.filter(ImageFilter.GaussianBlur(FEATHER))
@@ -135,6 +188,7 @@ def main():
     pad = int(round(max(x1 - x0, y1 - y0) * MARGIN))
     W, H = raw[0].size
     box = (max(0, x0 - pad), max(0, y0 - pad), min(W, x1 + pad), min(H, y1 + pad))
+    print("%d of %d frames had walled-off white cleared" % (gapped, len(raw)))
     print("shared crop %dx%d (he drifts %d px across the clip)"
           % (box[2] - box[0], box[3] - box[1], np.ptp(b[:, 0]) + np.ptp(b[:, 1])))
 
