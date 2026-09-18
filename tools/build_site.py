@@ -39,6 +39,8 @@ VERBATIM = [
     (SITE / "favicon.png", "favicon.png"),
     (SITE / "art" / "fujie_cheer.png", "hero_chibi.png"),
     (CRE / "01_character" / "chibi_neutral.png", "buddy_neutral.png"),
+    # the same chibi, actually swimming - the floating buddy on the hub
+    (CRE / "01_character" / "chibi_neutral_swim.webp", "buddy_swim.webp"),
     (SITE / "art" / "bg_egg.jpg", "bg_egg.jpg"),
     (SITE / "art" / "bg_tank_early.jpg", "bg_tank_early.jpg"),
     (SITE / "art" / "bg_tank_grown.jpg", "bg_tank_grown.jpg"),

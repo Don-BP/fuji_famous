@@ -1,0 +1,1006 @@
+{
+ "10": {
+  "inputs": {
+   "unet_name": "minimax_h3_ref2va_pruned-Q3_K.gguf"
+  },
+  "class_type": "UnetLoaderGGUF",
+  "_meta": {
+   "title": "Unet Loader (GGUF)"
+  }
+ },
+ "14": {
+  "inputs": {
+   "vae_name": "minimax_h3_video_vae_fp16.safetensors"
+  },
+  "class_type": "VAELoader",
+  "_meta": {
+   "title": "Load VAE"
+  }
+ },
+ "16": {
+  "inputs": {
+   "vae_name": "minimax_h3_audio_vae_fp32.safetensors"
+  },
+  "class_type": "VAELoader",
+  "_meta": {
+   "title": "Load VAE"
+  }
+ },
+ "8": {
+  "inputs": {
+   "unet_name": "minimax_h3_fl2va_pruned-Q3_K.gguf"
+  },
+  "class_type": "UnetLoaderGGUF",
+  "_meta": {
+   "title": "Unet Loader (GGUF)"
+  }
+ },
+ "12": {
+  "inputs": {
+   "clip_name": "qwen3vl_32b_minimax_h3-Q4_K_M.gguf",
+   "type": "minimax"
+  },
+  "class_type": "CLIPLoaderGGUF",
+  "_meta": {
+   "title": "CLIPLoader (GGUF)"
+  }
+ },
+ "3988:3907": {
+  "inputs": {
+   "enabled": true,
+   "blend_weight": 0.5,
+   "degree": 1,
+   "ridge_lambda": 0.1,
+   "window_size": 2,
+   "flex_window": 0.75,
+   "warmup_steps": 1,
+   "tail_actual_steps": 1,
+   "max_history": 8,
+   "debug": false,
+   "history_storage": "system_ram",
+   "bootstrap_first_forecast": true,
+   "anchor_residual_feedback": false,
+   "selective_rollback_correction": false,
+   "offline_smoothing_replay": true,
+   "audio_blend_weight": 0,
+   "offline_archive_storage": "system_ram",
+   "model_aware_mode": "off",
+   "model_aware_risk_threshold": 0.65,
+   "model_aware_trust_shrinkage": false,
+   "model_aware_replay_generic_correction": false,
+   "generic_correction_mode": "coordinate_rls",
+   "generic_correction_limiter": "hard_clip",
+   "generic_correction_limit": 0.4,
+   "generic_correction_attenuation": "no_attenuation",
+   "model": [
+    "3994",
+    0
+   ]
+  },
+  "class_type": "SpectrumApplyMiniMaxH3",
+  "_meta": {
+   "title": "Spectrum Apply MiniMax H3"
+  }
+ },
+ "3990:3908": {
+  "inputs": {
+   "image": [
+    "3990:3909",
+    0
+   ]
+  },
+  "class_type": "GetImageSize",
+  "_meta": {
+   "title": "Get Image Size"
+  }
+ },
+ "3990:3909": {
+  "inputs": {
+   "upscale_method": "nearest-exact",
+   "megapixels": 1,
+   "resolution_steps": 32,
+   "image": [
+    "4012:3983",
+    0
+   ]
+  },
+  "class_type": "ImageScaleToTotalPixels",
+  "_meta": {
+   "title": "Scale Image to Total Pixels"
+  }
+ },
+ "3991": {
+  "inputs": {
+   "noise_seed": 69420
+  },
+  "class_type": "RandomNoise",
+  "_meta": {
+   "title": "RandomNoise"
+  }
+ },
+ "3992": {
+  "inputs": {
+   "scheduler": "simple",
+   "steps": 8,
+   "denoise": 1,
+   "model": [
+    "3988:3907",
+    0
+   ]
+  },
+  "class_type": "BasicScheduler",
+  "_meta": {
+   "title": "BasicScheduler"
+  }
+ },
+ "3994": {
+  "inputs": {
+   "sage_attention": "auto",
+   "allow_compile": true,
+   "model": [
+    "3995",
+    0
+   ]
+  },
+  "class_type": "PathchSageAttentionKJ",
+  "_meta": {
+   "title": "Patch Sage Attention KJ"
+  }
+ },
+ "3995": {
+  "inputs": {
+   "shift_video": 12,
+   "shift_audio": 3,
+   "model": [
+    "4002",
+    0
+   ]
+  },
+  "class_type": "MiniMaxH3SigmaShift",
+  "_meta": {
+   "title": "ModelSamplingMiniMaxH3"
+  }
+ },
+ "3999": {
+  "inputs": {
+   "sampler_name": "euler"
+  },
+  "class_type": "KSamplerSelect",
+  "_meta": {
+   "title": "KSamplerSelect"
+  }
+ },
+ "3989": {
+  "inputs": {
+   "aspect_ratio": "16:9 (Widescreen)",
+   "megapixels": 0.4,
+   "multiple": 32
+  },
+  "class_type": "ResolutionSelector",
+  "_meta": {
+   "title": "Resolution Selector"
+  }
+ },
+ "4002": {
+  "inputs": {
+   "model": [
+    "8",
+    0
+   ],
+   "PowerLoraLoaderHeaderWidget": {
+    "type": "PowerLoraLoaderHeaderWidget"
+   },
+   "lora_1": {
+    "on": true,
+    "lora": "minimax_h3_turbo_v4_step600_ema_pruned_comfyui.safetensors",
+    "strength": 1
+   },
+   "\u2795 Add Lora": ""
+  },
+  "class_type": "Power Lora Loader (rgthree)",
+  "_meta": {
+   "title": "Power Lora Loader (rgthree)"
+  }
+ },
+ "3967": {
+  "inputs": {
+   "frame_rate": 24,
+   "loop_count": 0,
+   "filename_prefix": "MiMx-TXT",
+   "format": "video/h264-mp4",
+   "pingpong": false,
+   "save_output": true,
+   "images": [
+    "4012:3968",
+    0
+   ],
+   "audio": [
+    "4012:3969",
+    0
+   ],
+   "pix_fmt": "yuv420p",
+   "crf": 19,
+   "save_metadata": true,
+   "trim_to_audio": false
+  },
+  "class_type": "VHS_VideoCombine",
+  "_meta": {
+   "title": "Video Combine \ud83c\udfa5\ud83c\udd65\ud83c\udd57\ud83c\udd62"
+  }
+ },
+ "3987": {
+  "inputs": {
+   "frame_rate": 24,
+   "loop_count": 0,
+   "filename_prefix": "MiMx-IMG",
+   "format": "video/h264-mp4",
+   "pingpong": false,
+   "save_output": false,
+   "images": [
+    "4012:3976",
+    0
+   ],
+   "audio": [
+    "4012:3981",
+    0
+   ],
+   "pix_fmt": "yuv420p",
+   "crf": 19,
+   "save_metadata": true,
+   "trim_to_audio": false
+  },
+  "class_type": "VHS_VideoCombine",
+  "_meta": {
+   "title": "Video Combine \ud83c\udfa5\ud83c\udd65\ud83c\udd57\ud83c\udd62"
+  }
+ },
+ "4012:3986": {
+  "inputs": {
+   "clip": [
+    "12",
+    0
+   ],
+   "vae": [
+    "14",
+    0
+   ],
+   "prompt": [
+    "4011",
+    0
+   ],
+   "width": [
+    "4012:3982",
+    0
+   ],
+   "height": [
+    "4012:3984",
+    0
+   ],
+   "length": [
+    "4012:3979",
+    1
+   ],
+   "first_frame": [
+    "4012:3983",
+    0
+   ],
+   "last_frame": [
+    "4012:3983",
+    1
+   ]
+  },
+  "class_type": "MiniMaxH3ImageToVideo",
+  "_meta": {
+   "title": "MiniMax H3 Image to Video"
+  }
+ },
+ "4012:3976": {
+  "inputs": {
+   "samples": [
+    "4012:3980",
+    0
+   ],
+   "vae": [
+    "14",
+    0
+   ]
+  },
+  "class_type": "VAEDecode",
+  "_meta": {
+   "title": "VAE Decode"
+  }
+ },
+ "4012:3978": {
+  "inputs": {
+   "model": [
+    "3988:3907",
+    0
+   ],
+   "conditioning": [
+    "4012:3986",
+    0
+   ]
+  },
+  "class_type": "BasicGuider",
+  "_meta": {
+   "title": "Basic Guider"
+  }
+ },
+ "4012:3980": {
+  "inputs": {
+   "noise": [
+    "3991",
+    0
+   ],
+   "guider": [
+    "4012:3978",
+    0
+   ],
+   "sampler": [
+    "3999",
+    0
+   ],
+   "sigmas": [
+    "4012:3985",
+    0
+   ],
+   "latent_image": [
+    "4012:3986",
+    1
+   ]
+  },
+  "class_type": "SamplerCustomAdvanced",
+  "_meta": {
+   "title": "SamplerCustomAdvanced"
+  }
+ },
+ "4012:3970": {
+  "inputs": {
+   "sigmas": "0.9231, 0.8780, 0.8000, 0.6316, 0.3158, 0.0000"
+  },
+  "class_type": "ManualSigmas",
+  "_meta": {
+   "title": "ManualSigmas"
+  }
+ },
+ "4012:3975": {
+  "inputs": {
+   "model": [
+    "3988:3907",
+    0
+   ],
+   "conditioning": [
+    "4012:3973",
+    0
+   ]
+  },
+  "class_type": "BasicGuider",
+  "_meta": {
+   "title": "Basic Guider"
+  }
+ },
+ "4012:3982": {
+  "inputs": {
+   "any_01": [
+    "3990:3908",
+    0
+   ],
+   "any_02": [
+    "3989",
+    0
+   ]
+  },
+  "class_type": "Any Switch (rgthree)",
+  "_meta": {
+   "title": "Any Switch (rgthree)"
+  }
+ },
+ "4012:3971": {
+  "inputs": {
+   "noise": [
+    "3991",
+    0
+   ],
+   "guider": [
+    "4012:3975",
+    0
+   ],
+   "sampler": [
+    "3999",
+    0
+   ],
+   "sigmas": [
+    "4012:3970",
+    0
+   ],
+   "latent_image": [
+    "4012:3972",
+    0
+   ]
+  },
+  "class_type": "SamplerCustomAdvanced",
+  "_meta": {
+   "title": "SamplerCustomAdvanced"
+  }
+ },
+ "4012:3983": {
+  "inputs": {
+   "references": [
+    "3993",
+    0
+   ]
+  },
+  "class_type": "MiniMaxH3ReferenceSplitter",
+  "_meta": {
+   "title": "Fantastic H3 Reference Splitter"
+  }
+ },
+ "4012:3981": {
+  "inputs": {
+   "samples": [
+    "4012:3980",
+    0
+   ],
+   "vae": [
+    "16",
+    0
+   ]
+  },
+  "class_type": "VAEDecodeAudio",
+  "_meta": {
+   "title": "VAE Decode Audio"
+  }
+ },
+ "4012:3968": {
+  "inputs": {
+   "samples": [
+    "4012:3971",
+    0
+   ],
+   "vae": [
+    "14",
+    0
+   ]
+  },
+  "class_type": "VAEDecode",
+  "_meta": {
+   "title": "VAE Decode"
+  }
+ },
+ "4012:3969": {
+  "inputs": {
+   "samples": [
+    "4012:3971",
+    0
+   ],
+   "vae": [
+    "16",
+    0
+   ]
+  },
+  "class_type": "VAEDecodeAudio",
+  "_meta": {
+   "title": "VAE Decode Audio"
+  }
+ },
+ "4012:3977": {
+  "inputs": {
+   "av_latent": [
+    "4012:3980",
+    1
+   ]
+  },
+  "class_type": "LTXVSeparateAVLatent",
+  "_meta": {
+   "title": "Separate AV Latent"
+  }
+ },
+ "4012:3972": {
+  "inputs": {
+   "video_latent": [
+    "4012:3977",
+    0
+   ],
+   "audio_latent": [
+    "4012:3977",
+    1
+   ]
+  },
+  "class_type": "LTXVConcatAVLatent",
+  "_meta": {
+   "title": "Concat AV Latent"
+  }
+ },
+ "4012:3973": {
+  "inputs": {
+   "clip": [
+    "12",
+    0
+   ],
+   "vae": [
+    "14",
+    0
+   ],
+   "prompt": [
+    "4011",
+    0
+   ],
+   "width": [
+    "4012:3982",
+    0
+   ],
+   "height": [
+    "4012:3984",
+    0
+   ],
+   "length": [
+    "4012:3979",
+    1
+   ],
+   "first_frame": [
+    "4012:3983",
+    0
+   ],
+   "last_frame": [
+    "4012:3983",
+    1
+   ]
+  },
+  "class_type": "MiniMaxH3ImageToVideo",
+  "_meta": {
+   "title": "MiniMax H3 Image to Video"
+  }
+ },
+ "4012:3984": {
+  "inputs": {
+   "any_01": [
+    "3990:3908",
+    1
+   ],
+   "any_02": [
+    "3989",
+    1
+   ]
+  },
+  "class_type": "Any Switch (rgthree)",
+  "_meta": {
+   "title": "Any Switch (rgthree)"
+  }
+ },
+ "4012:3979": {
+  "inputs": {
+   "expression": "max(5, round(a * 24)) + (5 - (max(5, round(a * 24)) % 17)) % 17",
+   "values.a": [
+    "3998",
+    0
+   ]
+  },
+  "class_type": "ComfyMathExpression",
+  "_meta": {
+   "title": "Math Expression"
+  }
+ },
+ "4012:3985": {
+  "inputs": {
+   "step": 4,
+   "sigmas": [
+    "3992",
+    0
+   ]
+  },
+  "class_type": "SplitSigmas",
+  "_meta": {
+   "title": "SplitSigmas"
+  }
+ },
+ "3993": {
+  "inputs": {
+   "media_state": "[{\"kind\":\"picture\",\"file\":\"minimax_h3/fujie_chibi_swim_in.png [input]\",\"name\":\"fujie_chibi_swim_in.png\",\"duration\":null,\"width\":672,\"height\":672,\"has_audio\":false,\"audio_mode\":\"off\",\"uid\":\"fujieswim01\"}]"
+  },
+  "class_type": "MiniMaxH3MediaLoader",
+  "_meta": {
+   "title": "Fantastic H3 Media Loader"
+  }
+ },
+ "4000": {
+  "inputs": {
+   "aspect_ratio": "16:9 (Widescreen)",
+   "megapixels": 1.2,
+   "multiple": 32
+  },
+  "class_type": "ResolutionSelector",
+  "_meta": {
+   "title": "Resolution Selector"
+  }
+ },
+ "4092": {
+  "inputs": {},
+  "class_type": "MiniMaxH3ReferenceSplitter",
+  "_meta": {
+   "title": "Reference pictures -> size"
+  }
+ },
+ "4093:2036": {
+  "inputs": {
+   "image": [
+    "4093:2035",
+    0
+   ]
+  },
+  "class_type": "GetImageSize",
+  "_meta": {
+   "title": "Get Image Size"
+  }
+ },
+ "4093:2035": {
+  "inputs": {
+   "upscale_method": "nearest-exact",
+   "megapixels": 1,
+   "resolution_steps": 32,
+   "image": [
+    "4092",
+    0
+   ]
+  },
+  "class_type": "ImageScaleToTotalPixels",
+  "_meta": {
+   "title": "Scale Image to Total Pixels"
+  }
+ },
+ "4094": {
+  "inputs": {},
+  "class_type": "MiniMaxH3ReferenceSplitter",
+  "_meta": {
+   "title": "Reference pictures -> size"
+  }
+ },
+ "4095:2036": {
+  "inputs": {
+   "image": [
+    "4095:2035",
+    0
+   ]
+  },
+  "class_type": "GetImageSize",
+  "_meta": {
+   "title": "Get Image Size"
+  }
+ },
+ "4095:2035": {
+  "inputs": {
+   "upscale_method": "nearest-exact",
+   "megapixels": 1,
+   "resolution_steps": 32,
+   "image": [
+    "4094",
+    0
+   ]
+  },
+  "class_type": "ImageScaleToTotalPixels",
+  "_meta": {
+   "title": "Scale Image to Total Pixels"
+  }
+ },
+ "4096": {
+  "inputs": {
+   "any_05": [
+    "4012:3968",
+    0
+   ]
+  },
+  "class_type": "Any Switch (rgthree)",
+  "_meta": {
+   "title": "Frames from whichever section is running"
+  }
+ },
+ "4097": {
+  "inputs": {
+   "any_05": [
+    "4012:3969",
+    0
+   ]
+  },
+  "class_type": "Any Switch (rgthree)",
+  "_meta": {
+   "title": "Sound from whichever section is running"
+  }
+ },
+ "4098": {
+  "inputs": {
+   "model": "BiRefNet_toonout",
+   "sensitivity": 1,
+   "mask_blur": 0,
+   "mask_offset": 0,
+   "invert_output": false,
+   "refine_foreground": true,
+   "background": "Alpha",
+   "background_color": "#222222",
+   "image": [
+    "4096",
+    0
+   ]
+  },
+  "class_type": "BiRefNetRMBG",
+  "_meta": {
+   "title": "Cut out the background"
+  }
+ },
+ "4099": {
+  "inputs": {
+   "frame_rate": 24,
+   "loop_count": 0,
+   "filename_prefix": "FUJIE-ALPHA-GIF",
+   "format": "video/ffmpeg-gif",
+   "pingpong": false,
+   "save_output": true,
+   "images": [
+    "4098",
+    0
+   ]
+  },
+  "class_type": "VHS_VideoCombine",
+  "_meta": {
+   "title": "Transparent GIF"
+  }
+ },
+ "4100": {
+  "inputs": {
+   "frame_rate": 24,
+   "loop_count": 0,
+   "filename_prefix": "FUJIE-ALPHA-MOV",
+   "format": "video/ProRes",
+   "pingpong": false,
+   "save_output": true,
+   "images": [
+    "4098",
+    0
+   ],
+   "audio": [
+    "4097",
+    0
+   ]
+  },
+  "class_type": "VHS_VideoCombine",
+  "_meta": {
+   "title": "Transparent video - ProRes 4444 .mov"
+  }
+ },
+ "4101": {
+  "inputs": {
+   "frame_rate": 24,
+   "loop_count": 0,
+   "filename_prefix": "FUJIE-ALPHA-WEBM",
+   "format": "video/webm",
+   "pingpong": false,
+   "save_output": true,
+   "images": [
+    "4098",
+    0
+   ],
+   "audio": [
+    "4097",
+    0
+   ]
+  },
+  "class_type": "VHS_VideoCombine",
+  "_meta": {
+   "title": "Transparent video - WebM .webm"
+  }
+ },
+ "4106": {
+  "inputs": {
+   "any_01": [
+    "3990:3908",
+    0
+   ],
+   "any_02": [
+    "4000",
+    0
+   ]
+  },
+  "class_type": "Any Switch (rgthree)",
+  "_meta": {
+   "title": "FASTIMG shape in force - width"
+  }
+ },
+ "4107": {
+  "inputs": {
+   "any_01": [
+    "3990:3908",
+    1
+   ],
+   "any_02": [
+    "4000",
+    1
+   ]
+  },
+  "class_type": "Any Switch (rgthree)",
+  "_meta": {
+   "title": "FASTIMG shape in force - height"
+  }
+ },
+ "4108": {
+  "inputs": {
+   "expression": "max(64, round(sqrt(max(c * d, 419430) * a / b) / 32) * 32)",
+   "values.a": [
+    "4106",
+    0
+   ],
+   "values.b": [
+    "4107",
+    0
+   ],
+   "values.c": [
+    "4122",
+    0
+   ],
+   "values.d": [
+    "4123",
+    0
+   ]
+  },
+  "class_type": "ComfyMathExpression",
+  "_meta": {
+   "title": "FASTIMG final width"
+  }
+ },
+ "4109": {
+  "inputs": {
+   "expression": "max(64, round(sqrt(max(c * d, 419430) * b / a) / 32) * 32)",
+   "values.a": [
+    "4106",
+    0
+   ],
+   "values.b": [
+    "4107",
+    0
+   ],
+   "values.c": [
+    "4122",
+    0
+   ],
+   "values.d": [
+    "4123",
+    0
+   ]
+  },
+  "class_type": "ComfyMathExpression",
+  "_meta": {
+   "title": "FASTIMG final height"
+  }
+ },
+ "4110": {
+  "inputs": {
+   "any_01": [
+    "4095:2036",
+    0
+   ]
+  },
+  "class_type": "Any Switch (rgthree)",
+  "_meta": {
+   "title": "FASTREF shape in force - width"
+  }
+ },
+ "4111": {
+  "inputs": {
+   "any_01": [
+    "4095:2036",
+    1
+   ]
+  },
+  "class_type": "Any Switch (rgthree)",
+  "_meta": {
+   "title": "FASTREF shape in force - height"
+  }
+ },
+ "4112": {
+  "inputs": {
+   "expression": "max(64, round(sqrt(c * d * a / b) / 32) * 32)",
+   "values.a": [
+    "4110",
+    0
+   ],
+   "values.b": [
+    "4111",
+    0
+   ]
+  },
+  "class_type": "ComfyMathExpression",
+  "_meta": {
+   "title": "FASTREF final width"
+  }
+ },
+ "4113": {
+  "inputs": {
+   "expression": "max(64, round(sqrt(c * d * b / a) / 32) * 32)",
+   "values.a": [
+    "4110",
+    0
+   ],
+   "values.b": [
+    "4111",
+    0
+   ]
+  },
+  "class_type": "ComfyMathExpression",
+  "_meta": {
+   "title": "FASTREF final height"
+  }
+ },
+ "4119": {
+  "inputs": {},
+  "class_type": "Any Switch (rgthree)",
+  "_meta": {
+   "title": "IMG size in force - width"
+  }
+ },
+ "4120": {
+  "inputs": {},
+  "class_type": "Any Switch (rgthree)",
+  "_meta": {
+   "title": "IMG size in force - height"
+  }
+ },
+ "4121": {
+  "inputs": {
+   "image": [
+    "4012:3983",
+    0
+   ]
+  },
+  "class_type": "GetImageSize",
+  "_meta": {
+   "title": "Picture size (Fast Image to Video)"
+  }
+ },
+ "4122": {
+  "inputs": {
+   "any_01": [
+    "4121",
+    0
+   ],
+   "any_02": [
+    "4000",
+    0
+   ]
+  },
+  "class_type": "Any Switch (rgthree)",
+  "_meta": {
+   "title": "FASTIMG size source - width"
+  }
+ },
+ "4123": {
+  "inputs": {
+   "any_01": [
+    "4121",
+    1
+   ],
+   "any_02": [
+    "4000",
+    1
+   ]
+  },
+  "class_type": "Any Switch (rgthree)",
+  "_meta": {
+   "title": "FASTIMG size source - height"
+  }
+ },
+ "4011": {
+  "inputs": {
+   "value": "For the target video, at 0.00 seconds into the target video, <Picture 1> (from [Shot 1]) is fully referenced.\n\nintegrated_multimodal_description: [Shot 1] A flat two-dimensional cartoon illustration on a plain, empty, pure white background. <Picture 1> shows a chubby chibi sturgeon mascot drawn in a clean, thick dark outline style with flat cel shading in grey and pale silver-white: a long flat pointed snout, four small barbels hanging beneath the snout, one large round black eye with a white highlight, a small closed smiling mouth, a row of small bony scutes along its back, two side flippers, small belly fins and a single upswept tail fin. Its identity, colours, outline weight, body proportions, pose, size in frame and flat cartoon style remain exactly the same for the entire video, identical to <Picture 1>. The camera is a completely static shot and never moves, zooms or pans. The background stays flat, empty and pure white for the whole video, with no water, no bubbles, no ripples, no shadow, no scenery and no text of any kind. The mascot stays centred with clear empty margin on all four sides and never leaves the frame or drifts away. It swims gently on the spot: its single tail fin sweeps smoothly and evenly from side to side, its two side flippers paddle slowly back and forth, its whole body rocks with a soft, slow up-and-down bobbing motion and tilts very slightly with the rhythm, and it blinks once. The movement is small, slow, smooth, continuous and evenly paced from the first frame to the last, so that the final pose returns to match the opening pose and the clip loops seamlessly.\n\noverall_soundscape: Silence.\n\nnon_diegetic_music: N/A"
+  },
+  "class_type": "PrimitiveStringMultiline",
+  "_meta": {
+   "title": "Text (Multiline)"
+  }
+ },
+ "3998": {
+  "inputs": {
+   "value": 2.0
+  },
+  "class_type": "PrimitiveFloat",
+  "_meta": {
+   "title": "Float"
+  }
+ }
+}

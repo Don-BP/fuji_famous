@@ -6,8 +6,10 @@
      avoid   - bolts away from the cursor
      wander  - ignores the cursor and drifts along its own path
 
-   He swims with a calm neutral face and only breaks into the happy,
-   star-covered pose while the cursor is actually touching him.
+   The calm face is a two-second loop of him actually swimming - tail
+   sweeping, flippers paddling, one blink (assets/buddy_swim.webp, made by
+   tools/run_buddy_swim.py). He only breaks into the happy, star-covered
+   still while the cursor is actually touching him.
 
    Movement is steering, not teleporting: it accelerates toward a
    target and coasts, so it always reads as swimming.
