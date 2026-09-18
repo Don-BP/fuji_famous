@@ -354,6 +354,17 @@ footer{padding:clamp(48px,7vw,84px) clamp(18px,5vw,72px);background:#03101a;bord
       rgba(4,18,26,.86) 100%);
     backdrop-filter:blur(3px) saturate(1.05);
   }
+
+  /* ...except the one directly under the hero.
+
+     #contents is the only dark band above the first white band, so it is
+     the only one whose top edge meets the hero. The frosting began dead on
+     that edge, which made the film go from sharp to soft along a straight
+     line right across the screen - the seam. Every dark band further down
+     starts against another band, not against open film, so there is no
+     line to see and they keep their glass. The cards inside all of them
+     frost their own backdrop either way. */
+  .filmOn #contents{backdrop-filter:none}
   /* the copy inside it gets its own halo so it stays readable over the reef */
   .filmOn .band.dark .eyebrow,
   .filmOn .band.dark .sectionH,
@@ -433,11 +444,6 @@ footer{padding:clamp(48px,7vw,84px) clamp(18px,5vw,72px);background:#03101a;bord
   .filmOn .hero .heroMeta{
     text-shadow:0 2px 18px rgba(2,10,16,.95),0 1px 3px rgba(2,10,16,.85);
   }
-
-  /* The band's blur began dead on that same edge, so the film went from
-     sharp to soft along the line as well. The cards blur their own
-     backdrop, so the band does not need to blur the whole width. */
-  .filmOn .band.dark{backdrop-filter:none}
 }
 
 /* ---------------- the case buttons and panel ---------------- */
