@@ -45,12 +45,23 @@ undone.
    survives, feathers the edge and trims the transparent margin. It refuses and
    warns if less than 2% of the image looks like background — that means the
    subject touches all four edges and the prompt needs more margin.
-7. **Wire it into the site.** Add the file id and its Japanese/English captions to
+7. **Then look for trapped white.** The flood comes in from the edge, so any white
+   the character's own outline shuts in is left behind: the daylight between a
+   raised flipper and the tail, the loop of a handle, the gap inside a curled fin.
+   It survives as a white patch that shows up the moment the picture is placed on
+   the dark page, and it is easy to miss on a white preview — always check the
+   cut-out against a dark background before accepting it. `tools/run_buddy_swim.py`
+   has the fix worth copying: a trapped patch is near-white, big enough to see, and
+   ringed by the black outline on nearly every side, whereas a shine on the belly
+   is ringed by the character's own grey.
+8. **Wire it into the site.** Add the file id and its Japanese/English captions to
    the right list in `promo/data.js`, make sure its folder is in `GALLERY_DIRS` in
    `tools/build_site.py` (or in `VERBATIM` if it must keep its transparency), then
    run `python tools/build_site.py`. The build fails loudly if a listed id has no
    file.
-8. **Rebuild the offline copy** with `python tools/make_portable.py`.
+9. **Rebuild the offline copies** — `python tools/make_portable.py` for the game on
+   its own, and `python tools/make_hub_portable.py` for the one-file copy of the
+   whole studio that goes to the judges.
 
 ## The standing rule blocks
 
@@ -79,6 +90,7 @@ Copy these into the prompt. Each one exists because a batch was thrown away.
 | Asking for the mascot in the scene | Off-model creature that must be painted out | Empty the space, composite after |
 | Asking for a caption | Invented Japanese | Empty strip, real font after |
 | Running cutout on a photographic scene | "only 0.4% detected as background — skipped" | Cutout is for studio-white subjects only |
+| Checking a cut-out on a white page | White trapped inside the outline is invisible until it is on the dark site | Always view it on the dark background before accepting it |
 | Adding art without touching `data.js` | Picture never appears on the site | Add the id and both captions |
 | Adding an id with no file | `build_site.py` stops | Check the filename matches exactly |
 | Regenerating approved art | Wasted run, inconsistent line | Check the approved list first |

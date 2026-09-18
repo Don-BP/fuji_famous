@@ -18,6 +18,13 @@ const C = {
 };
 const FH = "Yu Gothic";   // headings
 const FB = "Meiryo";      // body
+
+/* The way we want the judges to see this: the whole studio, live, in a browser.
+   It is unlisted and carries a no-index instruction, so it works for anyone who
+   has the link and cannot be found by searching. Printed on the cover, on the
+   game slide and on the closing slide, because a link buried once gets missed.
+   The offline file attached to the mail is the fallback, not the main route. */
+const LIVE = "https://don-bp.github.io/fuji_famous/studio-fa519005bf/";
 const IMG = "D:/Fuji_Famous/Fujie_Creative/";
 
 const W = 13.3, H = 7.5, M = 0.75;
@@ -128,10 +135,16 @@ s.addText("フジィは、\n実在する。", {
 s.addText("世界初の完全養殖ストーリーで、\nフジィを「シンボル」から「キャラクター」へ。", {
   x: M, y: 4.62, w: 7.2, h: 0.9, fontFace: FB, fontSize: 14.5,
   color: C.steel, lineSpacing: 27, isTextBox: true, margin: 0 });
+s.addShape(P.ShapeType.roundRect, { x: M, y: 5.62, w: 7.2, h: 0.55, rectRadius: 0.08,
+  fill: { color: C.mid }, line: { color: C.cyan, width: 1 } });
+s.addText([
+  { text: "企画の全体像はこちらで　", options: { fontSize: 11, color: C.steel, bold: true } },
+  { text: LIVE, options: { fontSize: 12, color: C.cyan, bold: true, hyperlink: { url: LIVE } } },
+], { x: M + 0.3, y: 5.74, w: 6.6, h: 0.32, fontFace: FB, isTextBox: true, margin: 0 });
 s.addText("株式会社ブレインパワー　大阪　／　Vittorio Zumpano", {
   x: M, y: H - 1.0, w: 7, h: 0.35, fontFace: FB, fontSize: 11.5,
   color: C.dimOnDark, isTextBox: true, margin: 0 });
-s.addNotes("表紙。結論を先に置く：フジィは想像上のキャラクターではなく、フジキンが実際に育てている魚である。");
+s.addNotes("表紙。結論を先に置く：フジィは想像上のキャラクターではなく、フジキンが実際に育てている魚である。企画の全体像は表紙のリンクからそのまま開ける。");
 
 /* =============== 2. 課題 =============== */
 s = P.addSlide(); light(s);
@@ -707,8 +720,8 @@ s.addShape(P.ShapeType.roundRect, { x: M, y: 5.95, w: 11.8, h: 0.62, rectRadius:
   fill: { color: C.mid }, line: { color: C.cyan, width: 1 } });
 s.addText([
   { text: "いますぐ開けます　", options: { fontSize: 12, color: C.steel, bold: true } },
-  { text: "https://don-bp.github.io/fuji_famous/", options: { fontSize: 13.5, color: C.cyan, bold: true } },
-  { text: "　／　添付：フジィを育てよう.html", options: { fontSize: 11, color: C.dimOnDark } },
+  { text: LIVE, options: { fontSize: 13.5, color: C.cyan, bold: true, hyperlink: { url: LIVE } } },
+  { text: "　／　オフラインでご覧の場合は添付のHTMLから", options: { fontSize: 11, color: C.dimOnDark } },
 ], { x: M + 0.4, y: 6.08, w: 11.0, h: 0.38, fontFace: FB, isTextBox: true, margin: 0 });
 
 /* =============== 17. ROADMAP =============== */
@@ -807,9 +820,13 @@ s.addText("フジキンが 40 年かけて育ててきた魚を、\n日本中が
   x: 0.9, y: 5.0, w: 11.5, h: 0.9, fontFace: FB, fontSize: 14.5, color: C.steel,
   align: "center", lineSpacing: 28, isTextBox: true, margin: 0 });
 s.addText("2027 年、40 年目。　創業 100 周年を、フジィが有名になった状態で迎える。", {
-  x: 0.9, y: 5.92, w: 11.5, h: 0.4, fontFace: FH, fontSize: 15, bold: true,
+  x: 0.9, y: 5.82, w: 11.5, h: 0.4, fontFace: FH, fontSize: 15, bold: true,
   color: C.cyan, align: "center", isTextBox: true, margin: 0 });
-s.addText("株式会社ブレインパワー　大阪　／　Vittorio Zumpano", { x: 0.9, y: 6.35, w: 11.5, h: 0.35,
+s.addText([
+  { text: "企画の全体像・年表・体験版はこちらで　", options: { fontSize: 11, color: C.steel } },
+  { text: LIVE, options: { fontSize: 12.5, color: C.cyan, bold: true, hyperlink: { url: LIVE } } },
+], { x: 0.9, y: 6.28, w: 11.5, h: 0.34, fontFace: FB, align: "center", isTextBox: true, margin: 0 });
+s.addText("株式会社ブレインパワー　大阪　／　Vittorio Zumpano", { x: 0.9, y: 6.66, w: 11.5, h: 0.35,
   fontFace: FB, fontSize: 11, color: C.dimOnDark, align: "center", isTextBox: true, margin: 0 });
 
 P.writeFile({ fileName: "D:/Fuji_Famous/Fujie_Creative/05_submission/フジィは実在する_企画書.pptx" })

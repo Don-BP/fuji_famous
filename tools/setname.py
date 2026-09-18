@@ -1,6 +1,6 @@
 import json, io
 
-NAME_FULL = "Vittorio Zumpano（ヴィットリオ・ズンパーノ）　／　株式会社ブレインパワー　大阪"
+NAME_FULL = "Vittorio Zumpano（ビットリオ・ズンパーノ）　／　株式会社ブレインパワー　大阪"
 NAME_DECK = "株式会社ブレインパワー　大阪　／　Vittorio Zumpano"
 
 # 1) entry sheet fields
