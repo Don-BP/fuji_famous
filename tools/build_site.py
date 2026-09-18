@@ -167,6 +167,51 @@ def main():
         sys.exit(1)
     print("checked     %d gallery ids all present" % len(ids))
 
+    # ---- every picture a page asks for must actually be there ----
+    #
+    # The check above only proves the gallery's full-size images exist. It says
+    # nothing about the thumbnails the tiles use, nor about any picture written
+    # straight into the markup, so a tile could point at a file that was never
+    # built and the build would still say it was happy. This walks every built
+    # page and resolves every local src and href it finds.
+    broken = []
+    for page in sorted(DIST.rglob("*.html")):
+        markup = page.read_text(encoding="utf-8")
+        for ref in re.findall(r'(?:src|href)\s*=\s*"([^"]+)"', markup):
+            ref = ref.split("?")[0].split("#")[0]
+            if not ref or ref.startswith(("http", "//", "data:", "mailto:", "#")):
+                continue
+            target = (DIST / ref.lstrip("/")) if ref.startswith("/") else (page.parent / ref)
+            if not target.exists():
+                broken.append("%s -> %s" % (page.relative_to(DIST), ref))
+    if broken:
+        print("\n!! pages point at files that are not there:")
+        for b in broken:
+            print("   -", b)
+        sys.exit(1)
+    print("checked     every picture and link on every page resolves")
+
+    # ---- no contents tile left blank when its idea has a picture ----
+    #
+    # A tile marked "ph" draws a dashed blank instead of a picture. That is
+    # right for an idea with no artwork yet, but three tiles stayed blank long
+    # after their pictures had been made and shipped further down the same
+    # page, and nothing ever said so. If the section a tile points at has a
+    # picture, the tile has no business being blank.
+    home = (DIST / "index.html").read_text(encoding="utf-8")
+    stranded = []
+    for target in re.findall(r'<a href="#([\w-]+)" class="ph[^"]*">', home):
+        section = re.search(r'<section id="%s".*?</section>' % re.escape(target),
+                            home, re.S)
+        if section and "<img" in section.group(0):
+            stranded.append(target)
+    if stranded:
+        print("\n!! these contents tiles are blank but their idea has a picture:")
+        for t in stranded:
+            print("   -", t)
+        sys.exit(1)
+    print("checked     no contents tile is blank while its picture exists")
+
     mb = sum(f.stat().st_size for f in DIST.rglob("*") if f.is_file()) / 1048576
     print("\nWROTE %s  (%.1f MB)" % (DIST, mb))
 
