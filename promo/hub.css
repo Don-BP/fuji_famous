@@ -398,12 +398,40 @@ footer{padding:clamp(48px,7vw,84px) clamp(18px,5vw,72px);background:#03101a;bord
   .filmOn .hero > .heroCopy::before{
     left:-100vw;width:300vw;
     top:-13vh;height:calc(100% + 13vh + 60px);
+
+    /* It reaches full strength late, not early.
+
+       Measuring against the copy fixed tall windows and broke phones,
+       because on a phone the copy IS most of the screen - two thirds of
+       it - so a scrim that went opaque a quarter of the way down covered
+       the film from the headline to the buttons. The whole hero came up
+       black and the film looked as though it never ran.
+
+       There is no room on a phone to put the fish in clear water above
+       the words: the upright frame is taller than the screen is, so it
+       crops sideways and the fish lands where it lands. So the fish is
+       meant to be seen THROUGH the top of the copy. The scrim stays
+       nearly clear across the kicker and the headline - big type that
+       carries itself - and only closes up over the lede, which is small
+       and grey and genuinely needs a dark ground.
+
+       The words that sit in the light part get a shadow instead. */
     background:linear-gradient(180deg,
       rgba(4,18,26,0)    0%,
-      rgba(4,18,26,.55) 14%,
-      rgba(4,18,26,.90) 23%,
+      rgba(4,18,26,.10) 20%,
+      rgba(4,18,26,.30) 34%,
+      rgba(4,18,26,.72) 44%,
+      rgba(4,18,26,.90) 55%,
       rgba(4,18,26,.93) 92%,
       rgba(4,18,26,0)  100%);
+  }
+
+  .filmOn .hero .kicker,
+  .filmOn .hero .byline,
+  .filmOn .hero h1,
+  .filmOn .hero .lede,
+  .filmOn .hero .heroMeta{
+    text-shadow:0 2px 18px rgba(2,10,16,.95),0 1px 3px rgba(2,10,16,.85);
   }
 
   /* The band's blur began dead on that same edge, so the film went from
