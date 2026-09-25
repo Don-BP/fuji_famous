@@ -132,7 +132,7 @@ s.addText("フジィを有名にする！アイデアコンテスト", {
 s.addText("フジィは、\n実在する。", {
   x: M, y: 2.05, w: 7.2, h: 2.5, fontFace: FH, fontSize: 60, bold: true,
   color: "FFFFFF", lineSpacing: 74, isTextBox: true, margin: 0 });
-s.addText("世界初の完全養殖ストーリーで、\nフジィを「シンボル」から「キャラクター」へ。", {
+s.addText("世界初の完全養殖という事実を起点に、\n十三の施策でフジィを「シンボル」から「キャラクター」へ。", {
   x: M, y: 4.62, w: 7.2, h: 0.9, fontFace: FB, fontSize: 14.5,
   color: C.steel, lineSpacing: 27, isTextBox: true, margin: 0 });
 s.addShape(P.ShapeType.roundRect, { x: M, y: 5.62, w: 7.2, h: 0.55, rectRadius: 0.08,
