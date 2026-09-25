@@ -151,14 +151,23 @@
 </section>
 
 <section id="story" class="band dark idea">
-  <div class="wrap ideaWrap">
+  <div class="wrap ideaWrap filmWrap">
     <div class="ideaText">
       <p class="eyebrow"><span class="ideaNum">04</span><span data-t="tagStory">スクロール年表</span></p>
       <h2 class="sectionH" data-t="storyH">一粒の卵から</h2>
       <p class="intro" data-t="storyB">1987年の一言から、世界初の完全養殖、日本初のキャビア、そして2027年の40年目まで。指を下ろすだけで40年が流れていきます。社史ではなく、物語として書きました。読み終えた人は、バルブの会社を好きになっています。</p>
       <p class="caseRow"><a class="btn small" href="timeline/" data-t="storyGo">読む →</a><button type="button" class="caseBtn" data-case="story"></button></p>
     </div>
-    <a class="ideaArt" href="timeline/"><img src="assets/shot_timeline.jpg" alt=""></a>
+    <div id="eggFilm" class="ideaArt eggFilm">
+      <canvas role="img" aria-label="一粒の卵から ── 約1分のアニメーション"></canvas>
+      <button type="button" class="efPlay"><i></i><b data-t="efPlay">アニメを見る</b><small data-t="efSound">約1分・音が出ます</small></button>
+      <div class="efCtrls">
+        <button type="button" data-ef="pause" aria-label="一時停止／再生"></button>
+        <button type="button" data-ef="mute" aria-label="音を消す"></button>
+        <button type="button" data-ef="full" aria-label="全画面"></button>
+      </div>
+      <div class="efBar"><i></i></div>
+    </div>
   </div>
 </section>
 
@@ -346,5 +355,6 @@
 <script src="hub.js"></script>
 <script src="buddy.js"></script>
 <script src="cases.js"></script>
+<script src="eggfilm.js"></script>
 </body>
 </html>

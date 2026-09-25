@@ -137,6 +137,7 @@
     tagStory: "SCROLLING TIMELINE", storyH: "From a single egg",
     storyB: "From one remark in 1987 to the world's first full-cycle farming, Japan's first caviar, and on to the fortieth year in 2027. Forty years go past under one thumb. It is written as a story rather than a company history. People come out of it liking a valve company.",
     storyGo: "Read →",
+    efPlay: "Watch the film", efSound: "About a minute · with sound",
     rtEyebrow: "A ROUTE ONLY FUJIKIN HAS", rt1H: "Give Fujie a voice",
     rt1B: "Feeding time, when the whole surface boils for a few dozen seconds. A single fish hatching from an egg. Footage nobody has seen, and only Fujikin has it. Every location is company-owned and it costs almost nothing to shoot. The official Instagram's 114 followers are not a weakness but room.",
     rtEyebrow2: "THE ONE NOBODY ELSE CAN COPY", rt2H: "Turn trade customers' packaging into advertising",

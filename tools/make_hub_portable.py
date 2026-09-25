@@ -106,7 +106,7 @@ def read(*parts):
 
 hub_html = read("index.html")
 hub_css = read("hub.css")
-hub_js = {n: read(n) for n in ("data.js", "hub.js", "hero.js", "buddy.js", "cases.js")}
+hub_js = {n: read(n) for n in ("data.js", "hub.js", "hero.js", "buddy.js", "cases.js", "eggfilm.js")}
 
 tl_html = read("timeline", "index.html")
 tl_css = read("timeline", "timeline.css")
@@ -428,7 +428,7 @@ out = sub_literal(r'<link rel="stylesheet" href="hub\.css[^"]*">',
 
 shim_js = SHIM.replace("__ASSETS__", as_js(assets))
 first = True
-for name in ("data.js", "hub.js", "hero.js", "buddy.js", "cases.js"):
+for name in ("data.js", "hub.js", "hero.js", "buddy.js", "cases.js", "eggfilm.js"):
     body = hub_js[name]
     block = "<script>%s</script>" % body
     if first:

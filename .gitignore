@@ -39,3 +39,9 @@ tools/_fontcache/
 
 # Local safety copies taken before risky changes - never publish
 _backup/
+
+# egg film: preview recordings and check frames are made on demand
+Fujie_Creative/22_egg_film/_video/
+Fujie_Creative/22_egg_film/_frames/
+Fujie_Creative/22_egg_film/_cut/
+Fujie_Creative/22_egg_film/*.mp4
